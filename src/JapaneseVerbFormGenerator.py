@@ -317,6 +317,43 @@ class PositiveVerbForms:
                 return None # TODO: create return type failure
         return "{}{}".format(verb_base, ending)
 
+    def generate_potential_form(self, verb, verb_class, formality):
+        '''Generate the positive potential form of the verb depending
+        on the level of formality.
+        
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: positive potential form of the verb based on the specified formality
+        parameter
+        '''
+        if verb_class == VerbClass.IRREGULAR:
+            if formality == Formality.PLAIN:
+                return handle_irregular_verb(verb, suru_ending=POTENTIAL_SURU_PLAIN_POSITIVE_ENDING, kuru_ending=POTENTIAL_KURU_PLAIN_POSITIVE_ENDING)
+            else:
+                return handle_irregular_verb(verb, suru_ending=POTENTIAL_SURU_POLITE_POSITIVE_ENDING, kuru_ending=POTENTIAL_KURU_POLITE_POSITIVE_ENDING)
+        else:
+            # assuming godan plain form 
+            verb_base = map_dictionary_to_e_ending(verb)
+            ending = RU_PARTICLE
+            
+            if verb_class == VerbClass.GODAN:
+                if formality == Formality.POLITE:
+                    verb_base = map_dictionary_to_e_ending(verb)
+                    ending = MASU_POSITIVE_NONPAST
+            elif verb_class == VerbClass.ICHIDAN:
+                verb_base = splice_verb(verb, verb_class)
+                if formality == Formality.PLAIN:
+                    ending = POTENTIAL_ICHIDAN_ENDING
+                else:
+                    ending = POTENTIAL_POLITE_ICHIDAN_ENDING
+            return "{}{}".format(verb_base, ending)
+
 # ---------------------------------------------------------- #
 #                       Negative Verb Forms                  #
 # ---------------------------------------------------------- #
@@ -368,6 +405,20 @@ class NegativeVerbForms:
             # no change needed for ichidan verb
             return "{}{}".format(verb_base, ending)
 
+    def generate_te_form(self, verb, verb_class):
+        '''Utilize base_te_ta_form function to generate the -te form 
+        of the verb
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+
+        Returns:
+            str: -te form of the verb
+        '''
+        return base_te_ta_form(verb, verb_class, TE_PARTICLE, DE_PARTICLE)
+
     def generate_conditional_form(self, verb, verb_class, formality):
         '''Generate the negative polite form of the verb depending
         on the formality.
@@ -409,4 +460,39 @@ class NegativeVerbForms:
             return "{}{}".format(verb_nai_form, VOLITIONAL_PLAIN_COPULA)
         elif formality == Formality.POLITE:
             return "{}{}".format(verb_nai_form, VOLITIONAL_POLITE_COPULA)
-    
+
+    def generate_potential_form(self, verb, verb_class, formality):
+        '''Generate the negative potential form of the verb depending
+        on the formality.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: negative potential form of the verb based on the formality
+        parameter
+        '''
+        if verb_class == VerbClass.IRREGULAR:
+            if formality == Formality.PLAIN:
+                return handle_irregular_verb(verb, suru_ending=POTENTIAL_SURU_PLAIN_NEGATIVE_ENDING, kuru_ending=POTENTIAL_KURU_PLAIN_NEGATIVE_ENDING)
+            else:
+                return handle_irregular_verb(verb, suru_ending=POTENTIAL_SURU_POLITE_NEGATIVE_ENDING, kuru_ending=POTENTIAL_KURU_POLITE_NEGATIVE_ENDING)
+        else:
+            verb_base = map_dictionary_to_e_ending(verb)
+
+            if verb_class == VerbClass.GODAN:
+                if formality == Formality.PLAIN:
+                    return generate_nai_form(verb_base, verb_class, False)
+                else:
+                    return "{}{}".format(verb_base, MASU_NEGATIVE_NONPAST)
+            elif verb_class == VerbClass.ICHIDAN:
+                verb_base = splice_verb(verb, verb_class)
+                verb_with_rare = "{}{}".format(verb_base, "られ")
+                if formality == Formality.PLAIN:
+                    return generate_nai_form(verb_with_rare, verb_class, False)
+                else:
+                    return "{}{}".format(verb_with_rare, MASU_NEGATIVE_NONPAST)
