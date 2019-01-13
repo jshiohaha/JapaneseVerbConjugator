@@ -61,6 +61,50 @@ def handle_irregular_verb(verb, append_stem_particle=False, suru_ending=None, ku
             ending = "{}{}".format(ending, kuru_ending)
     return "{}{}".format(verb_stem, ending)
 
+def base_te_ta_form(verb, verb_class, *endings):
+    ''' Handle the formation of the -te / -ta form for verbs belonging to
+    any verb class. Logic for both forms follows similar logic but differs
+    between (-te, -de) and (-ta, -da) based on the last particle of a Godan 
+    verb.
+
+    Args:
+        verb (str): Japanese verb in kana, might contain kanji
+        verb_class (enum): VerbClass Enum representing the verb class
+            to which the verb belongs
+        *endings: Variable length argument list. Must be in the form (te, de)
+        or (ta, da) 
+        
+        TODO... reformat this logic for *endings
+
+    Returns:
+        str: The verb stem plus the -te / -ta particle depending on the 
+        verb class. Defaults to None. 
+    '''
+    if verb_class == VerbClass.IRREGULAR:
+        return handle_irregular_verb(verb, True, endings[0], endings[0])
+    else:
+        verb_stem = get_verb_stem(verb, verb_class)
+        verb_ending = ""
+        if verb_class == VerbClass.ICHIDAN:
+            verb_ending = endings[0]
+        elif verb_class == VerbClass.GODAN:
+            last_kana = verb[-1:]
+            
+            if last_kana in [RU_PARTICLE, TSU_PARTICLE, U_PARTICLE]:
+                verb_ending = "{}{}".format(CHISAI_TSU_PARTICLE, endings[0])
+            elif last_kana in [BU_PARTICLE, MU_PARTICLE, NU_PARTICLE]:
+                verb_ending = "{}{}".format(N_PARTICLE, endings[1])
+            elif last_kana in [KU_PARTICLE]:
+                verb_ending = "{}{}".format(I_PARTICLE, endings[0])
+            elif last_kana in [GU_PARTICLE]:
+                verb_ending = "{}{}".format(I_PARTICLE, endings[1])
+            elif last_kana in [SU_PARTICLE]:
+                verb_ending = "{}{}".format(SHI_PARTICLE, endings[0])
+            else:
+                return None # TODO no matching particle
+        return "{}{}".format(verb_stem, verb_ending)
+    return None # TODO (return certain error type?)
+
 def map_dictionary_to_a_ending(verb):
     ''' Generates Godan verb stem with corresponding -a particle attached
 
