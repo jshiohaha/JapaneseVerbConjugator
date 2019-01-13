@@ -9,20 +9,24 @@ import romkan
 # ---------------------------------------------------------- #
 #              GENERAL VERB GENERATOR FUNCTIONS              #
 # ---------------------------------------------------------- #
-def get_verb_stem(verb, verb_class):
-    ''' Parse Japense verb stem from entire verb 
+def splice_verb(verb, verb_class, should_return_stem=True):
+    '''Split Japense verb between stem and ending particle(s). The number of ending
+    particles returned depends on the verb class (i.e. godan / ichidan will return one
+    particle while irregular verbs will return two particles)
 
     Args:
         verb (str): Japanese verb in kanji and/or kana
         verb_class (enum): VerbClass enum representing the Japanese verb class
 
     Returns:
-        str: Main verb stem, which varies depending on verb class
+        str: Verb stem or particle endings based on the value of should_return_stem
     '''
     num_ending_particles = 1
     if verb_class == VerbClass.IRREGULAR:
         num_ending_particles = 2
-    return verb[:-1*num_ending_particles]
+    if should_return_stem:
+        return verb[:-1*num_ending_particles] 
+    return verb[-1*num_ending_particles:] 
 
 def handle_irregular_verb(verb, append_stem_particle=False, suru_ending=None, kuru_ending=None):
     ''' Handles irregular verb conjugations depending on suru or kuru verb type.
@@ -43,11 +47,11 @@ def handle_irregular_verb(verb, append_stem_particle=False, suru_ending=None, ku
         str: irregular verb with appropriate particles and ending attached depending
             on verb conjugation
     '''
-    particle_ending = verb[-2:]
+    particle_ending = splice_verb(verb, VerbClass.IRREGULAR, False)
     if particle_ending not in [SURU_ENDING, KURU_ENDING]:
         return None
 
-    verb_stem = get_verb_stem(verb, VerbClass.IRREGULAR)
+    verb_stem = splice_verb(verb, VerbClass.IRREGULAR)
     ending = ""
     if particle_ending == SURU_ENDING:
         if append_stem_particle:
@@ -59,6 +63,36 @@ def handle_irregular_verb(verb, append_stem_particle=False, suru_ending=None, ku
             ending = KI_PARTICLE
         if kuru_ending is not None:
             ending = "{}{}".format(ending, kuru_ending)
+    return "{}{}".format(verb_stem, ending)
+
+def generate_nai_form(verb, verb_class, is_regular_nai):
+    ''' Generates the nai form of a Japanese verb
+
+    Args:
+        verb (str): Japanese verb in kana, might contain kanji
+        verb_class (enum): VerbClass Enum representing the verb class
+            to which the verb belongs
+        is_regular_nai (bool): indicates whether to attach nai ending directly
+            to verb param or generate the explicit nai form of a verb. Some
+            verb conjugations require the nai ending without calculating the 
+            nai form
+
+    Returns:
+        str: nai ending attached to verb param
+    '''
+    verb_stem = splice_verb(verb, verb_class)
+    ending = NAI_ENDING
+
+    if not is_regular_nai:
+        return "{}{}".format(verb, ending)
+    if verb_class == VerbClass.IRREGULAR:
+        if splice_verb(verb, verb_class, False) == SURU_ENDING:
+            ending = "{}{}".format(SHI_PARTICLE, ending)
+        else:
+            ending = "{}{}".format(KO_PARTICLE, ending)
+    else:
+        if verb_class == VerbClass.GODAN:
+            verb_stem = map_dictionary_to_a_ending(verb)
     return "{}{}".format(verb_stem, ending)
 
 def base_te_ta_form(verb, verb_class, *endings):
@@ -83,12 +117,12 @@ def base_te_ta_form(verb, verb_class, *endings):
     if verb_class == VerbClass.IRREGULAR:
         return handle_irregular_verb(verb, True, endings[0], endings[0])
     else:
-        verb_stem = get_verb_stem(verb, verb_class)
+        verb_stem = splice_verb(verb, verb_class)
         verb_ending = ""
         if verb_class == VerbClass.ICHIDAN:
             verb_ending = endings[0]
         elif verb_class == VerbClass.GODAN:
-            last_kana = verb[-1:]
+            last_kana = splice_verb(verb, verb_class, False)
             
             if last_kana in [RU_PARTICLE, TSU_PARTICLE, U_PARTICLE]:
                 verb_ending = "{}{}".format(CHISAI_TSU_PARTICLE, endings[0])
@@ -163,8 +197,8 @@ def map_dict_form_to_different_ending(verb, romaji_ending, *special_endings):
         str: verb stem with the correct particle attached depending on the last kana particle
     of the Godan verb
     '''
-    last_kana = verb[-1:]
-    verb_stem = get_verb_stem(verb, VerbClass.GODAN)
+    last_kana = splice_verb(verb, VerbClass.GODAN, False)
+    verb_stem = splice_verb(verb, VerbClass.GODAN)
 
     if last_kana == U_PARTICLE:
         return "{}{}".format(verb_stem, special_endings[0])
@@ -176,3 +210,17 @@ def map_dict_form_to_different_ending(verb, romaji_ending, *special_endings):
         transformed_last_kana_as_romaji = "{}{}".format(romkan.to_roma(last_kana)[:-1], romaji_ending)
         return "{}{}".format(verb_stem, romkan.to_hiragana(transformed_last_kana_as_romaji))
     return None
+
+# ---------------------------------------------------------- #
+#                       Positive Verb Forms                  #
+# ---------------------------------------------------------- #
+class PositiveVerbForms:
+    def __init__(self):
+        return
+
+# ---------------------------------------------------------- #
+#                       Negative Verb Forms                  #
+# ---------------------------------------------------------- #
+class NegativeVerbForms:
+    def __init__(self):
+        return
