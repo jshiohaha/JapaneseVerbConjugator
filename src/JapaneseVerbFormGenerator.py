@@ -430,20 +430,38 @@ class PositiveVerbForms:
                 ending = "{}{}".format(RE_PARTICLE, BA_PARTICLE)
             return "{}{}".format(verb_base, ending)
 
+    def generate_causative_form(self, verb, verb_class, formality):
+        '''Generate the positive causative form of the verb depending
+        on the level of formality.
 
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
 
-
-
-
-
-
-
-
-
-
-
-
-
+        Returns:
+            str: positive causative form based on the specified formality
+        parameter
+        '''
+        if verb_class == VerbClass.IRREGULAR:
+            if formality == Formality.PLAIN:
+                return handle_irregular_verb(verb, suru_ending=CAUSATIVE_PLAIN_SURU_ENDING, kuru_ending=CAUSATIVE_PLAIN_KURU_ENDING)
+        else:
+            # TODO FIX ALL THIS LOGIC... GROSS :-P
+            if verb_class == VerbClass.GODAN:
+                verb_with_a_ending = map_dictionary_to_a_ending(verb)
+                if formality == Formality.PLAIN:
+                    return "{}{}{}".format(verb_with_a_ending, SE_PARTICLE, RU_PARTICLE)
+                else:
+                    return "{}{}{}".format(verb_with_a_ending, SE_PARTICLE, MASU_POSITIVE_NONPAST)
+            elif verb_class == VerbClass.ICHIDAN:
+                verb_stem = splice_verb(verb, verb_class)
+                if formality == Formality.PLAIN:
+                    return "{}{}{}{}".format(verb_stem, SA_PARTICLE, SE_PARTICLE, RU_PARTICLE)
+                else:
+                    return "{}{}{}{}".format(verb_stem, SA_PARTICLE, SE_PARTICLE, MASU_POSITIVE_NONPAST)
 
 # ---------------------------------------------------------- #
 #                       Negative Verb Forms                  #
@@ -647,3 +665,39 @@ class NegativeVerbForms:
             elif verb_class == VerbClass.ICHIDAN:
                 return "{}{}".format(verb_stem, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING)
         return None
+
+    def generate_causative_form(self, verb, verb_class, formality):
+        '''Generate the negative causative form of the verb depending
+        on the formality.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: negative causative form of the verb based on the formality
+        parameter
+        '''
+        if verb_class == VerbClass.IRREGULAR:
+            if splice_verb(verb, verb_class, False) != SURU_ENDING:
+                if formality == Formality.PLAIN: 
+                    return generate_nai_form(CAUSATIVE_KURU_NEGATIVE_BASE, verb_class, False)
+                else:
+                    return "{}{}".format(CAUSATIVE_KURU_NEGATIVE_BASE, MASU_NEGATIVE_NONPAST)
+        else:
+            verb_stem = splice_verb(verb, verb_class)
+            if verb_class == VerbClass.GODAN:
+                modified_verb_stem = "{}{}".format(map_dictionary_to_a_ending(verb), SE_PARTICLE)
+                if formality == Formality.PLAIN:
+                    return generate_nai_form(modified_verb_stem, verb_class, False)
+                else:
+                    return "{}{}".format(modified_verb_stem, MASU_NEGATIVE_NONPAST)
+            elif verb_class == VerbClass.ICHIDAN:
+                modified_verb_stem = "{}{}{}".format(verb_stem, SA_PARTICLE, SE_PARTICLE)
+                if formality == Formality.PLAIN:
+                    return generate_nai_form(modified_verb_stem, verb_class, False)
+                else:
+                    return "{}{}".format(modified_verb_stem, MASU_NEGATIVE_NONPAST)
