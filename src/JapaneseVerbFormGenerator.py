@@ -399,6 +399,52 @@ class PositiveVerbForms:
                     ending = RO_PARTICLE
             return "{}{}".format(verb_base, ending)
 
+    def generate_provisional_form(self, verb, verb_class, formality=None):
+        '''Generate the positive provisional form of the verb depending
+        on the level of formality. No formality parameter required for 
+        non-irregular verbs.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (:obj: enum, optional): Formality Enum representing the formality class
+                for the conjugated verb. Defaults to None.
+
+        Returns:
+            str: positive provisional form based on the specified formality
+        parameter
+        '''        
+        if verb_class == VerbClass.IRREGULAR:
+            if formality == Formality.PLAIN:
+                return handle_irregular_verb(verb, suru_ending=PROVISIONAL_SURU_PLAIN_POSITIVE_ENDING, kuru_ending=PROVISIONAL_KURU_PLAIN_POSITIVE_ENDING)
+            else:
+                return handle_irregular_verb(verb, suru_ending=PROVISIONAL_SURU_POLITE_POSITIVE_ENDING, kuru_ending=PROVISIONAL_KURU_POLITE_POSITIVE_ENDING)
+        else:
+            # assuming godan verb 
+            verb_base = map_dictionary_to_e_ending(verb)
+            ending = BA_PARTICLE
+
+            if verb_class == VerbClass.ICHIDAN:
+                verb_base = splice_verb(verb, verb_class)
+                ending = "{}{}".format(RE_PARTICLE, BA_PARTICLE)
+            return "{}{}".format(verb_base, ending)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ---------------------------------------------------------- #
 #                       Negative Verb Forms                  #
 # ---------------------------------------------------------- #
@@ -568,3 +614,36 @@ class NegativeVerbForms:
                 return "{}{}".format(verb, NA_PARTICLE)
             else:
                 return "{}{}{}".format(generate_nai_form(verb, verb_class, True), DE_PARTICLE, KUDASAI)
+    
+    def generate_provisional_form(self, verb, verb_class, formality):
+        '''Generate the negative provisional form of the verb depending
+        on the formality.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: negative provisional form of the verb based on the formality
+        parameter
+        '''
+        if verb_class == VerbClass.IRREGULAR:
+            if formality == Formality.PLAIN:
+                if splice_verb(verb, verb_class, False) == SURU_ENDING:
+                    return handle_irregular_verb(verb, append_stem_particle=True, suru_ending=PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING)
+                else:
+                    return "{}{}".format(KO_PARTICLE, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING)
+            else:
+                intermediate_verb = handle_irregular_verb(verb, append_stem_particle=True, suru_ending=MASU_NEGATIVE_NONPAST, kuru_ending=MASU_NEGATIVE_NONPAST)
+                return "{}{}{}".format(intermediate_verb, NA_PARTICLE, RA_PARTICLE)
+        else:
+            verb_stem = splice_verb(verb, verb_class)
+            if verb_class == VerbClass.GODAN:
+                verb_with_a_ending = map_dictionary_to_a_ending(verb)
+                return "{}{}".format(verb_with_a_ending, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING)
+            elif verb_class == VerbClass.ICHIDAN:
+                return "{}{}".format(verb_stem, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING)
+        return None
