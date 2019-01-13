@@ -259,6 +259,20 @@ class PositiveVerbForms:
             # ichidan verb class check is not needed here
             return "{}{}".format(verb_stem, ending)
 
+    def generate_te_form(self, verb, verb_class):
+        '''Utilize base_te_ta_form function to generate the -te form 
+        of the verb
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+
+        Returns:
+            str: -te form of the verb
+        '''
+        return base_te_ta_form(verb, verb_class, TE_PARTICLE, DE_PARTICLE)
+
     def generate_conditional_form(self, verb, verb_class, formality):
         '''Generate the positive conditional form of the verb depending
         on the level of formality.
@@ -352,6 +366,37 @@ class PositiveVerbForms:
                     ending = POTENTIAL_ICHIDAN_ENDING
                 else:
                     ending = POTENTIAL_POLITE_ICHIDAN_ENDING
+            return "{}{}".format(verb_base, ending)
+
+    def generate_imperative_form(self, verb, verb_class, formality):
+        '''Generate the positive imperative form of the verb depending
+        on the level of formality.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: positive imperative form based on the specified formality
+        parameter
+        '''
+        if verb_class == VerbClass.IRREGULAR:
+            if formality == Formality.PLAIN:
+                return handle_irregular_verb(verb, suru_ending=IMPERATIVE_SURU_PLAIN_POSITIVE_ENDING, kuru_ending=IMPERATIVE_KURU_PLAIN_POSITIVE_ENDING)
+            else:
+                return "{}{}".format(self.generate_te_form(verb, verb_class), KUDASAI)
+        else:
+            verb_base = self.generate_te_form(verb, verb_class)
+            ending = KUDASAI
+            if formality == Formality.PLAIN:
+                if verb_class == VerbClass.GODAN:
+                    return map_dictionary_to_e_ending(verb)
+                else:
+                    verb_base = splice_verb(verb, verb_class)
+                    ending = RO_PARTICLE
             return "{}{}".format(verb_base, ending)
 
 # ---------------------------------------------------------- #
@@ -496,3 +541,30 @@ class NegativeVerbForms:
                     return generate_nai_form(verb_with_rare, verb_class, False)
                 else:
                     return "{}{}".format(verb_with_rare, MASU_NEGATIVE_NONPAST)
+    
+    def generate_imperative_form(self, verb, verb_class, formality):
+        '''Generate the negative imperative form of the verb depending
+        on the formality.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: negative imperative form of the verb based on the formality
+        parameter
+        '''
+        if verb_class == VerbClass.IRREGULAR:
+            if formality == Formality.PLAIN:
+                return handle_irregular_verb(verb, suru_ending="{}{}".format(SURU_ENDING, NA_PARTICLE), kuru_ending="{}{}".format(KURU_ENDING, NA_PARTICLE))
+            else:
+                nai_form = generate_nai_form(verb, verb_class, True)
+                return "{}{}{}".format(nai_form, DE_PARTICLE, KUDASAI)
+        else:
+            if formality == Formality.PLAIN:
+                return "{}{}".format(verb, NA_PARTICLE)
+            else:
+                return "{}{}{}".format(generate_nai_form(verb, verb_class, True), DE_PARTICLE, KUDASAI)
