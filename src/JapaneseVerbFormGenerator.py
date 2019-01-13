@@ -215,12 +215,97 @@ def map_dict_form_to_different_ending(verb, romaji_ending, *special_endings):
 #                       Positive Verb Forms                  #
 # ---------------------------------------------------------- #
 class PositiveVerbForms:
-    def __init__(self):
-        return
+    def generate_plain_form(self, verb, verb_class, tense):
+        '''Generate the positive polite form of the verb depending
+        on the tense.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            tense (enum): Tense Enum representing the tense for the conjugated verb 
+
+        Returns:
+            str: positive plain form of the verb based on the tense parameter
+        '''
+        if tense == Tense.NONPAST:
+            return verb
+        return base_te_ta_form(verb, verb_class, TA_PARTICLE, DA_PARTICLE)
+
+    def generate_polite_form(self, verb, verb_class, tense):
+        '''Generate the positive polite form of the verb depending
+        on the tense.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            tense (enum): Tense Enum representing the tense for the conjugated verb 
+
+        Returns:
+            str: positive polite form of the verb based on the tense parameter
+        '''
+        ending = MASU_POSITIVE_PAST
+        if tense == Tense.NONPAST:
+            ending = MASU_POSITIVE_NONPAST
+
+        if verb_class == VerbClass.IRREGULAR:
+            # ending is the same regardless. Any way to account for this? 
+            return handle_irregular_verb(verb, True, ending, ending)
+        else:
+            verb_stem = splice_verb(verb, verb_class)
+            if verb_class == VerbClass.GODAN:
+                verb_stem = map_dictionary_to_i_ending(verb)
+            # ichidan verb class check is not needed here
+            return "{}{}".format(verb_stem, ending)
 
 # ---------------------------------------------------------- #
 #                       Negative Verb Forms                  #
 # ---------------------------------------------------------- #
 class NegativeVerbForms:
-    def __init__(self):
-        return
+    def generate_plain_form(self, verb, verb_class, tense):
+        '''Generate the negative polite form of the verb depending
+        on the tense.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            tense (enum): Tense Enum representing the tense for the conjugated verb 
+
+        Returns:
+            str: negative plain form of the verb based on the tense
+        parameter
+        '''
+        verb = generate_nai_form(verb, verb_class, True)
+        if tense == Tense.NONPAST:
+            return verb
+        # force a non-irregular verb class to remove ending -i particle
+        return "{}{}".format(splice_verb(verb, VerbClass.NONIRREGULAR), KATTA_ENDING)
+
+    def generate_polite_form(self, verb, verb_class, tense):
+        '''Generate the negative polite form of the verb depending
+        on the tense.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            tense (enum): Tense Enum representing the tense for the conjugated verb 
+
+        Returns:
+            str: negative polite form of the verb based on the tense
+        parameter
+        '''
+        ending = MASU_NEGATIVE_PAST
+        if tense == Tense.NONPAST:
+            ending = MASU_NEGATIVE_NONPAST
+
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(verb, append_stem_particle=True, suru_ending=ending, kuru_ending=ending)
+        else:
+            verb_base = splice_verb(verb, verb_class)
+            if verb_class == VerbClass.GODAN:
+                verb_base = map_dictionary_to_i_ending(verb)
+            # no change needed for ichidan verb
+            return "{}{}".format(verb_base, ending)
