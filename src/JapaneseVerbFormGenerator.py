@@ -248,7 +248,7 @@ class PositiveVerbForms:
         ending = MASU_POSITIVE_PAST
         if tense == Tense.NONPAST:
             ending = MASU_POSITIVE_NONPAST
-
+    
         if verb_class == VerbClass.IRREGULAR:
             # ending is the same regardless. Any way to account for this? 
             return handle_irregular_verb(verb, True, ending, ending)
@@ -279,6 +279,43 @@ class PositiveVerbForms:
         else:
             verb = self.generate_polite_form(verb, verb_class, Tense.PAST)
         return "{}{}".format(verb, RA_PARTICLE)
+
+    def generate_volitional_form(self, verb, verb_class, formality):
+        '''Generate the positive volitional form of the verb depending
+        on the level of formality.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: positive volitional form of the verb based on the formality
+            parameter
+        '''
+        if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(verb, suru_ending=VOLITIONAL_SURU_ENDING, kuru_ending=VOLITIONAL_KURU_ENDING)
+        else:
+            verb_base = ""
+            ending = ""
+            if verb_class == VerbClass.GODAN:
+                # assuming plain formality param
+                verb_base = map_dictionary_to_o_ending(verb)
+                ending = U_PARTICLE
+                if formality == Formality.POLITE:
+                    verb_base = map_dictionary_to_i_ending(verb)
+                    ending = VOLITIONAL_POLITE_ENDING
+            elif verb_class == VerbClass.ICHIDAN:
+                verb_base = splice_verb(verb, verb_class)
+                # assuming plain formality param
+                ending = VOLITIONAL_ICHIDAN_PLAIN_ENDING
+                if formality == Formality.POLITE:
+                    ending = VOLITIONAL_POLITE_ENDING                  
+            else:
+                return None # TODO: create return type failure
+        return "{}{}".format(verb_base, ending)
 
 # ---------------------------------------------------------- #
 #                       Negative Verb Forms                  #
@@ -350,4 +387,26 @@ class NegativeVerbForms:
             verb = self.generate_plain_form(verb, verb_class, Tense.PAST)
         else:
             verb = self.generate_polite_form(verb, verb_class, Tense.PAST)
-        return "{}{}".format(verb, RA_PARTICLE)  
+        return "{}{}".format(verb, RA_PARTICLE)   
+
+    def generate_volitional_form(self, verb, verb_class, formality):
+        '''Generate the negative volitional form of the verb depending
+        on the formality. 
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: negative volitional form of the verb based on the formality
+        parameter
+        '''
+        verb_nai_form = generate_nai_form(verb, verb_class, True)
+        if formality == Formality.PLAIN:
+            return "{}{}".format(verb_nai_form, VOLITIONAL_PLAIN_COPULA)
+        elif formality == Formality.POLITE:
+            return "{}{}".format(verb_nai_form, VOLITIONAL_POLITE_COPULA)
+    
