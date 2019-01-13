@@ -24,6 +24,43 @@ def get_verb_stem(verb, verb_class):
         num_ending_particles = 2
     return verb[:-1*num_ending_particles]
 
+def handle_irregular_verb(verb, append_stem_particle=False, suru_ending=None, kuru_ending=None):
+    ''' Handles irregular verb conjugations depending on suru or kuru verb type.
+    Isolates logic of irregular verbs.
+    
+    Args:
+        verb (str): Japanese verb in kana, might contain kanji
+        append_stem_particle (bool): verb base particle depends on if the verb is a 
+            suru or kuru verb. し particle is appended to suru verbs and き is appended
+            to kuru verbs. Not all conjugations require these particles to be appended
+            to the verb stem.
+        suru_ending (:obj: str, optional): suru verb ending based on the conjugation form.
+            Defaults to None.
+        kuru_ending (:obj: str, optional): kuru verb ending based on the conjugation form.
+            Defaults to None.
+
+    Returns:
+        str: irregular verb with appropriate particles and ending attached depending
+            on verb conjugation
+    '''
+    particle_ending = verb[-2:]
+    if particle_ending not in [SURU_ENDING, KURU_ENDING]:
+        return None
+
+    verb_stem = get_verb_stem(verb, VerbClass.IRREGULAR)
+    ending = ""
+    if particle_ending == SURU_ENDING:
+        if append_stem_particle:
+            ending = SHI_PARTICLE
+        if suru_ending is not None:
+            ending = "{}{}".format(ending, suru_ending)
+    else:
+        if append_stem_particle:
+            ending = KI_PARTICLE
+        if kuru_ending is not None:
+            ending = "{}{}".format(ending, kuru_ending)
+    return "{}{}".format(verb_stem, ending)
+
 def map_dictionary_to_a_ending(verb):
     ''' Generates Godan verb stem with corresponding -a particle attached
 
