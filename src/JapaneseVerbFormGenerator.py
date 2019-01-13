@@ -259,6 +259,27 @@ class PositiveVerbForms:
             # ichidan verb class check is not needed here
             return "{}{}".format(verb_stem, ending)
 
+    def generate_conditional_form(self, verb, verb_class, formality):
+        '''Generate the positive conditional form of the verb depending
+        on the level of formality.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: positive conditional form of the verb based on the formality
+        parameter
+        '''
+        if formality == Formality.PLAIN:
+            verb = base_te_ta_form(verb, verb_class, TA_PARTICLE, DA_PARTICLE)
+        else:
+            verb = self.generate_polite_form(verb, verb_class, Tense.PAST)
+        return "{}{}".format(verb, RA_PARTICLE)
+
 # ---------------------------------------------------------- #
 #                       Negative Verb Forms                  #
 # ---------------------------------------------------------- #
@@ -309,3 +330,24 @@ class NegativeVerbForms:
                 verb_base = map_dictionary_to_i_ending(verb)
             # no change needed for ichidan verb
             return "{}{}".format(verb_base, ending)
+
+    def generate_conditional_form(self, verb, verb_class, formality):
+        '''Generate the negative polite form of the verb depending
+        on the formality.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: negative conditional form of the verb based on the formality
+        parameter
+        '''
+        if formality == Formality.PLAIN:
+            verb = self.generate_plain_form(verb, verb_class, Tense.PAST)
+        else:
+            verb = self.generate_polite_form(verb, verb_class, Tense.PAST)
+        return "{}{}".format(verb, RA_PARTICLE)  
