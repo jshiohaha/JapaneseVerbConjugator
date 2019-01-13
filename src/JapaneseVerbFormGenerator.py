@@ -463,6 +463,40 @@ class PositiveVerbForms:
                 else:
                     return "{}{}{}{}".format(verb_stem, SA_PARTICLE, SE_PARTICLE, MASU_POSITIVE_NONPAST)
 
+    def generate_passive_form(self, verb, verb_class, formality):
+        '''Generate the positive passive form of the verb depending
+        on the level of formality.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: positive passive form based on the specified formality
+        parameter
+        '''
+        if verb_class == VerbClass.IRREGULAR:
+            if formality == Formality.PLAIN:
+                return handle_irregular_verb(verb, suru_ending=PASSIVE_SURU_PLAIN_POSITIVE_ENDING, kuru_ending=PASSIVE_KURU_PLAIN_POSITIVE_ENDING)
+            else:
+                return None
+        else:
+            if verb_class == VerbClass.GODAN:
+                verb_with_a_ending = map_dictionary_to_a_ending(verb)
+                if formality == Formality.PLAIN:
+                    return "{}{}{}".format(verb_with_a_ending, RE_PARTICLE, RU_PARTICLE)
+                else:
+                    return "{}{}{}".format(verb_with_a_ending, RE_PARTICLE, MASU_POSITIVE_NONPAST)
+            elif verb_class == VerbClass.ICHIDAN:
+                verb_stem = splice_verb(verb, verb_class)
+                if formality == Formality.PLAIN:
+                    return "{}{}".format(verb_stem, PASSIVE_ICHIDAN_PLAIN_POSITIVE_ENDING)
+                else:
+                    return "{}{}".format(verb_stem, PASSIVE_ICHIDAN_POLITE_POSITIVE_ENDING)
+
 # ---------------------------------------------------------- #
 #                       Negative Verb Forms                  #
 # ---------------------------------------------------------- #
@@ -701,3 +735,31 @@ class NegativeVerbForms:
                     return generate_nai_form(modified_verb_stem, verb_class, False)
                 else:
                     return "{}{}".format(modified_verb_stem, MASU_NEGATIVE_NONPAST)
+
+    def generate_passive_form(self, verb, verb_class, formality):
+        '''Generate the negative passive form of the verb depending
+        on the formality.
+
+        Args:
+            verb (str): Japanese verb in kana, might contain kanji
+            verb_class (enum): VerbClass Enum representing the verb class
+                to which the verb belongs
+            formality (enum): Formality Enum representing the formality class
+                for the conjugated verb 
+
+        Returns:
+            str: negative passive form of the verb based on the formality
+        parameter
+        '''
+        if verb_class == VerbClass.GODAN:
+            verb_with_updated_ending = "{}{}".format(map_dictionary_to_a_ending(verb), RE_PARTICLE)
+            if formality == Formality.PLAIN:
+                return generate_nai_form(verb_with_updated_ending, verb_class, False)
+            else:
+                return "{}{}".format(verb_with_updated_ending, MASU_NEGATIVE_NONPAST)
+        elif verb_class == VerbClass.ICHIDAN:
+            modified_verb_stem = "{}{}{}".format(splice_verb(verb, verb_class), RA_PARTICLE, RE_PARTICLE)
+            if formality == Formality.PLAIN:
+                return generate_nai_form(modified_verb_stem, verb_class, False)
+            else:
+                return "{}{}".format(modified_verb_stem, MASU_NEGATIVE_NONPAST)
