@@ -1,6 +1,14 @@
 from src.constants.EnumeratedTypes import Formality, Polarity, Tense, VerbClass
 
 # regex for kanji / kana: "[一-龯ぁ-んァ-ン]+"
+# 飲む
+# 
+# 先秦兩漢
+
+korean_with_japanese = "한국어처리기む"
+english_with_japanese = "Heloむ"
+verb_incorrect_particle_ending = "飲ま"
+
 
 class GodanVerbNomu:
     # http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%E9%A3%B2%E3%82%80

@@ -1,6 +1,7 @@
 # Local modules
 from .constants.EnumeratedTypes import Polarity
 
+from .Decorators import validateJapaneseVerbDecorator
 from .PositiveVerbFormGenerator import PositiveVerbForms
 from .NegativeVerbFormGenerator import NegativeVerbForms
 
@@ -10,6 +11,7 @@ class JapaneseVerbFormGenerator():
         self.positiveVerbForms = PositiveVerbForms()
         self.negativeVerbForms = NegativeVerbForms()
 
+    @validateJapaneseVerbDecorator
     def generate_plain_form(self, verb, verb_class, tense, polarity):
         '''Generate the plain form of the verb depending on the tense and 
         polarity.
@@ -30,6 +32,7 @@ class JapaneseVerbFormGenerator():
             return self.positiveVerbForms.generate_plain_form(verb, verb_class, tense)
         return self.negativeVerbForms.generate_plain_form(verb, verb_class, tense)
 
+    @validateJapaneseVerbDecorator
     def generate_polite_form(self, verb, verb_class, tense, polarity):
         '''Generate the polite form of the verb depending on the tense and 
         polarity.
@@ -50,6 +53,7 @@ class JapaneseVerbFormGenerator():
             return self.positiveVerbForms.generate_polite_form(verb, verb_class, tense)
         return self.negativeVerbForms.generate_polite_form(verb, verb_class, tense)
 
+    @validateJapaneseVerbDecorator
     def generate_te_form(self, verb, verb_class):
         '''Utilize base_te_ta_form function to generate the -te form 
         of the verb
@@ -64,6 +68,7 @@ class JapaneseVerbFormGenerator():
         '''
         return self.positiveVerbForms.generate_te_form(verb, verb_class)
 
+    @validateJapaneseVerbDecorator
     def generate_conditional_form(self, verb, verb_class, formality, polarity):
         '''Generate the conditional form of the verb depending on the formality.
 
@@ -84,6 +89,7 @@ class JapaneseVerbFormGenerator():
             return self.positiveVerbForms.generate_conditional_form(verb, verb_class, formality)
         return self.negativeVerbForms.generate_conditional_form(verb, verb_class, formality)
 
+    @validateJapaneseVerbDecorator
     def generate_volitional_form(self, verb, verb_class, formality, polarity):
         '''Generate the volitional form of the verb depending on the formality. 
 
@@ -104,6 +110,7 @@ class JapaneseVerbFormGenerator():
             return self.positiveVerbForms.generate_volitional_form(verb, verb_class, formality)
         return self.negativeVerbForms.generate_volitional_form(verb, verb_class, formality)
 
+    @validateJapaneseVerbDecorator
     def generate_potential_form(self, verb, verb_class, formality, polarity):
         '''Generate the potential form of the verb depending on the formality.
 
@@ -124,6 +131,7 @@ class JapaneseVerbFormGenerator():
             return self.positiveVerbForms.generate_potential_form(verb, verb_class, formality)
         return self.negativeVerbForms.generate_potential_form(verb, verb_class, formality)
 
+    @validateJapaneseVerbDecorator
     def generate_imperative_form(self, verb, verb_class, formality, polarity):
         '''Generate the imperative form of the verb depending on the formality.
 
@@ -144,6 +152,7 @@ class JapaneseVerbFormGenerator():
             return self.positiveVerbForms.generate_imperative_form(verb, verb_class, formality)
         return self.negativeVerbForms.generate_imperative_form(verb, verb_class, formality)
 
+    @validateJapaneseVerbDecorator
     def generate_provisional_form(self, verb, verb_class, formality, polarity):
         '''Generate the provisional form of the verb depending on the formality.
 
@@ -164,6 +173,7 @@ class JapaneseVerbFormGenerator():
             return self.positiveVerbForms.generate_provisional_form(verb, verb_class, formality)
         return self.negativeVerbForms.generate_provisional_form(verb, verb_class, formality)
 
+    @validateJapaneseVerbDecorator
     def generate_causative_form(self, verb, verb_class, formality, polarity):
         '''Generate the causative form of the verb depending on the formality.
 
@@ -184,6 +194,7 @@ class JapaneseVerbFormGenerator():
             return self.positiveVerbForms.generate_causative_form(verb, verb_class, formality)
         return self.negativeVerbForms.generate_causative_form(verb, verb_class, formality)
 
+    @validateJapaneseVerbDecorator
     def generate_passive_form(self, verb, verb_class, formality, polarity):
         '''Generate the passive form of the verb depending on the formality.
 
