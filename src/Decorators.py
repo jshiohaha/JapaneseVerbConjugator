@@ -1,14 +1,8 @@
-from .constants.ParticleConstants import (
-    U_PARTICLE,
-    KU_PARTICLE,
-    GU_PARTICLE,
-    SU_PARTICLE,
-    TSU_PARTICLE,
-    NU_PARTICLE,
-    BU_PARTICLE,
-    MU_PARTICLE,
-    RU_PARTICLE,
-)
+from .constants.ParticleConstants import (BU_PARTICLE, GU_PARTICLE,
+                                          KU_PARTICLE, MU_PARTICLE,
+                                          NU_PARTICLE, RU_PARTICLE,
+                                          SU_PARTICLE, TSU_PARTICLE,
+                                          U_PARTICLE)
 
 
 def containsJapaneseCharacters(verb):
