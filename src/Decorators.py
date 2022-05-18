@@ -34,7 +34,6 @@ def containsJapaneseCharacters(verb):
 def validateJapaneseVerbDecorator(func):
     def wrapper(self, verb, *args):
         if len(verb) < 2:
-            print("here")
             raise Exception("Invalid Japanese Verb Length", len(verb), verb)
 
         if verb[-1:] not in [U_PARTICLE, KU_PARTICLE, GU_PARTICLE, SU_PARTICLE, TSU_PARTICLE, NU_PARTICLE, BU_PARTICLE, MU_PARTICLE, RU_PARTICLE]:
