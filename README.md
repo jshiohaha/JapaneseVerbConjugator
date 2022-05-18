@@ -78,7 +78,7 @@ from japaneseverbconjugator.src import JapaneseVerbFormGenerator as japaneseVerb
 from japaneseverbconjugator.src.constants.EnumeratedTypes import VerbClass, Tense, Polarity
 
 jvfg = japaneseVerbFormGenerator.JapaneseVerbFormGenerator() # creates JapaneseVerbFormGenerator instance
-jvfg.generate_plain_form("飲む", VerbClass.GODAN, Tense.NONPAST, Polarity.POSTIIVE) # returns '飲む'
+jvfg.generate_plain_form("飲む", VerbClass.GODAN, Tense.NONPAST, Polarity.POSITIVE) # returns '飲む'
 jvfg.generate_plain_form("飲む", VerbClass.GODAN, Tense.NONPAST, Polarity.NEGATIVE) # returns '飲まない'
 ```
 
