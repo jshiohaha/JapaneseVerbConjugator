@@ -1,8 +1,12 @@
-from .constants.ParticleConstants import (BU_PARTICLE, GU_PARTICLE,
-                                          KU_PARTICLE, MU_PARTICLE,
-                                          NU_PARTICLE, RU_PARTICLE,
-                                          SU_PARTICLE, TSU_PARTICLE,
-                                          U_PARTICLE)
+from .constants.ParticleConstants import BU_PARTICLE
+from .constants.ParticleConstants import GU_PARTICLE
+from .constants.ParticleConstants import KU_PARTICLE
+from .constants.ParticleConstants import MU_PARTICLE
+from .constants.ParticleConstants import NU_PARTICLE
+from .constants.ParticleConstants import RU_PARTICLE
+from .constants.ParticleConstants import SU_PARTICLE
+from .constants.ParticleConstants import TSU_PARTICLE
+from .constants.ParticleConstants import U_PARTICLE
 
 
 def containsJapaneseCharacters(verb):
