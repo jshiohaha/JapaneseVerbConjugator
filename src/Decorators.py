@@ -32,7 +32,7 @@ def containsJapaneseCharacters(verb):
     return True
 
 def validateJapaneseVerbDecorator(func):
-    def wrapper(self, verb, *args):
+    def wrapper(self, verb, *args, **kwargs):
         if len(verb) < 2:
             raise Exception("Invalid Japanese Verb Length", len(verb), verb)
 
@@ -42,7 +42,7 @@ def validateJapaneseVerbDecorator(func):
         if not containsJapaneseCharacters(verb):
             raise Exception("Non-Japanese Character Found", verb)
 
-        # assuming *args will always have the correct arguments because initial function call succeeded
-        return func(self, verb, *args)
+        # assuming *args and **kwargs will always have the correct arguments because initial function call succeeded
+        return func(self, verb, *args, **kwargs)
     return wrapper
     
