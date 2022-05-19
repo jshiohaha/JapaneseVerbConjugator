@@ -1,9 +1,9 @@
 # Local modules
+from .constants.enumerated_types import Formality, Tense, VerbClass
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
-from .constants.enumerated_types import Formality, Tense, VerbClass
-
 from .utils import *
+
 
 # ---------------------------------------------------------- #
 #                       Positive Verb Forms                  #

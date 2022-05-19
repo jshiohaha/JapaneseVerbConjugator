@@ -1,9 +1,8 @@
 # Local modules
 from .constants.enumerated_types import Polarity
-
 from .decorators import validateJapaneseVerbDecorator
-from .positive_form_gen import PositiveVerbForms
 from .negative_form_gen import NegativeVerbForms
+from .positive_form_gen import PositiveVerbForms
 
 
 class JapaneseVerbFormGenerator:

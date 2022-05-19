@@ -1,10 +1,11 @@
 # Local modules
-from .constants.particle_constants import *
-from .constants.verb_ending_constants import *
-from .constants.enumerated_types import Formality, Polarity, Tense, VerbClass
-
 # External Libraries
 import romkan
+
+from .constants.enumerated_types import Formality, Polarity, Tense, VerbClass
+from .constants.particle_constants import *
+from .constants.verb_ending_constants import *
+
 
 # ---------------------------------------------------------- #
 #                UTIL VERB GENERATOR FUNCTIONS               #

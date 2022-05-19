@@ -1,24 +1,23 @@
 import unittest
 
-from japverbgen.verb_form_gen import JapaneseVerbFormGenerator
-from japverbgen.decorators import *
-from japverbgen.constants.enumerated_types import VerbClass, Tense, Polarity
+from japverbgen.constants.enumerated_types import Polarity, Tense, VerbClass
 from japverbgen.constants.particle_constants import (
     CHISAI_TSU_PARTICLE,
-    KU_PARTICLE,
-    GU_PARTICLE,
-    SU_PARTICLE,
-    U_PARTICLE,
-    TSU_PARTICLE,
-    TA_PARTICLE,
     DA_PARTICLE,
+    GU_PARTICLE,
+    KU_PARTICLE,
     PU_PARTICLE,
+    SU_PARTICLE,
+    TA_PARTICLE,
+    TSU_PARTICLE,
+    U_PARTICLE,
 )
-
+from japverbgen.decorators import *
+from japverbgen.verb_form_gen import JapaneseVerbFormGenerator
 from TestConstants import (
     GodanVerbNomu,
-    korean_with_japanese,
     english_with_japanese,
+    korean_with_japanese,
     verb_incorrect_particle_ending,
 )
 

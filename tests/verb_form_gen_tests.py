@@ -1,13 +1,13 @@
 import unittest
 
+from japverbgen.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
 from japverbgen.verb_form_gen import *
-from japverbgen.constants.enumerated_types import Polarity, Formality, VerbClass, Tense
 
 from .constants import (
     GodanVerbNomu,
     IchidanVerbTaberu,
-    IrregularVerbSuru,
     IrregularVerbKuru,
+    IrregularVerbSuru,
 )
 
 # https://github.com/audreyr/how-to/blob/master/python/use_coverage_with_unittest.rst

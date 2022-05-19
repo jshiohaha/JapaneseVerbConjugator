@@ -1,22 +1,21 @@
 import unittest
 
-from japverbgen.utils import *
 from japverbgen.constants.particle_constants import (
     CHISAI_TSU_PARTICLE,
-    KU_PARTICLE,
-    GU_PARTICLE,
-    SU_PARTICLE,
-    U_PARTICLE,
-    TSU_PARTICLE,
-    TA_PARTICLE,
     DA_PARTICLE,
+    GU_PARTICLE,
+    KU_PARTICLE,
+    SU_PARTICLE,
+    TA_PARTICLE,
+    TSU_PARTICLE,
+    U_PARTICLE,
 )
-
+from japverbgen.utils import *
 from TestConstants import (
     GodanVerbNomu,
     IchidanVerbTaberu,
-    IrregularVerbSuru,
     IrregularVerbKuru,
+    IrregularVerbSuru,
 )
 
 

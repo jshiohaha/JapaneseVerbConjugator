@@ -1,13 +1,13 @@
 from .constants.particle_constants import (
-    U_PARTICLE,
-    KU_PARTICLE,
+    BU_PARTICLE,
     GU_PARTICLE,
+    KU_PARTICLE,
+    MU_PARTICLE,
+    NU_PARTICLE,
+    RU_PARTICLE,
     SU_PARTICLE,
     TSU_PARTICLE,
-    NU_PARTICLE,
-    BU_PARTICLE,
-    MU_PARTICLE,
-    RU_PARTICLE,
+    U_PARTICLE,
 )
 
 
