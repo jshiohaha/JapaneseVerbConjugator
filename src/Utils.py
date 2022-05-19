@@ -48,7 +48,7 @@ def handle_irregular_verb(verb, append_stem_particle=False, suru_ending=None, ku
             on verb conjugation
     '''
     particle_ending = splice_verb(verb, VerbClass.IRREGULAR, False)
-    if particle_ending not in [SURU_ENDING, KURU_ENDING]:
+    if particle_ending not in [SURU_ENDING, KURU_ENDING, KURU_KANJI_ENDING]:
         return None
 
     verb_stem = splice_verb(verb, VerbClass.IRREGULAR)
@@ -58,9 +58,14 @@ def handle_irregular_verb(verb, append_stem_particle=False, suru_ending=None, ku
             ending = SHI_PARTICLE
         if suru_ending is not None:
             ending = "{}{}".format(ending, suru_ending)
-    else:
+    elif particle_ending == KURU_ENDING:
         if append_stem_particle:
             ending = KI_PARTICLE
+        if kuru_ending is not None:
+            ending = "{}{}".format(ending, kuru_ending)
+    else:
+        if append_stem_particle:
+            ending = KURU_KANJI
         if kuru_ending is not None:
             ending = "{}{}".format(ending, kuru_ending)
     return "{}{}".format(verb_stem, ending)
