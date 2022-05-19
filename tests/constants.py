@@ -1,8 +1,8 @@
-from src.constants.EnumeratedTypes import Formality, Polarity, Tense, VerbClass
+from japverbgen.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
 
 # regex for kanji / kana: "[一-龯ぁ-んァ-ン]+"
 # 飲む
-# 
+#
 # 先秦兩漢
 
 korean_with_japanese = "한국어처리기む"
@@ -12,7 +12,7 @@ verb_incorrect_particle_ending = "飲ま"
 
 class GodanVerbNomu:
     # http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%E9%A3%B2%E3%82%80
-    Verb = "飲む" # plain positive nonpast
+    Verb = "飲む"  # plain positive nonpast
     Verb_Class = VerbClass.GODAN
 
     # Formal Verb Forms
@@ -22,14 +22,14 @@ class GodanVerbNomu:
     PoliteNegativePast = "飲みませんでした"
 
     # Plain Verb Forms
-    PlainPositivePast = "飲んだ" # ta form
-    PlainNegativeNonpast = "飲まない" # nai form
-    PlainNegativePast = "飲まなかった" # katta form
+    PlainPositivePast = "飲んだ"  # ta form
+    PlainNegativeNonpast = "飲まない"  # nai form
+    PlainNegativePast = "飲まなかった"  # katta form
 
     TeForm = "飲んで"
 
     # Conditional Verb Forms
-    ConditionalPolite = "飲みましたら" # tara form
+    ConditionalPolite = "飲みましたら"  # tara form
     ConditionalPlain = "飲んだら"
 
     # Volitional Verb Forms
@@ -46,7 +46,7 @@ class GodanVerbNomu:
 
     # Imperative Verb Forms
     ImperativePlainPositive = "飲め"
-    ImperativePlainNegative= "飲むな"
+    ImperativePlainNegative = "飲むな"
     ImperativePolitePositive = "飲んでください"
     ImperativePoliteNegative = "飲まないでください"
 
@@ -69,7 +69,7 @@ class GodanVerbNomu:
 
 class IchidanVerbTaberu:
     # http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%E9%A3%9F%E3%81%B9%E3%82%8B
-    Verb = "食べる" # plain positive nonpast
+    Verb = "食べる"  # plain positive nonpast
     Verb_Class = VerbClass.ICHIDAN
 
     # Formal Verb Forms
@@ -79,15 +79,15 @@ class IchidanVerbTaberu:
     PoliteNegativePast = "食べませんでした"
 
     # Plain Verb Forms
-    PlainPositivePast = "食べた" # ta form
-    PlainNegativeNonpast = "食べない" # nai form
-    PlainNegativePast = "食べなかった" # katta form
+    PlainPositivePast = "食べた"  # ta form
+    PlainNegativeNonpast = "食べない"  # nai form
+    PlainNegativePast = "食べなかった"  # katta form
 
     TeForm = "食べて"
 
     # Conditional Verb Forms
-    ConditionalPolite = "食べましたら" # tara form
-    ConditionalPlain = "食べたら" # tara form
+    ConditionalPolite = "食べましたら"  # tara form
+    ConditionalPlain = "食べたら"  # tara form
 
     # Volitional Verb Forms
     VolitionalPlainPositive = "食べよう"
@@ -103,7 +103,7 @@ class IchidanVerbTaberu:
 
     # Imperative Verb Forms
     ImperativePlainPositive = "食べろ"
-    ImperativePlainNegative= "食べるな"
+    ImperativePlainNegative = "食べるな"
     ImperativePolitePositive = "食べてください"
     ImperativePoliteNegative = "食べないでください"
 
@@ -124,9 +124,9 @@ class IchidanVerbTaberu:
     ProvisionalPlainNegative = "食べなければ"
 
 
-class IrregularVerbSuru: 
+class IrregularVerbSuru:
     # http://www.japaneseverbconjugator.com/Suru.asp
-    Verb = "勉強する" # plain positive nonpast
+    Verb = "勉強する"  # plain positive nonpast
     Verb_Class = VerbClass.IRREGULAR
 
     # Formal Verb Forms
@@ -136,17 +136,17 @@ class IrregularVerbSuru:
     PoliteNegativePast = "勉強しませんでした"
 
     # Plain Verb Forms
-    PlainPositivePast = "勉強した" # ta form
-    PlainNegativeNonpast = "勉強しない" # nai form
-    PlainNegativePast = "勉強しなかった" # katta form
+    PlainPositivePast = "勉強した"  # ta form
+    PlainNegativeNonpast = "勉強しない"  # nai form
+    PlainNegativePast = "勉強しなかった"  # katta form
 
     TeForm = "勉強して"
 
     # Conditional Verb Forms
-    ConditionalPlainPositive = "勉強したら" # tara form
-    ConditionalPolitePositive = "勉強しましたら" # tara form
-    ConditionalPlainNegative = "勉強しなかったら" # tara form
-    ConditionalPoliteNegative = "勉強しませんでしたら" # tara form
+    ConditionalPlainPositive = "勉強したら"  # tara form
+    ConditionalPolitePositive = "勉強しましたら"  # tara form
+    ConditionalPlainNegative = "勉強しなかったら"  # tara form
+    ConditionalPoliteNegative = "勉強しませんでしたら"  # tara form
 
     # Volitional Verb Forms
     VolitionalPlainPositive = "勉強しよう"
@@ -167,7 +167,7 @@ class IrregularVerbSuru:
 
     # Imperative Verb Forms
     ImperativePlainPositive = "勉強しろ"
-    ImperativePlainNegative= "勉強するな"
+    ImperativePlainNegative = "勉強するな"
     ImperativePolitePositive = "勉強してください"
     ImperativePoliteNegative = "勉強しないでください"
 
@@ -184,9 +184,9 @@ class IrregularVerbSuru:
     ProvisionalPoliteNegative = "勉強しませんなら"
 
 
-class IrregularVerbKuru: 
+class IrregularVerbKuru:
     # http://www.japaneseverbconjugator.com/Kuru.asp
-    Verb = "くる" # plain positive nonpast
+    Verb = "くる"  # plain positive nonpast
     Verb_Class = VerbClass.IRREGULAR
 
     # Formal Verb Forms
@@ -196,17 +196,17 @@ class IrregularVerbKuru:
     PoliteNegativePast = "きませんでした"
 
     # Plain Verb Forms
-    PlainPositivePast = "きた" # ta form
-    PlainNegativeNonpast = "こない" # nai form
-    PlainNegativePast = "こなかった" # katta form
+    PlainPositivePast = "きた"  # ta form
+    PlainNegativeNonpast = "こない"  # nai form
+    PlainNegativePast = "こなかった"  # katta form
 
     TeForm = "きて"
 
     # Conditional Verb Forms
-    ConditionalPlainPositive = "きたら" # tara form
-    ConditionalPolitePositive = "きましたら" # tara form
-    ConditionalPlainNegative = "こなかったら" # tara form
-    ConditionalPoliteNegative = "きませんでしたら" # tara form
+    ConditionalPlainPositive = "きたら"  # tara form
+    ConditionalPolitePositive = "きましたら"  # tara form
+    ConditionalPlainNegative = "こなかったら"  # tara form
+    ConditionalPoliteNegative = "きませんでしたら"  # tara form
 
     # Volitional Verb Forms
     VolitionalPolitePositive = "きましょう"
@@ -227,7 +227,7 @@ class IrregularVerbKuru:
 
     # Imperative Verb Forms
     ImperativePlainPositive = "こい"
-    ImperativePlainNegative= "くるな"
+    ImperativePlainNegative = "くるな"
     ImperativePolitePositive = "きてください"
     ImperativePoliteNegative = "こないでください"
 

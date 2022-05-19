@@ -1,4 +1,4 @@
-from .EnumeratedTypes import Formality, Polarity, Tense, VerbClass
+from .enumerated_types import Formality, Polarity, Tense, VerbClass
 
 KUDASAI = "ください"
 KURU_KANJI = "来"
