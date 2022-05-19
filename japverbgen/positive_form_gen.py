@@ -9,7 +9,8 @@ from .utils import *
 #                       Positive Verb Forms                  #
 # ---------------------------------------------------------- #
 class PositiveVerbForms:
-    def generate_plain_form(self, verb, verb_class, tense):
+    @classmethod
+    def generate_plain_form(cls, verb, verb_class, tense):
         """Generate the positive polite form of the verb depending
         on the tense.
 
@@ -26,7 +27,8 @@ class PositiveVerbForms:
             return verb
         return base_te_ta_form(verb, verb_class, TA_PARTICLE, DA_PARTICLE)
 
-    def generate_polite_form(self, verb, verb_class, tense):
+    @classmethod
+    def generate_polite_form(cls, verb, verb_class, tense):
         """Generate the positive polite form of the verb depending
         on the tense.
 
@@ -53,7 +55,8 @@ class PositiveVerbForms:
             # ichidan verb class check is not needed here
             return "{}{}".format(verb_stem, ending)
 
-    def generate_te_form(self, verb, verb_class):
+    @classmethod
+    def generate_te_form(cls, verb, verb_class):
         """Utilize base_te_ta_form function to generate the -te form
         of the verb
 
@@ -67,7 +70,8 @@ class PositiveVerbForms:
         """
         return base_te_ta_form(verb, verb_class, TE_PARTICLE, DE_PARTICLE)
 
-    def generate_conditional_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_conditional_form(cls, verb, verb_class, formality):
         """Generate the positive conditional form of the verb depending
         on the level of formality.
 
@@ -85,10 +89,11 @@ class PositiveVerbForms:
         if formality == Formality.PLAIN:
             verb = base_te_ta_form(verb, verb_class, TA_PARTICLE, DA_PARTICLE)
         else:
-            verb = self.generate_polite_form(verb, verb_class, Tense.PAST)
+            verb = cls.generate_polite_form(verb, verb_class, Tense.PAST)
         return "{}{}".format(verb, RA_PARTICLE)
 
-    def generate_volitional_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_volitional_form(cls, verb, verb_class, formality):
         """Generate the positive volitional form of the verb depending
         on the level of formality.
 
@@ -127,7 +132,8 @@ class PositiveVerbForms:
                     ending = VOLITIONAL_POLITE_ENDING
         return "{}{}".format(verb_base, ending)
 
-    def generate_potential_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_potential_form(cls, verb, verb_class, formality):
         """Generate the positive potential form of the verb depending
         on the level of formality.
 
@@ -172,7 +178,8 @@ class PositiveVerbForms:
                     ending = POTENTIAL_POLITE_ICHIDAN_ENDING
             return "{}{}".format(verb_base, ending)
 
-    def generate_imperative_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_imperative_form(cls, verb, verb_class, formality):
         """Generate the positive imperative form of the verb depending
         on the level of formality.
 
@@ -195,9 +202,9 @@ class PositiveVerbForms:
                     kuru_ending=IMPERATIVE_KURU_PLAIN_POSITIVE_ENDING,
                 )
             else:
-                return "{}{}".format(self.generate_te_form(verb, verb_class), KUDASAI)
+                return "{}{}".format(cls.generate_te_form(verb, verb_class), KUDASAI)
         else:
-            verb_base = self.generate_te_form(verb, verb_class)
+            verb_base = cls.generate_te_form(verb, verb_class)
             ending = KUDASAI
             if formality == Formality.PLAIN:
                 if verb_class == VerbClass.GODAN:
@@ -207,7 +214,8 @@ class PositiveVerbForms:
                     ending = RO_PARTICLE
             return "{}{}".format(verb_base, ending)
 
-    def generate_provisional_form(self, verb, verb_class, formality=None):
+    @classmethod
+    def generate_provisional_form(cls, verb, verb_class, formality=None):
         """Generate the positive provisional form of the verb depending
         on the level of formality. No formality parameter required for
         non-irregular verbs.
@@ -246,7 +254,8 @@ class PositiveVerbForms:
                 ending = "{}{}".format(RE_PARTICLE, BA_PARTICLE)
             return "{}{}".format(verb_base, ending)
 
-    def generate_causative_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_causative_form(cls, verb, verb_class, formality):
         """Generate the positive causative form of the verb depending
         on the level of formality.
 
@@ -289,7 +298,8 @@ class PositiveVerbForms:
                         verb_stem, SA_PARTICLE, SE_PARTICLE, MASU_POSITIVE_NONPAST
                     )
 
-    def generate_passive_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_passive_form(cls, verb, verb_class, formality):
         """Generate the positive passive form of the verb depending
         on the level of formality.
 

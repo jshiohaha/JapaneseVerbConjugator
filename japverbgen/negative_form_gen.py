@@ -9,7 +9,8 @@ from .utils import *
 #                       Negative Verb Forms                  #
 # ---------------------------------------------------------- #
 class NegativeVerbForms:
-    def generate_plain_form(self, verb, verb_class, tense):
+    @classmethod
+    def generate_plain_form(cls, verb, verb_class, tense):
         """Generate the negative plain form of the verb depending
         on the tense.
 
@@ -29,7 +30,8 @@ class NegativeVerbForms:
         # force a non-irregular verb class to remove ending -i particle
         return "{}{}".format(splice_verb(verb, VerbClass.NONIRREGULAR), KATTA_ENDING)
 
-    def generate_polite_form(self, verb, verb_class, tense):
+    @classmethod
+    def generate_polite_form(cls, verb, verb_class, tense):
         """Generate the negative polite form of the verb depending
         on the tense.
 
@@ -58,7 +60,8 @@ class NegativeVerbForms:
             # no change needed for ichidan verb
             return "{}{}".format(verb_base, ending)
 
-    def generate_conditional_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_conditional_form(cls, verb, verb_class, formality):
         """Generate the negative conditional form of the verb depending
         on the formality.
 
@@ -74,12 +77,13 @@ class NegativeVerbForms:
         parameter
         """
         if formality == Formality.PLAIN:
-            verb = self.generate_plain_form(verb, verb_class, Tense.PAST)
+            verb = cls.generate_plain_form(verb, verb_class, Tense.PAST)
         else:
-            verb = self.generate_polite_form(verb, verb_class, Tense.PAST)
+            verb = cls.generate_polite_form(verb, verb_class, Tense.PAST)
         return "{}{}".format(verb, RA_PARTICLE)
 
-    def generate_volitional_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_volitional_form(cls, verb, verb_class, formality):
         """Generate the negative volitional form of the verb depending
         on the formality.
 
@@ -100,7 +104,8 @@ class NegativeVerbForms:
         elif formality == Formality.POLITE:
             return "{}{}".format(verb_nai_form, VOLITIONAL_POLITE_COPULA)
 
-    def generate_potential_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_potential_form(cls, verb, verb_class, formality):
         """Generate the negative potential form of the verb depending
         on the formality.
 
@@ -144,7 +149,8 @@ class NegativeVerbForms:
                 else:
                     return "{}{}".format(verb_with_rare, MASU_NEGATIVE_NONPAST)
 
-    def generate_imperative_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_imperative_form(cls, verb, verb_class, formality):
         """Generate the negative imperative form of the verb depending
         on the formality.
 
@@ -177,7 +183,8 @@ class NegativeVerbForms:
                     generate_nai_form(verb, verb_class, True), DE_PARTICLE, KUDASAI
                 )
 
-    def generate_provisional_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_provisional_form(cls, verb, verb_class, formality):
         """Generate the negative provisional form of the verb depending
         on the formality.
 
@@ -224,7 +231,8 @@ class NegativeVerbForms:
                     verb_stem, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING
                 )
 
-    def generate_causative_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_causative_form(cls, verb, verb_class, formality):
         """Generate the negative causative form of the verb depending
         on the formality.
 
@@ -268,7 +276,8 @@ class NegativeVerbForms:
                 else:
                     return "{}{}".format(modified_verb_stem, MASU_NEGATIVE_NONPAST)
 
-    def generate_passive_form(self, verb, verb_class, formality):
+    @classmethod
+    def generate_passive_form(cls, verb, verb_class, formality):
         """Generate the negative passive form of the verb depending
         on the formality.
 
