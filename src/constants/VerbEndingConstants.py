@@ -1,10 +1,12 @@
 from .EnumeratedTypes import Formality, Polarity, Tense, VerbClass
 
 KUDASAI = "ください"
+KURU_KANJI = "来"
 
 # IRREGULAR VERB ENDINGS
 SURU_ENDING = "する"
 KURU_ENDING = "くる"
+KURU_KANJI_ENDING = "来る"
 
 # (POLITE) MASU FORM ENDINGS
 MASU_POSITIVE_NONPAST = "ます"
