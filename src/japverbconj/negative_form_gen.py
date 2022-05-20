@@ -175,8 +175,7 @@ class NegativeVerbForms:
                     verb,
                     suru_ending="{}{}".format(SURU_ENDING, NA_PARTICLE),
                     kuru_ending="{}{}".format(KURU_ENDING, NA_PARTICLE),
-                    kuru_kanji_ending="{}{}".format(
-                        KURU_KANJI_ENDING, NA_PARTICLE),
+                    kuru_kanji_ending="{}{}".format(KURU_KANJI_ENDING, NA_PARTICLE),
                 )
             else:
                 nai_form = generate_nai_form(verb, verb_class, True)
@@ -186,8 +185,7 @@ class NegativeVerbForms:
                 return "{}{}".format(verb, NA_PARTICLE)
             else:
                 return "{}{}{}".format(
-                    generate_nai_form(verb, verb_class,
-                                      True), DE_PARTICLE, KUDASAI
+                    generate_nai_form(verb, verb_class, True), DE_PARTICLE, KUDASAI
                 )
 
     @classmethod
@@ -286,8 +284,7 @@ class NegativeVerbForms:
                 return "{}{}".format(modified_verb_stem, MASU_NEGATIVE_NONPAST)
         else:
             verb_stem = splice_verb(verb, verb_class)
-            modified_verb_stem = "{}{}{}".format(
-                verb_stem, SA_PARTICLE, SE_PARTICLE)
+            modified_verb_stem = "{}{}{}".format(verb_stem, SA_PARTICLE, SE_PARTICLE)
             if formality == Formality.PLAIN:
                 return generate_nai_form(modified_verb_stem, verb_class, False)
             else:

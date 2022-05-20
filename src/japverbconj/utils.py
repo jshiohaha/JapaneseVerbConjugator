@@ -27,7 +27,7 @@ def splice_verb(verb, verb_class, should_return_stem=True):
         num_ending_particles = 2
     if should_return_stem:
         return verb[: -1 * num_ending_particles]
-    return verb[-1 * num_ending_particles:]
+    return verb[-1 * num_ending_particles :]
 
 
 def handle_irregular_verb(
