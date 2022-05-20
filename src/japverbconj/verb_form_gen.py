@@ -28,8 +28,10 @@ class JapaneseVerbFormGenerator:
         parameters
         """
         if polarity == Polarity.POSITIVE:
-            return cls.positive_verb_forms.generate_plain_form(verb, verb_class, tense)
-        return cls.negative_verb_forms.generate_plain_form(verb, verb_class, tense)
+            return cls.positive_verb_forms.generate_plain_form(
+                verb, verb_class, tense)
+        return cls.negative_verb_forms.generate_plain_form(
+            verb, verb_class, tense)
 
     @classmethod
     @validateJapaneseVerbDecorator
@@ -50,8 +52,10 @@ class JapaneseVerbFormGenerator:
         parameters
         """
         if polarity == Polarity.POSITIVE:
-            return cls.positive_verb_forms.generate_polite_form(verb, verb_class, tense)
-        return cls.negative_verb_forms.generate_polite_form(verb, verb_class, tense)
+            return cls.positive_verb_forms.generate_polite_form(
+                verb, verb_class, tense)
+        return cls.negative_verb_forms.generate_polite_form(
+            verb, verb_class, tense)
 
     @classmethod
     @validateJapaneseVerbDecorator
@@ -89,11 +93,9 @@ class JapaneseVerbFormGenerator:
         """
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_conditional_form(
-                verb, verb_class, formality
-            )
+                verb, verb_class, formality)
         return cls.negative_verb_forms.generate_conditional_form(
-            verb, verb_class, formality
-        )
+            verb, verb_class, formality)
 
     @classmethod
     @validateJapaneseVerbDecorator
@@ -115,11 +117,9 @@ class JapaneseVerbFormGenerator:
         """
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_volitional_form(
-                verb, verb_class, formality
-            )
+                verb, verb_class, formality)
         return cls.negative_verb_forms.generate_volitional_form(
-            verb, verb_class, formality
-        )
+            verb, verb_class, formality)
 
     @classmethod
     @validateJapaneseVerbDecorator
@@ -141,11 +141,9 @@ class JapaneseVerbFormGenerator:
         """
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_potential_form(
-                verb, verb_class, formality
-            )
+                verb, verb_class, formality)
         return cls.negative_verb_forms.generate_potential_form(
-            verb, verb_class, formality
-        )
+            verb, verb_class, formality)
 
     @classmethod
     @validateJapaneseVerbDecorator
@@ -167,11 +165,9 @@ class JapaneseVerbFormGenerator:
         """
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_imperative_form(
-                verb, verb_class, formality
-            )
+                verb, verb_class, formality)
         return cls.negative_verb_forms.generate_imperative_form(
-            verb, verb_class, formality
-        )
+            verb, verb_class, formality)
 
     @classmethod
     @validateJapaneseVerbDecorator
@@ -193,11 +189,9 @@ class JapaneseVerbFormGenerator:
         """
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_provisional_form(
-                verb, verb_class, formality
-            )
+                verb, verb_class, formality)
         return cls.negative_verb_forms.generate_provisional_form(
-            verb, verb_class, formality
-        )
+            verb, verb_class, formality)
 
     @classmethod
     @validateJapaneseVerbDecorator
@@ -219,11 +213,9 @@ class JapaneseVerbFormGenerator:
         """
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_causative_form(
-                verb, verb_class, formality
-            )
+                verb, verb_class, formality)
         return cls.negative_verb_forms.generate_causative_form(
-            verb, verb_class, formality
-        )
+            verb, verb_class, formality)
 
     @classmethod
     @validateJapaneseVerbDecorator
@@ -245,8 +237,6 @@ class JapaneseVerbFormGenerator:
         """
         if polarity == Polarity.POSITIVE:
             return cls.positive_verb_forms.generate_passive_form(
-                verb, verb_class, formality
-            )
+                verb, verb_class, formality)
         return cls.negative_verb_forms.generate_passive_form(
-            verb, verb_class, formality
-        )
+            verb, verb_class, formality)

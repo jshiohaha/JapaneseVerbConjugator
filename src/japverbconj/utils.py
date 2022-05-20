@@ -29,8 +29,8 @@ def splice_verb(verb, verb_class, should_return_stem=True):
     if verb_class == VerbClass.IRREGULAR:
         num_ending_particles = 2
     if should_return_stem:
-        return verb[: -1 * num_ending_particles]
-    return verb[-1 * num_ending_particles :]
+        return verb[:-1 * num_ending_particles]
+    return verb[-1 * num_ending_particles:]
 
 
 def handle_irregular_verb(
@@ -132,7 +132,8 @@ def base_te_ta_form(verb, verb_class, *endings):
         verb class. Defaults to None.
     """
     if verb_class == VerbClass.IRREGULAR:
-        return handle_irregular_verb(verb, True, endings[0], endings[0], endings[0])
+        return handle_irregular_verb(verb, True, endings[0], endings[0],
+                                     endings[0])
     else:
         verb_stem = splice_verb(verb, verb_class)
         verb_ending = ""
@@ -163,9 +164,8 @@ def map_dictionary_to_a_ending(verb):
     Returns:
         str: verb stem with the correct -a particle attached (Godan verbs only)
     """
-    return map_dict_form_to_different_ending(
-        verb, "a", WA_PARTICLE, TA_PARTICLE, SA_PARTICLE
-    )
+    return map_dict_form_to_different_ending(verb, "a", WA_PARTICLE,
+                                             TA_PARTICLE, SA_PARTICLE)
 
 
 def map_dictionary_to_e_ending(verb):
@@ -177,9 +177,8 @@ def map_dictionary_to_e_ending(verb):
     Returns:
         str: verb stem with the correct -e particle attached (Godan verbs only)
     """
-    return map_dict_form_to_different_ending(
-        verb, "e", E_PARTICLE, TE_PARTICLE, SE_PARTICLE
-    )
+    return map_dict_form_to_different_ending(verb, "e", E_PARTICLE,
+                                             TE_PARTICLE, SE_PARTICLE)
 
 
 def map_dictionary_to_i_ending(verb):
@@ -191,9 +190,8 @@ def map_dictionary_to_i_ending(verb):
     Returns:
         str: verb stem with the correct -i particle attached (Godan verbs only)
     """
-    return map_dict_form_to_different_ending(
-        verb, "i", I_PARTICLE, CHI_PARTICLE, SHI_PARTICLE
-    )
+    return map_dict_form_to_different_ending(verb, "i", I_PARTICLE,
+                                             CHI_PARTICLE, SHI_PARTICLE)
 
 
 def map_dictionary_to_o_ending(verb):
@@ -205,9 +203,8 @@ def map_dictionary_to_o_ending(verb):
     Returns:
         str: verb stem with the correct -o particle attached (Godan verbs only)
     """
-    return map_dict_form_to_different_ending(
-        verb, "o", O_PARTICLE, TO_PARTICLE, SO_PARTICLE
-    )
+    return map_dict_form_to_different_ending(verb, "o", O_PARTICLE,
+                                             TO_PARTICLE, SO_PARTICLE)
 
 
 def map_dict_form_to_different_ending(verb, romaji_ending, *special_endings):
@@ -235,8 +232,6 @@ def map_dict_form_to_different_ending(verb, romaji_ending, *special_endings):
         return "{}{}".format(verb_stem, special_endings[2])
     else:
         transformed_last_kana_as_romaji = "{}{}".format(
-            romkan.to_roma(last_kana)[:-1], romaji_ending
-        )
+            romkan.to_roma(last_kana)[:-1], romaji_ending)
         return "{}{}".format(
-            verb_stem, romkan.to_hiragana(transformed_last_kana_as_romaji)
-        )
+            verb_stem, romkan.to_hiragana(transformed_last_kana_as_romaji))

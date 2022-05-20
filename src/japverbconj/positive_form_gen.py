@@ -11,6 +11,7 @@ from .utils import *
 #                       Positive Verb Forms                  #
 # ---------------------------------------------------------- #
 class PositiveVerbForms:
+
     @classmethod
     def generate_plain_form(cls, verb, verb_class, tense):
         """Generate the positive polite form of the verb depending
@@ -157,14 +158,16 @@ class PositiveVerbForms:
                     verb,
                     suru_ending=POTENTIAL_SURU_PLAIN_POSITIVE_ENDING,
                     kuru_ending=POTENTIAL_KURU_PLAIN_POSITIVE_ENDING,
-                    kuru_kanji_ending=POTENTIAL_KURU_KANJI_PLAIN_POSITIVE_ENDING,
+                    kuru_kanji_ending=
+                    POTENTIAL_KURU_KANJI_PLAIN_POSITIVE_ENDING,
                 )
             else:
                 return handle_irregular_verb(
                     verb,
                     suru_ending=POTENTIAL_SURU_POLITE_POSITIVE_ENDING,
                     kuru_ending=POTENTIAL_KURU_POLITE_POSITIVE_ENDING,
-                    kuru_kanji_ending=POTENTIAL_KURU_KANJI_POLITE_POSITIVE_ENDING,
+                    kuru_kanji_ending=
+                    POTENTIAL_KURU_KANJI_POLITE_POSITIVE_ENDING,
                 )
         else:
             # assuming godan plain form
@@ -205,10 +208,12 @@ class PositiveVerbForms:
                     verb,
                     suru_ending=IMPERATIVE_SURU_PLAIN_POSITIVE_ENDING,
                     kuru_ending=IMPERATIVE_KURU_PLAIN_POSITIVE_ENDING,
-                    kuru_kanji_ending=IMPERATIVE_KURU_KANJI_PLAIN_POSITIVE_ENDING,
+                    kuru_kanji_ending=
+                    IMPERATIVE_KURU_KANJI_PLAIN_POSITIVE_ENDING,
                 )
             else:
-                return "{}{}".format(cls.generate_te_form(verb, verb_class), KUDASAI)
+                return "{}{}".format(cls.generate_te_form(verb, verb_class),
+                                     KUDASAI)
         else:
             verb_base = cls.generate_te_form(verb, verb_class)
             ending = KUDASAI
@@ -243,14 +248,16 @@ class PositiveVerbForms:
                     verb,
                     suru_ending=PROVISIONAL_SURU_PLAIN_POSITIVE_ENDING,
                     kuru_ending=PROVISIONAL_KURU_PLAIN_POSITIVE_ENDING,
-                    kuru_kanji_ending=PROVISIONAL_KURU_KANJI_PLAIN_POSITIVE_ENDING,
+                    kuru_kanji_ending=
+                    PROVISIONAL_KURU_KANJI_PLAIN_POSITIVE_ENDING,
                 )
             else:
                 return handle_irregular_verb(
                     verb,
                     suru_ending=PROVISIONAL_SURU_POLITE_POSITIVE_ENDING,
                     kuru_ending=PROVISIONAL_KURU_POLITE_POSITIVE_ENDING,
-                    kuru_kanji_ending=PROVISIONAL_KURU_KANJI_POLITE_POSITIVE_ENDING,
+                    kuru_kanji_ending=
+                    PROVISIONAL_KURU_KANJI_POLITE_POSITIVE_ENDING,
                 )
         else:
             # assuming godan verb
@@ -290,21 +297,20 @@ class PositiveVerbForms:
             if verb_class == VerbClass.GODAN:
                 verb_with_a_ending = map_dictionary_to_a_ending(verb)
                 if formality == Formality.PLAIN:
-                    return "{}{}{}".format(verb_with_a_ending, SE_PARTICLE, RU_PARTICLE)
+                    return "{}{}{}".format(verb_with_a_ending, SE_PARTICLE,
+                                           RU_PARTICLE)
                 else:
-                    return "{}{}{}".format(
-                        verb_with_a_ending, SE_PARTICLE, MASU_POSITIVE_NONPAST
-                    )
+                    return "{}{}{}".format(verb_with_a_ending, SE_PARTICLE,
+                                           MASU_POSITIVE_NONPAST)
             else:
                 verb_stem = splice_verb(verb, verb_class)
                 if formality == Formality.PLAIN:
-                    return "{}{}{}{}".format(
-                        verb_stem, SA_PARTICLE, SE_PARTICLE, RU_PARTICLE
-                    )
+                    return "{}{}{}{}".format(verb_stem, SA_PARTICLE,
+                                             SE_PARTICLE, RU_PARTICLE)
                 else:
-                    return "{}{}{}{}".format(
-                        verb_stem, SA_PARTICLE, SE_PARTICLE, MASU_POSITIVE_NONPAST
-                    )
+                    return "{}{}{}{}".format(verb_stem, SA_PARTICLE,
+                                             SE_PARTICLE,
+                                             MASU_POSITIVE_NONPAST)
 
     @classmethod
     def generate_passive_form(cls, verb, verb_class, formality):
@@ -332,14 +338,16 @@ class PositiveVerbForms:
         elif verb_class == VerbClass.GODAN:
             verb_with_a_ending = map_dictionary_to_a_ending(verb)
             if formality == Formality.PLAIN:
-                return "{}{}{}".format(verb_with_a_ending, RE_PARTICLE, RU_PARTICLE)
+                return "{}{}{}".format(verb_with_a_ending, RE_PARTICLE,
+                                       RU_PARTICLE)
             else:
-                return "{}{}{}".format(
-                    verb_with_a_ending, RE_PARTICLE, MASU_POSITIVE_NONPAST
-                )
+                return "{}{}{}".format(verb_with_a_ending, RE_PARTICLE,
+                                       MASU_POSITIVE_NONPAST)
         else:
             verb_stem = splice_verb(verb, verb_class)
             if formality == Formality.PLAIN:
-                return "{}{}".format(verb_stem, PASSIVE_ICHIDAN_PLAIN_POSITIVE_ENDING)
+                return "{}{}".format(verb_stem,
+                                     PASSIVE_ICHIDAN_PLAIN_POSITIVE_ENDING)
             else:
-                return "{}{}".format(verb_stem, PASSIVE_ICHIDAN_POLITE_POSITIVE_ENDING)
+                return "{}{}".format(verb_stem,
+                                     PASSIVE_ICHIDAN_POLITE_POSITIVE_ENDING)

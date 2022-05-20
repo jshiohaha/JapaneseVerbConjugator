@@ -13,14 +13,14 @@ from src.japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
 
 
 class UtilsTests(unittest.TestCase):
+
     def setUp(self):
         self.verb_class = VerbClass.GODAN
 
     def test_validateJapaneseVerbDecorator_InvalidLength(self):
         with self.assertRaises(Exception) as expectedException:
-            jvfg.generate_plain_form(
-                KU_PARTICLE, VerbClass.GODAN, Tense.PAST, Polarity.NEGATIVE
-            )
+            jvfg.generate_plain_form(KU_PARTICLE, VerbClass.GODAN, Tense.PAST,
+                                     Polarity.NEGATIVE)
         self.assertEqual(
             str(expectedException.exception),
             "('Invalid Japanese Verb Length', 1, '" + KU_PARTICLE + "')",
@@ -37,16 +37,14 @@ class UtilsTests(unittest.TestCase):
             )
         self.assertEqual(
             str(expectedException.exception),
-            "('Invalid Japanese Verb Ending Particle', '"
-            + verb_incorrect_particle_ending[-1:]
-            + "')",
+            "('Invalid Japanese Verb Ending Particle', '" +
+            verb_incorrect_particle_ending[-1:] + "')",
         )
 
     def test_validateJapaneseVerbDecorator_ContainsKoreanCharacters(self):
         with self.assertRaises(Exception) as expectedException:
-            jvfg.generate_plain_form(
-                korean_with_japanese, VerbClass.GODAN, Tense.PAST, Polarity.NEGATIVE
-            )
+            jvfg.generate_plain_form(korean_with_japanese, VerbClass.GODAN,
+                                     Tense.PAST, Polarity.NEGATIVE)
         self.assertEqual(
             str(expectedException.exception),
             "('Non-Japanese Character Found', '" + korean_with_japanese + "')",
@@ -54,12 +52,12 @@ class UtilsTests(unittest.TestCase):
 
     def test_validateJapaneseVerbDecorator_ContainsEnglishCharacters(self):
         with self.assertRaises(Exception) as expectedException:
-            jvfg.generate_plain_form(
-                english_with_japanese, VerbClass.GODAN, Tense.PAST, Polarity.NEGATIVE
-            )
+            jvfg.generate_plain_form(english_with_japanese, VerbClass.GODAN,
+                                     Tense.PAST, Polarity.NEGATIVE)
         self.assertEqual(
             str(expectedException.exception),
-            "('Non-Japanese Character Found', '" + english_with_japanese + "')",
+            "('Non-Japanese Character Found', '" + english_with_japanese +
+            "')",
         )
 
     def test_validateJapaneseVerbDecorator_ValidVerb(self):
