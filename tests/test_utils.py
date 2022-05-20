@@ -1,21 +1,13 @@
 import unittest
 
-from src.constants.particle_constants import (
-    CHISAI_TSU_PARTICLE,
+from src.japverbconj.constants.particle_constants import (
     DA_PARTICLE,
-    GU_PARTICLE,
-    KU_PARTICLE,
-    SU_PARTICLE,
     TA_PARTICLE,
-    TSU_PARTICLE,
-    U_PARTICLE,
 )
-from src.utils import *
-from TestConstants import (
+from src.japverbconj.utils import *
+
+from .constants import (
     GodanVerbNomu,
-    IchidanVerbTaberu,
-    IrregularVerbKuru,
-    IrregularVerbSuru,
 )
 
 
@@ -66,5 +58,4 @@ class UtilsTests(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    suite = unittest.TestLoader().loadTestsFromTestCase(UtilsTests)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()

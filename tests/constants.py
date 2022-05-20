@@ -1,9 +1,4 @@
-from src.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
-
-# regex for kanji / kana: "[一-龯ぁ-んァ-ン]+"
-# 飲む
-#
-# 先秦兩漢
+from src.japverbconj.constants.enumerated_types import VerbClass
 
 korean_with_japanese = "한국어처리기む"
 english_with_japanese = "Heloむ"
@@ -245,3 +240,75 @@ class IrregularVerbKuru:
     ProvisionalPlainNegative = "こなければ"
     ProvisionalPolitePositive = "きませば"
     ProvisionalPoliteNegative = "きませんなら"
+
+
+class IrregularVerbKuruKanji:
+    # http://www.japaneseverbconjugator.com/Kuru.asp
+    Verb = "来る"  # plain positive nonpast
+    Verb_Class = VerbClass.IRREGULAR
+
+    # Formal Verb Forms
+    PolitePositiveNonpast = "来ます"
+    PolitePositivePast = "来ました"
+    PoliteNegativeNonpast = "来ません"
+    PoliteNegativePast = "来ませんでした"
+
+    # Plain Verb Forms
+    PlainPositivePast = "来た"  # ta form
+    PlainNegativeNonpast = "来ない"  # nai form
+    PlainNegativePast = "来なかった"  # katta form
+
+    TeForm = "来て"
+
+    # Conditional Verb Forms
+    ConditionalPlainPositive = "来たら"  # tara form
+    ConditionalPolitePositive = "来ましたら"  # tara form
+    ConditionalPlainNegative = "来なかったら"  # tara form
+    ConditionalPoliteNegative = "来ませんでしたら"  # tara form
+
+    # Volitional Verb Forms
+    VolitionalPolitePositive = "来ましょう"
+    VolitionalPoliteNegative = "来ないでしょう"
+    VolitionalPlainPositive = "来よう"
+    VolitionalPlainNegative = "来ないだろう"
+
+    # VolitionalPlainPositivePast = "来たろう"
+    # VolitionalPolitePositivePast = "来たでしょう"
+    # VolitionalPlainNegativePast = "来なかっただろう"
+    # VolitionalPoliteNegativePast = "来なかったでしょう"
+
+    # Potential Verb Forms
+    PotentialPlainPositive = "来られる"
+    PotentialPlainNegative = "来られない"
+    PotentialPolitePositive = "来られます"
+    PotentialPoliteNegative = "来られません"
+
+    # Imperative Verb Forms
+    ImperativePlainPositive = "来い"
+    ImperativePlainNegative = "来るな"
+    ImperativePolitePositive = "来てください"
+    ImperativePoliteNegative = "来ないでください"
+
+    # Causative Verb Forms
+    CausativePlainPositive = "来させる"
+    CausativePlainNegative = "来させない"
+    CausativePolitePositive = "来させます"
+    CausativePoliteNegative = "来させません"
+
+    # Passive Verb Forms
+    PassivePlainPositive = "来られる"
+
+    # Provisional Verb Forms
+    ProvisionalPlainPositive = "来れば"
+    ProvisionalPlainNegative = "来なければ"
+    ProvisionalPolitePositive = "来ませば"
+    ProvisionalPoliteNegative = "来ませんなら"
+
+
+PARAMETER_LIST = [
+    ("godan_nomu", GodanVerbNomu),
+    ("ichidan_taberu", IchidanVerbTaberu),
+    ("irreg_suru", IrregularVerbSuru),
+    ("irreg_kuru", IrregularVerbKuru),
+    ("irreg_kuru_kanji", IrregularVerbKuruKanji),
+]

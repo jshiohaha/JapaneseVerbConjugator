@@ -1,20 +1,13 @@
 import unittest
 
-from src.constants.enumerated_types import Polarity, Tense, VerbClass
-from src.constants.particle_constants import (
-    CHISAI_TSU_PARTICLE,
-    DA_PARTICLE,
-    GU_PARTICLE,
+from src.japverbconj.constants.enumerated_types import Polarity, Tense, VerbClass
+from src.japverbconj.constants.particle_constants import (
     KU_PARTICLE,
-    PU_PARTICLE,
-    SU_PARTICLE,
-    TA_PARTICLE,
-    TSU_PARTICLE,
-    U_PARTICLE,
 )
-from src.decorators import *
-from src.verb_form_gen import JapaneseVerbFormGenerator
-from TestConstants import (
+from src.japverbconj.decorators import *
+from src.japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
+
+from .constants import (
     GodanVerbNomu,
     english_with_japanese,
     korean_with_japanese,
@@ -25,11 +18,10 @@ from TestConstants import (
 class UtilsTests(unittest.TestCase):
     def setUp(self):
         self.verb_class = VerbClass.GODAN
-        self.japaneseVerbFormGenerator = JapaneseVerbFormGenerator()
 
     def test_validateJapaneseVerbDecorator_InvalidLength(self):
         with self.assertRaises(Exception) as expectedException:
-            self.japaneseVerbFormGenerator.generate_plain_form(
+            jvfg.generate_plain_form(
                 KU_PARTICLE, VerbClass.GODAN, Tense.PAST, Polarity.NEGATIVE
             )
         self.assertEqual(
@@ -40,7 +32,7 @@ class UtilsTests(unittest.TestCase):
     # "Invalid Japanese Verb Ending Particle", verb[-1:]
     def test_validateJapaneseVerbDecorator_InvalidJapaneseEndingParticle(self):
         with self.assertRaises(Exception) as expectedException:
-            self.japaneseVerbFormGenerator.generate_plain_form(
+            jvfg.generate_plain_form(
                 verb_incorrect_particle_ending,
                 VerbClass.GODAN,
                 Tense.PAST,
@@ -55,7 +47,7 @@ class UtilsTests(unittest.TestCase):
 
     def test_validateJapaneseVerbDecorator_ContainsKoreanCharacters(self):
         with self.assertRaises(Exception) as expectedException:
-            self.japaneseVerbFormGenerator.generate_plain_form(
+            jvfg.generate_plain_form(
                 korean_with_japanese, VerbClass.GODAN, Tense.PAST, Polarity.NEGATIVE
             )
         self.assertEqual(
@@ -65,7 +57,7 @@ class UtilsTests(unittest.TestCase):
 
     def test_validateJapaneseVerbDecorator_ContainsEnglishCharacters(self):
         with self.assertRaises(Exception) as expectedException:
-            self.japaneseVerbFormGenerator.generate_plain_form(
+            jvfg.generate_plain_form(
                 english_with_japanese, VerbClass.GODAN, Tense.PAST, Polarity.NEGATIVE
             )
         self.assertEqual(
@@ -74,7 +66,7 @@ class UtilsTests(unittest.TestCase):
         )
 
     def test_validateJapaneseVerbDecorator_ValidVerb(self):
-        result = self.japaneseVerbFormGenerator.generate_plain_form(
+        result = jvfg.generate_plain_form(
             GodanVerbNomu.Verb,
             GodanVerbNomu.Verb_Class,
             Tense.NONPAST,
@@ -84,5 +76,4 @@ class UtilsTests(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    suite = unittest.TestLoader().loadTestsFromTestCase(UtilsTests)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    unittest.main()
