@@ -1,9 +1,14 @@
 import unittest
 
-from src.Utils import *
-from src.constants.ParticleConstants import CHISAI_TSU_PARTICLE, KU_PARTICLE, GU_PARTICLE, SU_PARTICLE, U_PARTICLE, TSU_PARTICLE, TA_PARTICLE, DA_PARTICLE
+from src.japverbconj.constants.particle_constants import (
+    DA_PARTICLE,
+    TA_PARTICLE,
+)
+from src.japverbconj.utils import *
 
-from TestConstants import GodanVerbNomu, IchidanVerbTaberu, IrregularVerbSuru, IrregularVerbKuru
+from .constants import (
+    GodanVerbNomu,
+)
 
 
 class UtilsTests(unittest.TestCase):
@@ -20,7 +25,7 @@ class UtilsTests(unittest.TestCase):
         verb = "使う"
         result = base_te_ta_form(verb, self.verb_class, TA_PARTICLE, DA_PARTICLE)
         self.assertEqual(result, "使った")
-    
+
     def test_base_te_ta_form_KU_PARTICLE(self):
         verb = "聞く"
         result = base_te_ta_form(verb, self.verb_class, TA_PARTICLE, DA_PARTICLE)
@@ -40,7 +45,7 @@ class UtilsTests(unittest.TestCase):
         verb = "使う"
         result = map_dictionary_to_a_ending(verb)
         self.assertEqual(result, "使わ")
-   
+
     def test_map_dict_form_to_different_ending_TSU_PARTICLE(self):
         verb = "立つ"
         result = map_dictionary_to_a_ending(verb)
@@ -51,6 +56,6 @@ class UtilsTests(unittest.TestCase):
         result = map_dictionary_to_a_ending(verb)
         self.assertEqual(result, "話さ")
 
-if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(UtilsTests)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+
+if __name__ == "__main__":
+    unittest.main()
