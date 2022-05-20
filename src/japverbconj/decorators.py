@@ -22,16 +22,20 @@ def containsJapaneseCharacters(verb):
     """
     ranges = [
         # https://stackoverflow.com/questions/30069846/how-to-find-out-chinese-or-japanese-character-in-a-string-in-python
-        {"from": ord(u"\u3300"), "to": ord(u"\u33ff")},  # compatibility ideographs
-        {"from": ord(u"\ufe30"), "to": ord(u"\ufe4f")},  # compatibility ideographs
-        {"from": ord(u"\uf900"), "to": ord(u"\ufaff")},  # compatibility ideographs
+        # compatibility ideographs
+        {"from": ord(u"\u3300"), "to": ord(u"\u33ff")},
+        # compatibility ideographs
+        {"from": ord(u"\ufe30"), "to": ord(u"\ufe4f")},
+        # compatibility ideographs
+        {"from": ord(u"\uf900"), "to": ord(u"\ufaff")},
         {
             "from": ord(u"\U0002F800"),
             "to": ord(u"\U0002fa1f"),
         },  # compatibility ideographs
         {"from": ord(u"\u3040"), "to": ord(u"\u309f")},  # Japanese Hiragana
         {"from": ord(u"\u30a0"), "to": ord(u"\u30ff")},  # Japanese Katakana
-        {"from": ord(u"\u2e80"), "to": ord(u"\u2eff")},  # cjk radicals supplement
+        # cjk radicals supplement
+        {"from": ord(u"\u2e80"), "to": ord(u"\u2eff")},
         {"from": ord(u"\u4e00"), "to": ord(u"\u9fff")},
         {"from": ord(u"\u3400"), "to": ord(u"\u4dbf")},
         {"from": ord(u"\U00020000"), "to": ord(u"\U0002a6df")},
