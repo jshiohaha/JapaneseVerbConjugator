@@ -1,5 +1,7 @@
 # Local modules
-from .constants.enumerated_types import Formality, Tense, VerbClass
+from .constants.enumerated_types import Formality
+from .constants.enumerated_types import Tense
+from .constants.enumerated_types import VerbClass
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
 from .utils import *

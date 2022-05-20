@@ -1,10 +1,9 @@
 import unittest
 
-from src.japverbconj.constants.particle_constants import (DA_PARTICLE,
-                                                          TA_PARTICLE)
-from src.japverbconj.utils import *
-
 from .constants import GodanVerbNomu
+from src.japverbconj.constants.particle_constants import DA_PARTICLE
+from src.japverbconj.constants.particle_constants import TA_PARTICLE
+from src.japverbconj.utils import *
 
 
 class UtilsTests(unittest.TestCase):

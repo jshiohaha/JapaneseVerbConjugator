@@ -2,12 +2,13 @@ import unittest
 
 from parameterized import parameterized
 
-from src.japverbconj.constants.enumerated_types import (Formality, Polarity,
-                                                        Tense, VerbClass)
-from src.japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
-from src.japverbconj.verb_form_gen import *
-
 from .constants import PARAMETER_LIST
+from src.japverbconj.constants.enumerated_types import Formality
+from src.japverbconj.constants.enumerated_types import Polarity
+from src.japverbconj.constants.enumerated_types import Tense
+from src.japverbconj.constants.enumerated_types import VerbClass
+from src.japverbconj.verb_form_gen import *
+from src.japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
 
 
 # ---------------------------------------------------------- #

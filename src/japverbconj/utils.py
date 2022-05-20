@@ -2,7 +2,10 @@
 # External Libraries
 import romkan
 
-from .constants.enumerated_types import Formality, Polarity, Tense, VerbClass
+from .constants.enumerated_types import Formality
+from .constants.enumerated_types import Polarity
+from .constants.enumerated_types import Tense
+from .constants.enumerated_types import VerbClass
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
 
