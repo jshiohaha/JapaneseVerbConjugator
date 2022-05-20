@@ -1,4 +1,4 @@
-from japverbgen.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
+from src.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
 
 # regex for kanji / kana: "[一-龯ぁ-んァ-ン]+"
 # 飲む

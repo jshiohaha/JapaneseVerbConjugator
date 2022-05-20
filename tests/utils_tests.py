@@ -1,6 +1,6 @@
 import unittest
 
-from japverbgen.constants.particle_constants import (
+from src.constants.particle_constants import (
     CHISAI_TSU_PARTICLE,
     DA_PARTICLE,
     GU_PARTICLE,
@@ -10,7 +10,7 @@ from japverbgen.constants.particle_constants import (
     TSU_PARTICLE,
     U_PARTICLE,
 )
-from japverbgen.utils import *
+from src.utils import *
 from TestConstants import (
     GodanVerbNomu,
     IchidanVerbTaberu,

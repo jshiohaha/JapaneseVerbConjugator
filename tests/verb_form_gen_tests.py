@@ -1,7 +1,7 @@
 import unittest
 
-from japverbgen.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
-from japverbgen.verb_form_gen import *
+from src.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
+from src.verb_form_gen import *
 
 from .constants import (
     GodanVerbNomu,
