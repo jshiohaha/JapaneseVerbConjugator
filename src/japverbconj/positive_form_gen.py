@@ -47,7 +47,7 @@ class PositiveVerbForms:
 
         if verb_class == VerbClass.IRREGULAR:
             # ending is the same regardless. Any way to account for this?
-            return handle_irregular_verb(verb, True, ending, ending)
+            return handle_irregular_verb(verb, True, ending, ending, ending)
         else:
             verb_stem = splice_verb(verb, verb_class)
             if verb_class == VerbClass.GODAN:
@@ -113,6 +113,7 @@ class PositiveVerbForms:
                 verb,
                 suru_ending=VOLITIONAL_SURU_ENDING,
                 kuru_ending=VOLITIONAL_KURU_ENDING,
+                kuru_kanji_ending=VOLITIONAL_KURU_KANJI_ENDING,
             )
         else:
             verb_base = ""
@@ -124,7 +125,7 @@ class PositiveVerbForms:
                 if formality == Formality.POLITE:
                     verb_base = map_dictionary_to_i_ending(verb)
                     ending = VOLITIONAL_POLITE_ENDING
-            elif verb_class == VerbClass.ICHIDAN:
+            else:
                 verb_base = splice_verb(verb, verb_class)
                 # assuming plain formality param
                 ending = VOLITIONAL_ICHIDAN_PLAIN_ENDING
@@ -154,12 +155,14 @@ class PositiveVerbForms:
                     verb,
                     suru_ending=POTENTIAL_SURU_PLAIN_POSITIVE_ENDING,
                     kuru_ending=POTENTIAL_KURU_PLAIN_POSITIVE_ENDING,
+                    kuru_kanji_ending=POTENTIAL_KURU_KANJI_PLAIN_POSITIVE_ENDING,
                 )
             else:
                 return handle_irregular_verb(
                     verb,
                     suru_ending=POTENTIAL_SURU_POLITE_POSITIVE_ENDING,
                     kuru_ending=POTENTIAL_KURU_POLITE_POSITIVE_ENDING,
+                    kuru_kanji_ending=POTENTIAL_KURU_KANJI_POLITE_POSITIVE_ENDING,
                 )
         else:
             # assuming godan plain form
@@ -170,7 +173,7 @@ class PositiveVerbForms:
                 if formality == Formality.POLITE:
                     verb_base = map_dictionary_to_e_ending(verb)
                     ending = MASU_POSITIVE_NONPAST
-            elif verb_class == VerbClass.ICHIDAN:
+            else:
                 verb_base = splice_verb(verb, verb_class)
                 if formality == Formality.PLAIN:
                     ending = POTENTIAL_ICHIDAN_ENDING
@@ -200,6 +203,7 @@ class PositiveVerbForms:
                     verb,
                     suru_ending=IMPERATIVE_SURU_PLAIN_POSITIVE_ENDING,
                     kuru_ending=IMPERATIVE_KURU_PLAIN_POSITIVE_ENDING,
+                    kuru_kanji_ending=IMPERATIVE_KURU_KANJI_PLAIN_POSITIVE_ENDING,
                 )
             else:
                 return "{}{}".format(cls.generate_te_form(verb, verb_class), KUDASAI)
@@ -237,12 +241,14 @@ class PositiveVerbForms:
                     verb,
                     suru_ending=PROVISIONAL_SURU_PLAIN_POSITIVE_ENDING,
                     kuru_ending=PROVISIONAL_KURU_PLAIN_POSITIVE_ENDING,
+                    kuru_kanji_ending=PROVISIONAL_KURU_KANJI_PLAIN_POSITIVE_ENDING,
                 )
             else:
                 return handle_irregular_verb(
                     verb,
                     suru_ending=PROVISIONAL_SURU_POLITE_POSITIVE_ENDING,
                     kuru_ending=PROVISIONAL_KURU_POLITE_POSITIVE_ENDING,
+                    kuru_kanji_ending=PROVISIONAL_KURU_KANJI_POLITE_POSITIVE_ENDING,
                 )
         else:
             # assuming godan verb
@@ -271,12 +277,12 @@ class PositiveVerbForms:
         parameter
         """
         if verb_class == VerbClass.IRREGULAR:
-            if formality == Formality.PLAIN:
-                return handle_irregular_verb(
-                    verb,
-                    suru_ending=CAUSATIVE_PLAIN_SURU_ENDING,
-                    kuru_ending=CAUSATIVE_PLAIN_KURU_ENDING,
-                )
+            return handle_irregular_verb(
+                verb,
+                suru_ending=CAUSATIVE_PLAIN_SURU_ENDING,
+                kuru_ending=CAUSATIVE_PLAIN_KURU_ENDING,
+                kuru_kanji_ending=CAUSATIVE_PLAIN_KURU_KANJI_ENDING,
+            )
         else:
             # TODO FIX ALL THIS LOGIC... GROSS :-P
             if verb_class == VerbClass.GODAN:
@@ -287,7 +293,7 @@ class PositiveVerbForms:
                     return "{}{}{}".format(
                         verb_with_a_ending, SE_PARTICLE, MASU_POSITIVE_NONPAST
                     )
-            elif verb_class == VerbClass.ICHIDAN:
+            else:
                 verb_stem = splice_verb(verb, verb_class)
                 if formality == Formality.PLAIN:
                     return "{}{}{}{}".format(
@@ -315,28 +321,23 @@ class PositiveVerbForms:
         parameter
         """
         if verb_class == VerbClass.IRREGULAR:
+            return handle_irregular_verb(
+                verb,
+                suru_ending=PASSIVE_SURU_PLAIN_POSITIVE_ENDING,
+                kuru_ending=PASSIVE_KURU_PLAIN_POSITIVE_ENDING,
+                kuru_kanji_ending=PASSIVE_KURU_KANJI_PLAIN_POSITIVE_ENDING,
+            )
+        elif verb_class == VerbClass.GODAN:
+            verb_with_a_ending = map_dictionary_to_a_ending(verb)
             if formality == Formality.PLAIN:
-                return handle_irregular_verb(
-                    verb,
-                    suru_ending=PASSIVE_SURU_PLAIN_POSITIVE_ENDING,
-                    kuru_ending=PASSIVE_KURU_PLAIN_POSITIVE_ENDING,
+                return "{}{}{}".format(verb_with_a_ending, RE_PARTICLE, RU_PARTICLE)
+            else:
+                return "{}{}{}".format(
+                    verb_with_a_ending, RE_PARTICLE, MASU_POSITIVE_NONPAST
                 )
         else:
-            if verb_class == VerbClass.GODAN:
-                verb_with_a_ending = map_dictionary_to_a_ending(verb)
-                if formality == Formality.PLAIN:
-                    return "{}{}{}".format(verb_with_a_ending, RE_PARTICLE, RU_PARTICLE)
-                else:
-                    return "{}{}{}".format(
-                        verb_with_a_ending, RE_PARTICLE, MASU_POSITIVE_NONPAST
-                    )
-            elif verb_class == VerbClass.ICHIDAN:
-                verb_stem = splice_verb(verb, verb_class)
-                if formality == Formality.PLAIN:
-                    return "{}{}".format(
-                        verb_stem, PASSIVE_ICHIDAN_PLAIN_POSITIVE_ENDING
-                    )
-                else:
-                    return "{}{}".format(
-                        verb_stem, PASSIVE_ICHIDAN_POLITE_POSITIVE_ENDING
-                    )
+            verb_stem = splice_verb(verb, verb_class)
+            if formality == Formality.PLAIN:
+                return "{}{}".format(verb_stem, PASSIVE_ICHIDAN_PLAIN_POSITIVE_ENDING)
+            else:
+                return "{}{}".format(verb_stem, PASSIVE_ICHIDAN_POLITE_POSITIVE_ENDING)

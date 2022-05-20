@@ -51,7 +51,11 @@ class NegativeVerbForms:
 
         if verb_class == VerbClass.IRREGULAR:
             return handle_irregular_verb(
-                verb, append_stem_particle=True, suru_ending=ending, kuru_ending=ending
+                verb,
+                append_stem_particle=True,
+                suru_ending=ending,
+                kuru_ending=ending,
+                kuru_kanji_ending=ending,
             )
         else:
             verb_base = splice_verb(verb, verb_class)
@@ -101,7 +105,7 @@ class NegativeVerbForms:
         verb_nai_form = generate_nai_form(verb, verb_class, True)
         if formality == Formality.PLAIN:
             return "{}{}".format(verb_nai_form, VOLITIONAL_PLAIN_COPULA)
-        elif formality == Formality.POLITE:
+        else:
             return "{}{}".format(verb_nai_form, VOLITIONAL_POLITE_COPULA)
 
     @classmethod
@@ -126,28 +130,28 @@ class NegativeVerbForms:
                     verb,
                     suru_ending=POTENTIAL_SURU_PLAIN_NEGATIVE_ENDING,
                     kuru_ending=POTENTIAL_KURU_PLAIN_NEGATIVE_ENDING,
+                    kuru_kanji_ending=POTENTIAL_KURU_KANJI_PLAIN_NEGATIVE_ENDING,
                 )
             else:
                 return handle_irregular_verb(
                     verb,
                     suru_ending=POTENTIAL_SURU_POLITE_NEGATIVE_ENDING,
                     kuru_ending=POTENTIAL_KURU_POLITE_NEGATIVE_ENDING,
+                    kuru_kanji_ending=POTENTIAL_KURU_KANJI_POLITE_NEGATIVE_ENDING,
                 )
-        else:
+        elif verb_class == VerbClass.GODAN:
             verb_base = map_dictionary_to_e_ending(verb)
-
-            if verb_class == VerbClass.GODAN:
-                if formality == Formality.PLAIN:
-                    return generate_nai_form(verb_base, verb_class, False)
-                else:
-                    return "{}{}".format(verb_base, MASU_NEGATIVE_NONPAST)
-            elif verb_class == VerbClass.ICHIDAN:
-                verb_base = splice_verb(verb, verb_class)
-                verb_with_rare = "{}{}".format(verb_base, "られ")
-                if formality == Formality.PLAIN:
-                    return generate_nai_form(verb_with_rare, verb_class, False)
-                else:
-                    return "{}{}".format(verb_with_rare, MASU_NEGATIVE_NONPAST)
+            if formality == Formality.PLAIN:
+                return generate_nai_form(verb_base, verb_class, False)
+            else:
+                return "{}{}".format(verb_base, MASU_NEGATIVE_NONPAST)
+        else:
+            verb_base = splice_verb(verb, verb_class)
+            verb_with_rare = "{}{}".format(verb_base, "られ")
+            if formality == Formality.PLAIN:
+                return generate_nai_form(verb_with_rare, verb_class, False)
+            else:
+                return "{}{}".format(verb_with_rare, MASU_NEGATIVE_NONPAST)
 
     @classmethod
     def generate_imperative_form(cls, verb, verb_class, formality):
@@ -171,6 +175,7 @@ class NegativeVerbForms:
                     verb,
                     suru_ending="{}{}".format(SURU_ENDING, NA_PARTICLE),
                     kuru_ending="{}{}".format(KURU_ENDING, NA_PARTICLE),
+                    kuru_kanji_ending="{}{}".format(KURU_KANJI_ENDING, NA_PARTICLE),
                 )
             else:
                 nai_form = generate_nai_form(verb, verb_class, True)
@@ -207,29 +212,32 @@ class NegativeVerbForms:
                         append_stem_particle=True,
                         suru_ending=PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING,
                     )
-                else:
+                elif splice_verb(verb, verb_class, False) == KURU_ENDING:
                     return "{}{}".format(
                         KO_PARTICLE, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING
                     )
+                else:
+                    return "{}{}".format(
+                        KURU_KANJI, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING
+                    )
+
             else:
                 intermediate_verb = handle_irregular_verb(
                     verb,
                     append_stem_particle=True,
                     suru_ending=MASU_NEGATIVE_NONPAST,
                     kuru_ending=MASU_NEGATIVE_NONPAST,
+                    kuru_kanji_ending=MASU_NEGATIVE_NONPAST,
                 )
                 return "{}{}{}".format(intermediate_verb, NA_PARTICLE, RA_PARTICLE)
+        elif verb_class == VerbClass.GODAN:
+            verb_with_a_ending = map_dictionary_to_a_ending(verb)
+            return "{}{}".format(
+                verb_with_a_ending, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING
+            )
         else:
             verb_stem = splice_verb(verb, verb_class)
-            if verb_class == VerbClass.GODAN:
-                verb_with_a_ending = map_dictionary_to_a_ending(verb)
-                return "{}{}".format(
-                    verb_with_a_ending, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING
-                )
-            elif verb_class == VerbClass.ICHIDAN:
-                return "{}{}".format(
-                    verb_stem, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING
-                )
+            return "{}{}".format(verb_stem, PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING)
 
     @classmethod
     def generate_causative_form(cls, verb, verb_class, formality):
@@ -248,7 +256,7 @@ class NegativeVerbForms:
         parameter
         """
         if verb_class == VerbClass.IRREGULAR:
-            if splice_verb(verb, verb_class, False) != SURU_ENDING:
+            if splice_verb(verb, verb_class, False) == KURU_ENDING:
                 if formality == Formality.PLAIN:
                     return generate_nai_form(
                         CAUSATIVE_KURU_NEGATIVE_BASE, verb_class, False
@@ -257,24 +265,30 @@ class NegativeVerbForms:
                     return "{}{}".format(
                         CAUSATIVE_KURU_NEGATIVE_BASE, MASU_NEGATIVE_NONPAST
                     )
+            else:
+                if formality == Formality.PLAIN:
+                    return generate_nai_form(
+                        CAUSATIVE_KURU_KANJI_NEGATIVE_BASE, verb_class, False
+                    )
+                else:
+                    return "{}{}".format(
+                        CAUSATIVE_KURU_KANJI_NEGATIVE_BASE, MASU_NEGATIVE_NONPAST
+                    )
+        elif verb_class == VerbClass.GODAN:
+            modified_verb_stem = "{}{}".format(
+                map_dictionary_to_a_ending(verb), SE_PARTICLE
+            )
+            if formality == Formality.PLAIN:
+                return generate_nai_form(modified_verb_stem, verb_class, False)
+            else:
+                return "{}{}".format(modified_verb_stem, MASU_NEGATIVE_NONPAST)
         else:
             verb_stem = splice_verb(verb, verb_class)
-            if verb_class == VerbClass.GODAN:
-                modified_verb_stem = "{}{}".format(
-                    map_dictionary_to_a_ending(verb), SE_PARTICLE
-                )
-                if formality == Formality.PLAIN:
-                    return generate_nai_form(modified_verb_stem, verb_class, False)
-                else:
-                    return "{}{}".format(modified_verb_stem, MASU_NEGATIVE_NONPAST)
-            elif verb_class == VerbClass.ICHIDAN:
-                modified_verb_stem = "{}{}{}".format(
-                    verb_stem, SA_PARTICLE, SE_PARTICLE
-                )
-                if formality == Formality.PLAIN:
-                    return generate_nai_form(modified_verb_stem, verb_class, False)
-                else:
-                    return "{}{}".format(modified_verb_stem, MASU_NEGATIVE_NONPAST)
+            modified_verb_stem = "{}{}{}".format(verb_stem, SA_PARTICLE, SE_PARTICLE)
+            if formality == Formality.PLAIN:
+                return generate_nai_form(modified_verb_stem, verb_class, False)
+            else:
+                return "{}{}".format(modified_verb_stem, MASU_NEGATIVE_NONPAST)
 
     @classmethod
     def generate_passive_form(cls, verb, verb_class, formality):
@@ -300,7 +314,7 @@ class NegativeVerbForms:
                 return generate_nai_form(verb_with_updated_ending, verb_class, False)
             else:
                 return "{}{}".format(verb_with_updated_ending, MASU_NEGATIVE_NONPAST)
-        elif verb_class == VerbClass.ICHIDAN:
+        else:
             modified_verb_stem = "{}{}{}".format(
                 splice_verb(verb, verb_class), RA_PARTICLE, RE_PARTICLE
             )

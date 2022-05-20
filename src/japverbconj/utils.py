@@ -31,7 +31,11 @@ def splice_verb(verb, verb_class, should_return_stem=True):
 
 
 def handle_irregular_verb(
-    verb, append_stem_particle=False, suru_ending=None, kuru_ending=None
+    verb,
+    append_stem_particle=False,
+    suru_ending=None,
+    kuru_ending=None,
+    kuru_kanji_ending=None,
 ):
     """Handles irregular verb conjugations depending on suru or kuru verb type.
     Isolates logic of irregular verbs.
@@ -60,18 +64,15 @@ def handle_irregular_verb(
     if particle_ending == SURU_ENDING:
         if append_stem_particle:
             ending = SHI_PARTICLE
-        if suru_ending is not None:
-            ending = "{}{}".format(ending, suru_ending)
+        ending = "{}{}".format(ending, suru_ending)
     elif particle_ending == KURU_ENDING:
         if append_stem_particle:
             ending = KI_PARTICLE
-        if kuru_ending is not None:
-            ending = "{}{}".format(ending, kuru_ending)
+        ending = "{}{}".format(ending, kuru_ending)
     else:
         if append_stem_particle:
             ending = KURU_KANJI
-        if kuru_ending is not None:
-            ending = "{}{}".format(ending, kuru_ending)
+        ending = "{}{}".format(ending, kuru_kanji_ending)
     return "{}{}".format(verb_stem, ending)
 
 
@@ -98,8 +99,10 @@ def generate_nai_form(verb, verb_class, is_regular_nai):
     if verb_class == VerbClass.IRREGULAR:
         if splice_verb(verb, verb_class, False) == SURU_ENDING:
             ending = "{}{}".format(SHI_PARTICLE, ending)
-        else:
+        elif splice_verb(verb, verb_class, False) == KURU_ENDING:
             ending = "{}{}".format(KO_PARTICLE, ending)
+        else:
+            ending = "{}{}".format(KURU_KANJI, ending)
     else:
         if verb_class == VerbClass.GODAN:
             verb_stem = map_dictionary_to_a_ending(verb)
@@ -126,13 +129,13 @@ def base_te_ta_form(verb, verb_class, *endings):
         verb class. Defaults to None.
     """
     if verb_class == VerbClass.IRREGULAR:
-        return handle_irregular_verb(verb, True, endings[0], endings[0])
+        return handle_irregular_verb(verb, True, endings[0], endings[0], endings[0])
     else:
         verb_stem = splice_verb(verb, verb_class)
         verb_ending = ""
         if verb_class == VerbClass.ICHIDAN:
             verb_ending = endings[0]
-        elif verb_class == VerbClass.GODAN:
+        else:
             last_kana = splice_verb(verb, verb_class, False)
 
             if last_kana in [RU_PARTICLE, TSU_PARTICLE, U_PARTICLE]:
@@ -143,7 +146,7 @@ def base_te_ta_form(verb, verb_class, *endings):
                 verb_ending = "{}{}".format(I_PARTICLE, endings[0])
             elif last_kana in [GU_PARTICLE]:
                 verb_ending = "{}{}".format(I_PARTICLE, endings[1])
-            elif last_kana in [SU_PARTICLE]:
+            else:
                 verb_ending = "{}{}".format(SHI_PARTICLE, endings[0])
         return "{}{}".format(verb_stem, verb_ending)
 
