@@ -29,7 +29,7 @@ Japanese Verb Conjugator conjugates verbs based on `verb class`, `tense`, `forma
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install `japanese-verb-conjugator`. If you want to install `japanese-verb-conjugator` and its dependencies in a virtual environment, first create and activiate a virtual environment. If you want to change the virtual environment name to someting other than `venv`, replace the second `venv` with your desired name. Use that same name to replace `venv` in the second command.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install `japanese-verb-conjugator-v2`. If you want to install `japanese-verb-conjugator-v2` and its dependencies in a virtual environment, first create and activiate a virtual environment. If you want to change the virtual environment name to someting other than `venv`, replace the second `venv` with your desired name. Use that same name to replace `venv` in the second command.
 
 ```python
 python3 -m venv venv
@@ -39,10 +39,10 @@ source venv/bin/activate
 If you run into trouble, see the [Python Virtual Environment tutorial](https://docs.python.org/3/tutorial/venv.html). 
 
 ### Method 1: Pypi
-After installing and activating the virtual environment, run the following commands to install `japanese-verb-conjugator` and its dependencies.
+After installing and activating the virtual environment, run the following commands to install `japanese-verb-conjugator-v2` and its dependencies.
 
 ```bash
-pip install japanese-verb-conjugator
+pip install japanese-verb-conjugator-v2
 ```
 #### Note
 Pip may display an error during installation that includes the following message. 
@@ -51,7 +51,7 @@ Pip may display an error during installation that includes the following message
 No matching distribution found for romkan (from JapaneseVerbConjugator)
 ```
 
-In this case, run the command `pip install romkan` and then run `pip install japanese-verb-conjugator` again.
+In this case, run the command `pip install romkan` and then run `pip install japanese-verb-conjugator-v2` again.
 
 You should be good to go! See the **Usage** section on how to get started using the library.
 
