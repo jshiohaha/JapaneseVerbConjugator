@@ -80,6 +80,8 @@ def handle_irregular_verb(
             Defaults to None.
         kuru_ending (:obj: str, optional): kuru verb ending based on the conjugation form.
             Defaults to None.
+        kuru_kanji_ending (:obj: str, optional): kuru as kanji verb ending based on the conjugation form.
+            Defaults to None.
 
     Returns:
         str: irregular verb with appropriate particles and ending attached depending
@@ -88,20 +90,20 @@ def handle_irregular_verb(
     verb_stem, particle_ending = splice_verb(verb, VerbClass.IRREGULAR)
     if particle_ending not in [SURU_ENDING, KURU_ENDING, KURU_KANJI_ENDING]:
         raise NonIrregularVerbError("Non-Irregular Verb Ending Found", particle_ending)
-    ending = ""
+    stem_particle = ""
     if particle_ending == SURU_ENDING:
         if append_stem_particle:
-            ending = SHI_PARTICLE
-        ending = f"{ending}{suru_ending}"
+            stem_particle = SHI_PARTICLE
+        ending = suru_ending
     elif particle_ending == KURU_ENDING:
         if append_stem_particle:
-            ending = KI_PARTICLE
-        ending = f"{ending}{kuru_ending}"
+            stem_particle = KI_PARTICLE
+        ending = kuru_ending
     else:
         if append_stem_particle:
-            ending = KURU_KANJI
-        ending = f"{ending}{kuru_kanji_ending}"
-    return f"{verb_stem}{ending}"
+            stem_particle = KURU_KANJI
+        ending = kuru_kanji_ending
+    return f"{verb_stem}{stem_particle}{ending}"
 
 
 def generate_nai_form(verb, verb_class, is_regular_nai):
@@ -119,22 +121,21 @@ def generate_nai_form(verb, verb_class, is_regular_nai):
     Returns:
         str: nai ending attached to verb param
     """
-    verb_stem, particle_ending = splice_verb(verb, verb_class)
-    ending = NAI_ENDING
-
     if not is_regular_nai:
-        return f"{verb}{ending}"
+        return f"{verb}{NAI_ENDING}"
+    verb_stem, particle_ending = splice_verb(verb, verb_class)
+    stem_particle = ""
     if verb_class == VerbClass.IRREGULAR:
         if particle_ending == SURU_ENDING:
-            ending = f"{SHI_PARTICLE}{ending}"
+            stem_particle = SHI_PARTICLE
         elif particle_ending == KURU_ENDING:
-            ending = f"{KO_PARTICLE}{ending}"
+            stem_particle = KO_PARTICLE
         else:
-            ending = f"{KURU_KANJI}{ending}"
+            stem_particle = KURU_KANJI
     else:
         if verb_class == VerbClass.GODAN:
             verb_stem = map_dictionary_to_a_ending(verb)
-    return f"{verb_stem}{ending}"
+    return f"{verb_stem}{stem_particle}{NAI_ENDING}"
 
 
 def base_te_ta_form(verb, verb_class, regular_ending, dakuten_ending):
@@ -187,9 +188,7 @@ def map_dictionary_to_a_ending(verb):
     Returns:
         str: verb stem with the correct -a particle attached (Godan verbs only)
     """
-    return map_dict_form_to_different_ending(
-        verb, "a", WA_PARTICLE, TA_PARTICLE, SA_PARTICLE
-    )
+    return map_dict_form_to_different_ending(verb, A_PARTICLE)
 
 
 def map_dictionary_to_e_ending(verb):
@@ -201,9 +200,7 @@ def map_dictionary_to_e_ending(verb):
     Returns:
         str: verb stem with the correct -e particle attached (Godan verbs only)
     """
-    return map_dict_form_to_different_ending(
-        verb, "e", E_PARTICLE, TE_PARTICLE, SE_PARTICLE
-    )
+    return map_dict_form_to_different_ending(verb, E_PARTICLE)
 
 
 def map_dictionary_to_i_ending(verb):
@@ -215,9 +212,7 @@ def map_dictionary_to_i_ending(verb):
     Returns:
         str: verb stem with the correct -i particle attached (Godan verbs only)
     """
-    return map_dict_form_to_different_ending(
-        verb, "i", I_PARTICLE, CHI_PARTICLE, SHI_PARTICLE
-    )
+    return map_dict_form_to_different_ending(verb, I_PARTICLE)
 
 
 def map_dictionary_to_o_ending(verb):
@@ -229,23 +224,16 @@ def map_dictionary_to_o_ending(verb):
     Returns:
         str: verb stem with the correct -o particle attached (Godan verbs only)
     """
-    return map_dict_form_to_different_ending(
-        verb, "o", O_PARTICLE, TO_PARTICLE, SO_PARTICLE
-    )
+    return map_dict_form_to_different_ending(verb, O_PARTICLE)
 
 
-def map_dict_form_to_different_ending(
-    verb, romaji_ending, u_ending, tsu_ending, su_ending
-):
+def map_dict_form_to_different_ending(verb, desired_ending):
     """Generates Godan verb stem and computes the correct particle to attach based on the
     verb's last kana
 
     Args:
         verb (str): Japanese verb in kana, might contain kanji
-        romaji_ending (str): target sound of the particle to append to the verb
-        u_ending (str): ending in case of u as last kana
-        tsu_ending (str): ending in case of tsu as last kana
-        su_ending: ending in case of su as last kana
+        desired_ending (str): target base_particle
 
     Returns:
         str: verb stem with the correct particle attached depending on the last kana particle
@@ -253,12 +241,4 @@ def map_dict_form_to_different_ending(
     """
     verb_stem, particle_ending = splice_verb(verb, VerbClass.GODAN)
 
-    if particle_ending == U_PARTICLE:
-        return f"{verb_stem}{u_ending}"
-    elif particle_ending == TSU_PARTICLE:
-        return f"{verb_stem}{tsu_ending}"
-    elif particle_ending == SU_PARTICLE:
-        return f"{verb_stem}{su_ending}"
-    else:
-        last_kana_as_romaji = f"{romkan.to_roma(particle_ending)[:-1]}{romaji_ending}"
-        return f"{verb_stem}{romkan.to_hiragana(last_kana_as_romaji)}"
+    return f"{verb_stem}{ENDING_DICT[particle_ending][desired_ending]}"
