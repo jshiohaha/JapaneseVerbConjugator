@@ -3,6 +3,7 @@ branch = True
 source = src/
 
 [report]
+skip_empty = True
 fail_under = 100
 # Regexes for lines to exclude from consideration
 exclude_lines =
