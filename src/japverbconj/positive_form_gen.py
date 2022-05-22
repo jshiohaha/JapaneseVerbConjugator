@@ -49,7 +49,7 @@ class PositiveVerbForms:
             # ending is the same regardless. Any way to account for this?
             return handle_irregular_verb(verb, True, ending, ending, ending)
         else:
-            verb_stem = splice_verb(verb, verb_class)
+            verb_stem = get_verb_stem(verb, verb_class)
             if verb_class == VerbClass.GODAN:
                 verb_stem = map_dictionary_to_i_ending(verb)
             # ichidan verb class check is not needed here
@@ -116,22 +116,22 @@ class PositiveVerbForms:
                 kuru_kanji_ending=VOLITIONAL_KURU_KANJI_ENDING,
             )
         else:
-            verb_base = ""
+            verb_stem = ""
             ending = ""
             if verb_class == VerbClass.GODAN:
                 # assuming plain formality param
-                verb_base = map_dictionary_to_o_ending(verb)
+                verb_stem = map_dictionary_to_o_ending(verb)
                 ending = U_PARTICLE
                 if formality == Formality.POLITE:
-                    verb_base = map_dictionary_to_i_ending(verb)
+                    verb_stem = map_dictionary_to_i_ending(verb)
                     ending = VOLITIONAL_POLITE_ENDING
             else:
-                verb_base = splice_verb(verb, verb_class)
+                verb_stem = get_verb_stem(verb, verb_class)
                 # assuming plain formality param
                 ending = VOLITIONAL_ICHIDAN_PLAIN_ENDING
                 if formality == Formality.POLITE:
                     ending = VOLITIONAL_POLITE_ENDING
-        return f"{verb_base}{ending}"
+        return f"{verb_stem}{ending}"
 
     @classmethod
     def generate_potential_form(cls, verb, verb_class, formality):
@@ -166,20 +166,20 @@ class PositiveVerbForms:
                 )
         else:
             # assuming godan plain form
-            verb_base = map_dictionary_to_e_ending(verb)
+            verb_stem = map_dictionary_to_e_ending(verb)
             ending = RU_PARTICLE
 
             if verb_class == VerbClass.GODAN:
                 if formality == Formality.POLITE:
-                    verb_base = map_dictionary_to_e_ending(verb)
+                    verb_stem = map_dictionary_to_e_ending(verb)
                     ending = MASU_POSITIVE_NONPAST
             else:
-                verb_base = splice_verb(verb, verb_class)
+                verb_stem = get_verb_stem(verb, verb_class)
                 if formality == Formality.PLAIN:
                     ending = POTENTIAL_ICHIDAN_ENDING
                 else:
                     ending = POTENTIAL_POLITE_ICHIDAN_ENDING
-            return f"{verb_base}{ending}"
+            return f"{verb_stem}{ending}"
 
     @classmethod
     def generate_imperative_form(cls, verb, verb_class, formality):
@@ -208,15 +208,15 @@ class PositiveVerbForms:
             else:
                 return f"{cls.generate_te_form(verb, verb_class)}{KUDASAI}"
         else:
-            verb_base = cls.generate_te_form(verb, verb_class)
+            verb_stem = cls.generate_te_form(verb, verb_class)
             ending = KUDASAI
             if formality == Formality.PLAIN:
                 if verb_class == VerbClass.GODAN:
                     return map_dictionary_to_e_ending(verb)
                 else:
-                    verb_base = splice_verb(verb, verb_class)
+                    verb_stem = get_verb_stem(verb, verb_class)
                     ending = RO_PARTICLE
-            return f"{verb_base}{ending}"
+            return f"{verb_stem}{ending}"
 
     @classmethod
     def generate_provisional_form(cls, verb, verb_class, formality=None):
@@ -252,13 +252,13 @@ class PositiveVerbForms:
                 )
         else:
             # assuming godan verb
-            verb_base = map_dictionary_to_e_ending(verb)
+            verb_stem = map_dictionary_to_e_ending(verb)
             ending = BA_PARTICLE
 
             if verb_class == VerbClass.ICHIDAN:
-                verb_base = splice_verb(verb, verb_class)
+                verb_stem = get_verb_stem(verb, verb_class)
                 ending = f"{RE_PARTICLE}{BA_PARTICLE}"
-            return f"{verb_base}{ending}"
+            return f"{verb_stem}{ending}"
 
     @classmethod
     def generate_causative_form(cls, verb, verb_class, formality):
@@ -292,7 +292,7 @@ class PositiveVerbForms:
                 else:
                     return f"{verb_with_a_ending}{SE_PARTICLE}{MASU_POSITIVE_NONPAST}"
             else:
-                verb_stem = splice_verb(verb, verb_class)
+                verb_stem = get_verb_stem(verb, verb_class)
                 if formality == Formality.PLAIN:
                     return f"{verb_stem}{SA_PARTICLE}{SE_PARTICLE}{RU_PARTICLE}"
                 else:
@@ -330,7 +330,7 @@ class PositiveVerbForms:
             else:
                 return f"{verb_with_a_ending}{RE_PARTICLE}{MASU_POSITIVE_NONPAST}"
         else:
-            verb_stem = splice_verb(verb, verb_class)
+            verb_stem = get_verb_stem(verb, verb_class)
             if formality == Formality.PLAIN:
                 return f"{verb_stem}{PASSIVE_ICHIDAN_PLAIN_POSITIVE_ENDING}"
             else:

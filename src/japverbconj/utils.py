@@ -10,8 +10,8 @@ from .constants.verb_ending_constants import *
 # ---------------------------------------------------------- #
 #                UTIL VERB GENERATOR FUNCTIONS               #
 # ---------------------------------------------------------- #
-def splice_verb(verb, verb_class, should_return_stem=True):
-    """Split Japense verb between stem and ending particle(s). The number of ending
+def splice_verb(verb, verb_class):
+    """Split Japanese verb between stem and ending particle(s). The number of ending
     particles returned depends on the verb class (i.e. godan / ichidan will return one
     particle while irregular verbs will return two particles)
 
@@ -20,14 +20,42 @@ def splice_verb(verb, verb_class, should_return_stem=True):
         verb_class (enum): VerbClass enum representing the Japanese verb class
 
     Returns:
-        str: Verb stem or particle endings based on the value of should_return_stem
+        tuple: Verb stem and particle ending
     """
     num_ending_particles = 1
     if verb_class == VerbClass.IRREGULAR:
         num_ending_particles = 2
-    if should_return_stem:
-        return verb[: -1 * num_ending_particles]
-    return verb[-1 * num_ending_particles :]
+    return verb[: -1 * num_ending_particles], verb[-1 * num_ending_particles :]
+
+
+def get_verb_stem(verb, verb_class):
+    """Split Japanese verb between stem and ending particle(s). The number of ending
+    particles returned depends on the verb class (i.e. godan / ichidan will return one
+    particle while irregular verbs will return two particles)
+
+    Args:
+        verb (str): Japanese verb in kanji and/or kana
+        verb_class (enum): VerbClass enum representing the Japanese verb class
+
+    Returns:
+        str: Verb stem
+    """
+    return splice_verb(verb, verb_class)[0]
+
+
+def get_ending_particle(verb, verb_class):
+    """Split Japanese verb between stem and ending particle(s). The number of ending
+    particles returned depends on the verb class (i.e. godan / ichidan will return one
+    particle while irregular verbs will return two particles)
+
+    Args:
+        verb (str): Japanese verb in kanji and/or kana
+        verb_class (enum): VerbClass enum representing the Japanese verb class
+
+    Returns:
+        tuple: Particle ending
+    """
+    return splice_verb(verb, verb_class)[1]
 
 
 def handle_irregular_verb(
@@ -55,11 +83,9 @@ def handle_irregular_verb(
         str: irregular verb with appropriate particles and ending attached depending
             on verb conjugation
     """
-    particle_ending = splice_verb(verb, VerbClass.IRREGULAR, False)
+    verb_stem, particle_ending = splice_verb(verb, VerbClass.IRREGULAR)
     if particle_ending not in [SURU_ENDING, KURU_ENDING, KURU_KANJI_ENDING]:
         return None
-
-    verb_stem = splice_verb(verb, VerbClass.IRREGULAR)
     ending = ""
     if particle_ending == SURU_ENDING:
         if append_stem_particle:
@@ -91,15 +117,15 @@ def generate_nai_form(verb, verb_class, is_regular_nai):
     Returns:
         str: nai ending attached to verb param
     """
-    verb_stem = splice_verb(verb, verb_class)
+    verb_stem, particle_ending = splice_verb(verb, verb_class)
     ending = NAI_ENDING
 
     if not is_regular_nai:
         return f"{verb}{ending}"
     if verb_class == VerbClass.IRREGULAR:
-        if splice_verb(verb, verb_class, False) == SURU_ENDING:
+        if particle_ending == SURU_ENDING:
             ending = f"{SHI_PARTICLE}{ending}"
-        elif splice_verb(verb, verb_class, False) == KURU_ENDING:
+        elif particle_ending == KURU_ENDING:
             ending = f"{KO_PARTICLE}{ending}"
         else:
             ending = f"{KURU_KANJI}{ending}"
@@ -131,20 +157,17 @@ def base_te_ta_form(verb, verb_class, *endings):
     if verb_class == VerbClass.IRREGULAR:
         return handle_irregular_verb(verb, True, endings[0], endings[0], endings[0])
     else:
-        verb_stem = splice_verb(verb, verb_class)
-        verb_ending = ""
+        verb_stem, particle_ending = splice_verb(verb, verb_class)
         if verb_class == VerbClass.ICHIDAN:
             verb_ending = endings[0]
         else:
-            last_kana = splice_verb(verb, verb_class, False)
-
-            if last_kana in [RU_PARTICLE, TSU_PARTICLE, U_PARTICLE]:
+            if particle_ending in [RU_PARTICLE, TSU_PARTICLE, U_PARTICLE]:
                 verb_ending = f"{CHISAI_TSU_PARTICLE}{endings[0]}"
-            elif last_kana in [BU_PARTICLE, MU_PARTICLE, NU_PARTICLE]:
+            elif particle_ending in [BU_PARTICLE, MU_PARTICLE, NU_PARTICLE]:
                 verb_ending = f"{N_PARTICLE}{endings[1]}"
-            elif last_kana in [KU_PARTICLE]:
+            elif particle_ending in [KU_PARTICLE]:
                 verb_ending = f"{I_PARTICLE}{endings[0]}"
-            elif last_kana in [GU_PARTICLE]:
+            elif particle_ending in [GU_PARTICLE]:
                 verb_ending = f"{I_PARTICLE}{endings[1]}"
             else:
                 verb_ending = f"{SHI_PARTICLE}{endings[0]}"
@@ -224,17 +247,14 @@ def map_dict_form_to_different_ending(
         str: verb stem with the correct particle attached depending on the last kana particle
     of the Godan verb
     """
-    last_kana = splice_verb(verb, VerbClass.GODAN, False)
-    verb_stem = splice_verb(verb, VerbClass.GODAN)
+    verb_stem, particle_ending = splice_verb(verb, VerbClass.GODAN)
 
-    if last_kana == U_PARTICLE:
+    if particle_ending == U_PARTICLE:
         return f"{verb_stem}{u_ending}"
-    elif last_kana == TSU_PARTICLE:
+    elif particle_ending == TSU_PARTICLE:
         return f"{verb_stem}{tsu_ending}"
-    elif last_kana == SU_PARTICLE:
+    elif particle_ending == SU_PARTICLE:
         return f"{verb_stem}{su_ending}"
     else:
-        transformed_last_kana_as_romaji = (
-            f"{romkan.to_roma(last_kana)[:-1]}{romaji_ending}"
-        )
-        return f"{verb_stem}{romkan.to_hiragana(transformed_last_kana_as_romaji)}"
+        last_kana_as_romaji = f"{romkan.to_roma(particle_ending)[:-1]}{romaji_ending}"
+        return f"{verb_stem}{romkan.to_hiragana(last_kana_as_romaji)}"
