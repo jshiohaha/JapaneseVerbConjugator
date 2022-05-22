@@ -305,6 +305,26 @@ class IrregularVerbKuruKanji:
     ProvisionalPoliteNegative = "来ませんなら"
 
 
+class CopulaDa:
+    plain = "だ"
+    polite = "です"
+    conditional = "なら"
+    presumptive_plain = "だろう"
+    presumotive_polite = "でしょう"
+    te_form_plain = "で"
+    te_form_polite = "でして"
+    plain_past = "だった"
+    polite_past = "でした"
+    tara_plain = "だったら"
+    tara_polite = "でしたら"
+    plain_negative = "ではない"
+    polite_negative = "ではありません"
+    presumptive_plain_negative = "ではないだろう"
+    presumptive_polite_negative = "ではないでしょう"
+    plain_past_negative = "なかった"
+    polite_negative_past = "ではありませんでした"
+
+
 PARAMETER_LIST = [
     ("godan_nomu", GodanVerbNomu),
     ("ichidan_taberu", IchidanVerbTaberu),
