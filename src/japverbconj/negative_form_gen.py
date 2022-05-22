@@ -24,11 +24,11 @@ class NegativeVerbForms:
             str: negative plain form of the verb based on the tense
         parameter
         """
-        verb = generate_nai_form(verb, verb_class, True)
+        nai_form = generate_nai_form(verb, verb_class, True)
         if tense == Tense.NONPAST:
-            return verb
-        # force a non-irregular verb class to remove ending -i particle
-        return f"{get_verb_stem(verb, VerbClass.NONIRREGULAR)}{KATTA_ENDING}"
+            return nai_form
+        else:
+            return f"{nai_form[:-1]}{KATTA_ENDING}"
 
     @classmethod
     def generate_polite_form(cls, verb, verb_class, tense):
@@ -45,9 +45,10 @@ class NegativeVerbForms:
             str: negative polite form of the verb based on the tense
         parameter
         """
-        ending = MASU_NEGATIVE_PAST
         if tense == Tense.NONPAST:
             ending = MASU_NEGATIVE_NONPAST
+        else:
+            ending = MASU_NEGATIVE_PAST
 
         if verb_class == VerbClass.IRREGULAR:
             return handle_irregular_verb(
@@ -57,12 +58,11 @@ class NegativeVerbForms:
                 kuru_ending=ending,
                 kuru_kanji_ending=ending,
             )
+        elif verb_class == VerbClass.GODAN:
+            verb_stem = map_dictionary_to_i_ending(verb)
         else:
             verb_stem = get_verb_stem(verb, verb_class)
-            if verb_class == VerbClass.GODAN:
-                verb_stem = map_dictionary_to_i_ending(verb)
-            # no change needed for ichidan verb
-            return f"{verb_stem}{ending}"
+        return f"{verb_stem}{ending}"
 
     @classmethod
     def generate_conditional_form(cls, verb, verb_class, formality):
@@ -141,17 +141,12 @@ class NegativeVerbForms:
                 )
         elif verb_class == VerbClass.GODAN:
             verb_stem = map_dictionary_to_e_ending(verb)
-            if formality == Formality.PLAIN:
-                return generate_nai_form(verb_stem, verb_class, False)
-            else:
-                return f"{verb_stem}{MASU_NEGATIVE_NONPAST}"
         else:
-            verb_stem = get_verb_stem(verb, verb_class)
-            verb_with_rare = f"{verb_stem}{RA_PARTICLE}{RE_PARTICLE}"
-            if formality == Formality.PLAIN:
-                return generate_nai_form(verb_with_rare, verb_class, False)
-            else:
-                return f"{verb_with_rare}{MASU_NEGATIVE_NONPAST}"
+            verb_stem = f"{get_verb_stem(verb, verb_class)}{RA_PARTICLE}{RE_PARTICLE}"
+        if formality == Formality.PLAIN:
+            return generate_nai_form(verb_stem, verb_class, False)
+        else:
+            return f"{verb_stem}{MASU_NEGATIVE_NONPAST}"
 
     @classmethod
     def generate_imperative_form(cls, verb, verb_class, formality):
@@ -207,16 +202,15 @@ class NegativeVerbForms:
         if verb_class == VerbClass.IRREGULAR:
             if formality == Formality.PLAIN:
                 ending_particle = get_ending_particle(verb, verb_class)
-                if ending_particle == SURU_ENDING:
+                if ending_particle == KURU_ENDING:
+                    return f"{KO_PARTICLE}{PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING}"
+                else:
                     return handle_irregular_verb(
                         verb,
                         append_stem_particle=True,
                         suru_ending=PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING,
+                        kuru_kanji_ending=PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING,
                     )
-                elif ending_particle == KURU_ENDING:
-                    return f"{KO_PARTICLE}{PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING}"
-                else:
-                    return f"{KURU_KANJI}{PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING}"
 
             else:
                 intermediate_verb = handle_irregular_verb(
@@ -228,11 +222,10 @@ class NegativeVerbForms:
                 )
                 return f"{intermediate_verb}{NA_PARTICLE}{RA_PARTICLE}"
         elif verb_class == VerbClass.GODAN:
-            verb_with_a_ending = map_dictionary_to_a_ending(verb)
-            return f"{verb_with_a_ending}{PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING}"
+            verb_stem = map_dictionary_to_a_ending(verb)
         else:
             verb_stem = get_verb_stem(verb, verb_class)
-            return f"{verb_stem}{PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING}"
+        return f"{verb_stem}{PROVISIONAL_ICHIDAN_PLAIN_NEGATIVE_ENDING}"
 
     @classmethod
     def generate_causative_form(cls, verb, verb_class, formality):
@@ -252,34 +245,17 @@ class NegativeVerbForms:
         """
         if verb_class == VerbClass.IRREGULAR:
             if get_ending_particle(verb, verb_class) == KURU_ENDING:
-                if formality == Formality.PLAIN:
-                    return generate_nai_form(
-                        CAUSATIVE_KURU_NEGATIVE_BASE, verb_class, False
-                    )
-                else:
-                    return f"{CAUSATIVE_KURU_NEGATIVE_BASE}{MASU_NEGATIVE_NONPAST}"
+                verb_stem = CAUSATIVE_KURU_NEGATIVE_BASE
             else:
-                if formality == Formality.PLAIN:
-                    return generate_nai_form(
-                        CAUSATIVE_KURU_KANJI_NEGATIVE_BASE, verb_class, False
-                    )
-                else:
-                    return (
-                        f"{CAUSATIVE_KURU_KANJI_NEGATIVE_BASE}{MASU_NEGATIVE_NONPAST}"
-                    )
+                verb_stem = CAUSATIVE_KURU_KANJI_NEGATIVE_BASE
         elif verb_class == VerbClass.GODAN:
-            modified_verb_stem = f"{map_dictionary_to_a_ending(verb)}{SE_PARTICLE}"
-            if formality == Formality.PLAIN:
-                return generate_nai_form(modified_verb_stem, verb_class, False)
-            else:
-                return f"{modified_verb_stem}{MASU_NEGATIVE_NONPAST}"
+            verb_stem = f"{map_dictionary_to_a_ending(verb)}{SE_PARTICLE}"
         else:
-            verb_stem = get_verb_stem(verb, verb_class)
-            modified_verb_stem = f"{verb_stem}{SA_PARTICLE}{SE_PARTICLE}"
-            if formality == Formality.PLAIN:
-                return generate_nai_form(modified_verb_stem, verb_class, False)
-            else:
-                return f"{modified_verb_stem}{MASU_NEGATIVE_NONPAST}"
+            verb_stem = f"{get_verb_stem(verb, verb_class)}{SA_PARTICLE}{SE_PARTICLE}"
+        if formality == Formality.PLAIN:
+            return generate_nai_form(verb_stem, verb_class, False)
+        else:
+            return f"{verb_stem}{MASU_NEGATIVE_NONPAST}"
 
     @classmethod
     def generate_passive_form(cls, verb, verb_class, formality):
@@ -298,18 +274,10 @@ class NegativeVerbForms:
         parameter
         """
         if verb_class == VerbClass.GODAN:
-            verb_with_updated_ending = (
-                f"{map_dictionary_to_a_ending(verb)}{RE_PARTICLE}"
-            )
-            if formality == Formality.PLAIN:
-                return generate_nai_form(verb_with_updated_ending, verb_class, False)
-            else:
-                return f"{verb_with_updated_ending}{MASU_NEGATIVE_NONPAST}"
+            verb_stem = f"{map_dictionary_to_a_ending(verb)}{RE_PARTICLE}"
         else:
-            modified_verb_stem = (
-                f"{get_verb_stem(verb, verb_class)}{RA_PARTICLE}{RE_PARTICLE}"
-            )
-            if formality == Formality.PLAIN:
-                return generate_nai_form(modified_verb_stem, verb_class, False)
-            else:
-                return f"{modified_verb_stem}{MASU_NEGATIVE_NONPAST}"
+            verb_stem = f"{get_verb_stem(verb, verb_class)}{RA_PARTICLE}{RE_PARTICLE}"
+        if formality == Formality.PLAIN:
+            return generate_nai_form(verb_stem, verb_class, False)
+        else:
+            return f"{verb_stem}{MASU_NEGATIVE_NONPAST}"
