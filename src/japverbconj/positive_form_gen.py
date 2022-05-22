@@ -2,7 +2,15 @@
 from .constants.enumerated_types import Formality, Tense, VerbClass
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
-from .utils import *
+from .utils import (
+    base_te_ta_form,
+    get_verb_stem,
+    handle_irregular_verb,
+    map_dictionary_to_a_ending,
+    map_dictionary_to_e_ending,
+    map_dictionary_to_i_ending,
+    map_dictionary_to_o_ending,
+)
 
 
 # ---------------------------------------------------------- #

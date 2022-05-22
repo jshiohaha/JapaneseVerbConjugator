@@ -1,12 +1,7 @@
-# Local modules
-# External Libraries
-import romkan
-
-from src.japverbconj.exceptions import NonIrregularVerbError
-
-from .constants.enumerated_types import Formality, Polarity, Tense, VerbClass
+from .constants.enumerated_types import VerbClass
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
+from .exceptions import NonIrregularVerbError
 
 
 # ---------------------------------------------------------- #

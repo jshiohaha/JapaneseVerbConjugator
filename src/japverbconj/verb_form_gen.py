@@ -1,4 +1,3 @@
-# Local modules
 from .constants.enumerated_types import Polarity
 from .decorators import validate_japanese_verb
 from .negative_form_gen import NegativeVerbForms

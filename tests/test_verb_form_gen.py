@@ -1,4 +1,5 @@
 import unittest
+
 from parameterized import parameterized
 from src.japverbconj.constants.enumerated_types import (
     Formality,
