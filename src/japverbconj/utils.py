@@ -2,6 +2,8 @@
 # External Libraries
 import romkan
 
+from src.japverbconj.exceptions import NonIrregularVerbError
+
 from .constants.enumerated_types import Formality, Polarity, Tense, VerbClass
 from .constants.particle_constants import *
 from .constants.verb_ending_constants import *
@@ -85,7 +87,7 @@ def handle_irregular_verb(
     """
     verb_stem, particle_ending = splice_verb(verb, VerbClass.IRREGULAR)
     if particle_ending not in [SURU_ENDING, KURU_ENDING, KURU_KANJI_ENDING]:
-        return None
+        raise NonIrregularVerbError("Non-Irregular Verb Ending Found", particle_ending)
     ending = ""
     if particle_ending == SURU_ENDING:
         if append_stem_particle:

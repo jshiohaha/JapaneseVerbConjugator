@@ -8,3 +8,7 @@ class InvalidJapaneseVerbEndingError(Exception):
 
 class NonJapaneseCharacterError(Exception):
     pass
+
+
+class NonIrregularVerbError(Exception):
+    pass
