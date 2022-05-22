@@ -207,15 +207,18 @@ def map_dictionary_to_o_ending(verb):
     )
 
 
-def map_dict_form_to_different_ending(verb, romaji_ending, *special_endings):
+def map_dict_form_to_different_ending(
+    verb, romaji_ending, u_ending, tsu_ending, su_ending
+):
     """Generates Godan verb stem and computes the correct particle to attach based on the
     verb's last kana
 
     Args:
         verb (str): Japanese verb in kana, might contain kanji
         romaji_ending (str): target sound of the particle to append to the verb
-        *special_endings: Variable length argument list. Based on the target Godan particle
-        class (-a, -e, -i, -o). Order of particles is -u / -tsu / -su.
+        u_ending (str): ending in case of u as last kana
+        tsu_ending (str): ending in case of tsu as last kana
+        su_ending: ending in case of su as last kana
 
     Returns:
         str: verb stem with the correct particle attached depending on the last kana particle
@@ -225,11 +228,11 @@ def map_dict_form_to_different_ending(verb, romaji_ending, *special_endings):
     verb_stem = splice_verb(verb, VerbClass.GODAN)
 
     if last_kana == U_PARTICLE:
-        return f"{verb_stem}{special_endings[0]}"
+        return f"{verb_stem}{u_ending}"
     elif last_kana == TSU_PARTICLE:
-        return f"{verb_stem}{special_endings[1]}"
+        return f"{verb_stem}{tsu_ending}"
     elif last_kana == SU_PARTICLE:
-        return f"{verb_stem}{special_endings[2]}"
+        return f"{verb_stem}{su_ending}"
     else:
         transformed_last_kana_as_romaji = (
             f"{romkan.to_roma(last_kana)[:-1]}{romaji_ending}"
