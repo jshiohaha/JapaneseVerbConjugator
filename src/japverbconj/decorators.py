@@ -1,3 +1,8 @@
+from src.japverbconj.exceptions import (
+    InvalidJapaneseVerbEndingError,
+    InvalidJapaneseVerbLengthError,
+    NonJapaneseCharacterError,
+)
 from .constants.particle_constants import (
     BU_PARTICLE,
     GU_PARTICLE,
@@ -11,14 +16,14 @@ from .constants.particle_constants import (
 )
 
 
-def containsJapaneseCharacters(verb):
-    """Compute whether or not a Japanese verb contains any kanji characters
+def contains_only_japanese_characters(verb):
+    """Compute whether or not a verb contains only japanese characters
 
     Args:
-        verb (str): Japanese verb in kana or kanji
+        verb (str): Japanese verb
 
     Returns:
-        bool: True if kanji is found, false otherwise
+        bool: False if non-japanese characters are found, True otherwise
     """
     ranges = [
         # https://stackoverflow.com/questions/30069846/how-to-find-out-chinese-or-japanese-character-in-a-string-in-python
@@ -49,10 +54,12 @@ def containsJapaneseCharacters(verb):
     return True
 
 
-def validateJapaneseVerbDecorator(func):
+def validate_japanese_verb(func):
     def wrapper(self, verb, *args, **kwargs):
         if len(verb) < 2:
-            raise Exception("Invalid Japanese Verb Length", len(verb), verb)
+            raise InvalidJapaneseVerbLengthError(
+                "Invalid Japanese Verb Length", len(verb), verb
+            )
 
         if verb[-1:] not in [
             U_PARTICLE,
@@ -65,10 +72,12 @@ def validateJapaneseVerbDecorator(func):
             MU_PARTICLE,
             RU_PARTICLE,
         ]:
-            raise Exception("Invalid Japanese Verb Ending Particle", verb[-1:])
+            raise InvalidJapaneseVerbEndingError(
+                "Invalid Japanese Verb Ending Particle", verb[-1:]
+            )
 
-        if not containsJapaneseCharacters(verb):
-            raise Exception("Non-Japanese Character Found", verb)
+        if not contains_only_japanese_characters(verb):
+            raise NonJapaneseCharacterError("Non-Japanese Character Found", verb)
 
         # assuming *args and **kwargs will always have the correct arguments because initial function call succeeded
         return func(self, verb, *args, **kwargs)

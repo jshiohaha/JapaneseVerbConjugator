@@ -1,14 +1,9 @@
 import unittest
 
-from src.japverbconj.constants.particle_constants import (
-    DA_PARTICLE,
-    TA_PARTICLE,
-)
+from src.japverbconj.constants.particle_constants import DA_PARTICLE, TA_PARTICLE
 from src.japverbconj.utils import *
 
-from .constants import (
-    GodanVerbNomu,
-)
+from .constants import GodanVerbNomu
 
 
 class UtilsTests(unittest.TestCase):
@@ -16,9 +11,12 @@ class UtilsTests(unittest.TestCase):
         self.verb_class = VerbClass.GODAN
 
     def test_handle_irregular_verb_non_irregular_verb_ending(self):
-        result = handle_irregular_verb(GodanVerbNomu.Verb)
-        # TODO: refactor to throw error
-        self.assertIsNone(result)
+        with self.assertRaises(NonIrregularVerbError) as expected_exception:
+            handle_irregular_verb(GodanVerbNomu.Verb)
+        self.assertEqual(
+            str(expected_exception.exception),
+            "('Non-Irregular Verb Ending Found', '飲む')",
+        )
 
     # all below this must be godan verb
     def test_base_te_ta_form_CHISAI_TSU(self):
