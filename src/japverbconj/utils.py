@@ -135,7 +135,7 @@ def generate_nai_form(verb, verb_class, is_regular_nai):
     return f"{verb_stem}{ending}"
 
 
-def base_te_ta_form(verb, verb_class, *endings):
+def base_te_ta_form(verb, verb_class, regular_ending, dakuten_ending):
     """Handle the formation of the -te / -ta form for verbs belonging to
     any verb class. Logic for both forms follows similar logic but differs
     between (-te, -de) and (-ta, -da) based on the last particle of a Godan
@@ -145,32 +145,34 @@ def base_te_ta_form(verb, verb_class, *endings):
         verb (str): Japanese verb in kana, might contain kanji
         verb_class (enum): VerbClass Enum representing the verb class
             to which the verb belongs
-        *endings: Variable length argument list. Must be in the form (te, de)
-        or (ta, da)
+        regular_ending (str): ending without dakuten
+        dakuten_ending (str): ending with dakuten
 
-        TODO... reformat this logic for *endings
+        TODO... reformat this logic for endings
 
     Returns:
         str: The verb stem plus the -te / -ta particle depending on the
-        verb class. Defaults to None.
+        verb class.
     """
     if verb_class == VerbClass.IRREGULAR:
-        return handle_irregular_verb(verb, True, endings[0], endings[0], endings[0])
+        return handle_irregular_verb(
+            verb, True, regular_ending, regular_ending, regular_ending
+        )
     else:
         verb_stem, particle_ending = splice_verb(verb, verb_class)
         if verb_class == VerbClass.ICHIDAN:
-            verb_ending = endings[0]
+            verb_ending = regular_ending
         else:
             if particle_ending in [RU_PARTICLE, TSU_PARTICLE, U_PARTICLE]:
-                verb_ending = f"{CHISAI_TSU_PARTICLE}{endings[0]}"
+                verb_ending = f"{CHISAI_TSU_PARTICLE}{regular_ending}"
             elif particle_ending in [BU_PARTICLE, MU_PARTICLE, NU_PARTICLE]:
-                verb_ending = f"{N_PARTICLE}{endings[1]}"
+                verb_ending = f"{N_PARTICLE}{dakuten_ending}"
             elif particle_ending in [KU_PARTICLE]:
-                verb_ending = f"{I_PARTICLE}{endings[0]}"
+                verb_ending = f"{I_PARTICLE}{regular_ending}"
             elif particle_ending in [GU_PARTICLE]:
-                verb_ending = f"{I_PARTICLE}{endings[1]}"
+                verb_ending = f"{I_PARTICLE}{dakuten_ending}"
             else:
-                verb_ending = f"{SHI_PARTICLE}{endings[0]}"
+                verb_ending = f"{SHI_PARTICLE}{regular_ending}"
         return f"{verb_stem}{verb_ending}"
 
 
