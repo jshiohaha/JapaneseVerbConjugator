@@ -283,22 +283,17 @@ class PositiveVerbForms:
                 kuru_ending=CAUSATIVE_PLAIN_KURU_ENDING,
                 kuru_kanji_ending=CAUSATIVE_PLAIN_KURU_KANJI_ENDING,
             )
+
+        if verb_class == VerbClass.GODAN:
+            verb_stem = f"{map_dictionary_to_a_ending(verb)}{SE_PARTICLE}"
         else:
-            # TODO FIX ALL THIS LOGIC... GROSS :-P
-            if verb_class == VerbClass.GODAN:
-                verb_with_a_ending = map_dictionary_to_a_ending(verb)
-                if formality == Formality.PLAIN:
-                    return f"{verb_with_a_ending}{SE_PARTICLE}{RU_PARTICLE}"
-                else:
-                    return f"{verb_with_a_ending}{SE_PARTICLE}{MASU_POSITIVE_NONPAST}"
-            else:
-                verb_stem = get_verb_stem(verb, verb_class)
-                if formality == Formality.PLAIN:
-                    return f"{verb_stem}{SA_PARTICLE}{SE_PARTICLE}{RU_PARTICLE}"
-                else:
-                    return (
-                        f"{verb_stem}{SA_PARTICLE}{SE_PARTICLE}{MASU_POSITIVE_NONPAST}"
-                    )
+            verb_stem = f"{get_verb_stem(verb, verb_class)}{SA_PARTICLE}{SE_PARTICLE}"
+
+        if formality == Formality.PLAIN:
+            ending = RU_PARTICLE
+        else:
+            ending = MASU_POSITIVE_NONPAST
+        return f"{verb_stem}{ending}"
 
     @classmethod
     def generate_passive_form(cls, verb, verb_class, formality):
