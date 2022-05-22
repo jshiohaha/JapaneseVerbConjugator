@@ -53,7 +53,7 @@ class PositiveVerbForms:
             if verb_class == VerbClass.GODAN:
                 verb_stem = map_dictionary_to_i_ending(verb)
             # ichidan verb class check is not needed here
-            return "{}{}".format(verb_stem, ending)
+            return f"{verb_stem}{ending}"
 
     @classmethod
     def generate_te_form(cls, verb, verb_class):
@@ -90,7 +90,7 @@ class PositiveVerbForms:
             verb = base_te_ta_form(verb, verb_class, TA_PARTICLE, DA_PARTICLE)
         else:
             verb = cls.generate_polite_form(verb, verb_class, Tense.PAST)
-        return "{}{}".format(verb, RA_PARTICLE)
+        return f"{verb}{RA_PARTICLE}"
 
     @classmethod
     def generate_volitional_form(cls, verb, verb_class, formality):
@@ -131,7 +131,7 @@ class PositiveVerbForms:
                 ending = VOLITIONAL_ICHIDAN_PLAIN_ENDING
                 if formality == Formality.POLITE:
                     ending = VOLITIONAL_POLITE_ENDING
-        return "{}{}".format(verb_base, ending)
+        return f"{verb_base}{ending}"
 
     @classmethod
     def generate_potential_form(cls, verb, verb_class, formality):
@@ -179,7 +179,7 @@ class PositiveVerbForms:
                     ending = POTENTIAL_ICHIDAN_ENDING
                 else:
                     ending = POTENTIAL_POLITE_ICHIDAN_ENDING
-            return "{}{}".format(verb_base, ending)
+            return f"{verb_base}{ending}"
 
     @classmethod
     def generate_imperative_form(cls, verb, verb_class, formality):
@@ -206,7 +206,7 @@ class PositiveVerbForms:
                     kuru_kanji_ending=IMPERATIVE_KURU_KANJI_PLAIN_POSITIVE_ENDING,
                 )
             else:
-                return "{}{}".format(cls.generate_te_form(verb, verb_class), KUDASAI)
+                return f"{cls.generate_te_form(verb, verb_class)}{KUDASAI}"
         else:
             verb_base = cls.generate_te_form(verb, verb_class)
             ending = KUDASAI
@@ -216,7 +216,7 @@ class PositiveVerbForms:
                 else:
                     verb_base = splice_verb(verb, verb_class)
                     ending = RO_PARTICLE
-            return "{}{}".format(verb_base, ending)
+            return f"{verb_base}{ending}"
 
     @classmethod
     def generate_provisional_form(cls, verb, verb_class, formality=None):
@@ -257,8 +257,8 @@ class PositiveVerbForms:
 
             if verb_class == VerbClass.ICHIDAN:
                 verb_base = splice_verb(verb, verb_class)
-                ending = "{}{}".format(RE_PARTICLE, BA_PARTICLE)
-            return "{}{}".format(verb_base, ending)
+                ending = f"{RE_PARTICLE}{BA_PARTICLE}"
+            return f"{verb_base}{ending}"
 
     @classmethod
     def generate_causative_form(cls, verb, verb_class, formality):
@@ -338,6 +338,6 @@ class PositiveVerbForms:
         else:
             verb_stem = splice_verb(verb, verb_class)
             if formality == Formality.PLAIN:
-                return "{}{}".format(verb_stem, PASSIVE_ICHIDAN_PLAIN_POSITIVE_ENDING)
+                return f"{verb_stem}{PASSIVE_ICHIDAN_PLAIN_POSITIVE_ENDING}"
             else:
-                return "{}{}".format(verb_stem, PASSIVE_ICHIDAN_POLITE_POSITIVE_ENDING)
+                return f"{verb_stem}{PASSIVE_ICHIDAN_POLITE_POSITIVE_ENDING}"
