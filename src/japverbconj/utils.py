@@ -231,9 +231,7 @@ def map_dict_form_to_different_ending(verb, romaji_ending, *special_endings):
     elif last_kana == SU_PARTICLE:
         return f"{verb_stem}{special_endings[2]}"
     else:
-        transformed_last_kana_as_romaji = "{}{}".format(
-            romkan.to_roma(last_kana)[:-1], romaji_ending
+        transformed_last_kana_as_romaji = (
+            f"{romkan.to_roma(last_kana)[:-1]}{romaji_ending}"
         )
-        return "{}{}".format(
-            verb_stem, romkan.to_hiragana(transformed_last_kana_as_romaji)
-        )
+        return f"{verb_stem}{romkan.to_hiragana(transformed_last_kana_as_romaji)}"

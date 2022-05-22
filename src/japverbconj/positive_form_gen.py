@@ -288,20 +288,16 @@ class PositiveVerbForms:
             if verb_class == VerbClass.GODAN:
                 verb_with_a_ending = map_dictionary_to_a_ending(verb)
                 if formality == Formality.PLAIN:
-                    return "{}{}{}".format(verb_with_a_ending, SE_PARTICLE, RU_PARTICLE)
+                    return f"{verb_with_a_ending}{SE_PARTICLE}{RU_PARTICLE}"
                 else:
-                    return "{}{}{}".format(
-                        verb_with_a_ending, SE_PARTICLE, MASU_POSITIVE_NONPAST
-                    )
+                    return f"{verb_with_a_ending}{SE_PARTICLE}{MASU_POSITIVE_NONPAST}"
             else:
                 verb_stem = splice_verb(verb, verb_class)
                 if formality == Formality.PLAIN:
-                    return "{}{}{}{}".format(
-                        verb_stem, SA_PARTICLE, SE_PARTICLE, RU_PARTICLE
-                    )
+                    return f"{verb_stem}{SA_PARTICLE}{SE_PARTICLE}{RU_PARTICLE}"
                 else:
-                    return "{}{}{}{}".format(
-                        verb_stem, SA_PARTICLE, SE_PARTICLE, MASU_POSITIVE_NONPAST
+                    return (
+                        f"{verb_stem}{SA_PARTICLE}{SE_PARTICLE}{MASU_POSITIVE_NONPAST}"
                     )
 
     @classmethod
@@ -330,11 +326,9 @@ class PositiveVerbForms:
         elif verb_class == VerbClass.GODAN:
             verb_with_a_ending = map_dictionary_to_a_ending(verb)
             if formality == Formality.PLAIN:
-                return "{}{}{}".format(verb_with_a_ending, RE_PARTICLE, RU_PARTICLE)
+                return f"{verb_with_a_ending}{RE_PARTICLE}{RU_PARTICLE}"
             else:
-                return "{}{}{}".format(
-                    verb_with_a_ending, RE_PARTICLE, MASU_POSITIVE_NONPAST
-                )
+                return f"{verb_with_a_ending}{RE_PARTICLE}{MASU_POSITIVE_NONPAST}"
         else:
             verb_stem = splice_verb(verb, verb_class)
             if formality == Formality.PLAIN:
