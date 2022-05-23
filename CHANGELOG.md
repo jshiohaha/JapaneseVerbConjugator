@@ -1,4 +1,5 @@
-## 2022-05-23 (v0.1.1)
+## 2022-05-23 (v0.1.2)
+- fix missing ri particle
 - fix breaking import bug
 
 ## 2022-05-23 (v0.1.0) - broken
