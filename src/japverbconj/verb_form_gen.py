@@ -1,4 +1,5 @@
 from .constants.enumerated_types import Polarity
+from .copula_gen import Copula
 from .decorators import validate_japanese_verb
 from .negative_form_gen import NegativeVerbForms
 from .positive_form_gen import PositiveVerbForms
@@ -7,6 +8,7 @@ from .positive_form_gen import PositiveVerbForms
 class JapaneseVerbFormGenerator:
     positive_verb_forms = PositiveVerbForms
     negative_verb_forms = NegativeVerbForms
+    copula = Copula
 
     @classmethod
     @validate_japanese_verb

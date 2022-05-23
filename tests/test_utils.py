@@ -12,7 +12,7 @@ class UtilsTests(unittest.TestCase):
 
     def test_handle_irregular_verb_non_irregular_verb_ending(self):
         with self.assertRaises(NonIrregularVerbError) as expected_exception:
-            handle_irregular_verb(GodanVerbNomu.Verb)
+            handle_irregular_verb(GodanVerbNomu.verb)
         self.assertEqual(
             str(expected_exception.exception),
             "('Non-Irregular Verb Ending Found', '飲む')",

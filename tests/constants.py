@@ -7,302 +7,322 @@ verb_incorrect_particle_ending = "飲ま"
 
 class GodanVerbNomu:
     # http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%E9%A3%B2%E3%82%80
-    Verb = "飲む"  # plain positive nonpast
-    Verb_Class = VerbClass.GODAN
+    verb = "飲む"  # plain positive nonpast
+    verb_class = VerbClass.GODAN
 
     # Formal Verb Forms
-    PolitePositiveNonpast = "飲みます"
-    PolitePositivePast = "飲みました"
-    PoliteNegativeNonpast = "飲みません"
-    PoliteNegativePast = "飲みませんでした"
+    polite_positive_nonpast = "飲みます"
+    polite_positive_past = "飲みました"
+    polite_negative_nonpast = "飲みません"
+    polite_negative_past = "飲みませんでした"
 
     # Plain Verb Forms
-    PlainPositivePast = "飲んだ"  # ta form
-    PlainNegativeNonpast = "飲まない"  # nai form
-    PlainNegativePast = "飲まなかった"  # katta form
+    plain_positive_past = "飲んだ"  # ta form
+    plain_negative_nonpast = "飲まない"  # nai form
+    plain_negative_past = "飲まなかった"  # katta form
 
-    TeForm = "飲んで"
+    te_form = "飲んで"
 
     # Conditional Verb Forms
-    ConditionalPolite = "飲みましたら"  # tara form
-    ConditionalPlain = "飲んだら"
+    conditional_polite = "飲みましたら"  # tara form
+    conditional_plain = "飲んだら"
 
     # Volitional Verb Forms
-    VolitionalPolitePositive = "飲みましょう"
-    VolitionalPoliteNegative = "飲まないでしょう"
-    VolitionalPlainPositive = "飲もう"
-    VolitionalPlainNegative = "飲まないだろう"
+    volitional_polite_positive = "飲みましょう"
+    volitional_polite_negative = "飲まないでしょう"
+    volitional_plain_positive = "飲もう"
+    volitional_plain_negative = "飲まないだろう"
 
     # Potential Verb Forms
-    PotentialPlainPositive = "飲める"
-    PotentialPlainNegative = "飲めない"
-    PotentialPolitePositive = "飲めます"
-    PotentialPoliteNegative = "飲めません"
+    potential_plain_positive = "飲める"
+    potential_plain_negative = "飲めない"
+    potential_polite_positive = "飲めます"
+    potential_polite_negative = "飲めません"
 
     # Imperative Verb Forms
-    ImperativePlainPositive = "飲め"
-    ImperativePlainNegative = "飲むな"
-    ImperativePolitePositive = "飲んでください"
-    ImperativePoliteNegative = "飲まないでください"
+    imperative_plain_positive = "飲め"
+    imperative_plain_negative = "飲むな"
+    imperative_polite_positive = "飲んでください"
+    imperative_polite_negative = "飲まないでください"
 
     # Causative Verb Forms
-    CausativePlainPositive = "飲ませる"
-    CausativePlainNegative = "飲ませない"
-    CausativePolitePositive = "飲ませます"
-    CausativePoliteNegative = "飲ませません"
+    causative_plain_positive = "飲ませる"
+    causative_plain_negative = "飲ませない"
+    causative_polite_positive = "飲ませます"
+    causative_polite_negative = "飲ませません"
 
     # Passive Verb Forms
-    PassivePlainPositive = "飲まれる"
-    PassivePlainNegative = "飲まれない"
-    PassivePolitePositive = "飲まれます"
-    PassivePoliteNegative = "飲まれません"
+    passive_plain_positive = "飲まれる"
+    passive_plain_negative = "飲まれない"
+    passive_polite_positive = "飲まれます"
+    passive_polite_negative = "飲まれません"
 
     # Provisional Verb Forms
-    ProvisionalPlainPositive = "飲めば"
-    ProvisionalPlainNegative = "飲まなければ"
+    provisional_plain_positive = "飲めば"
+    provisional_plain_negative = "飲まなければ"
 
 
 class IchidanVerbTaberu:
     # http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%E9%A3%9F%E3%81%B9%E3%82%8B
-    Verb = "食べる"  # plain positive nonpast
-    Verb_Class = VerbClass.ICHIDAN
+    verb = "食べる"  # plain positive nonpast
+    verb_class = VerbClass.ICHIDAN
 
     # Formal Verb Forms
-    PolitePositiveNonpast = "食べます"
-    PolitePositivePast = "食べました"
-    PoliteNegativeNonpast = "食べません"
-    PoliteNegativePast = "食べませんでした"
+    polite_positive_nonpast = "食べます"
+    polite_positive_past = "食べました"
+    polite_negative_nonpast = "食べません"
+    polite_negative_past = "食べませんでした"
 
     # Plain Verb Forms
-    PlainPositivePast = "食べた"  # ta form
-    PlainNegativeNonpast = "食べない"  # nai form
-    PlainNegativePast = "食べなかった"  # katta form
+    plain_positive_past = "食べた"  # ta form
+    plain_negative_nonpast = "食べない"  # nai form
+    plain_negative_past = "食べなかった"  # katta form
 
-    TeForm = "食べて"
+    te_form = "食べて"
 
     # Conditional Verb Forms
-    ConditionalPolite = "食べましたら"  # tara form
-    ConditionalPlain = "食べたら"  # tara form
+    conditional_polite = "食べましたら"  # tara form
+    conditional_plain = "食べたら"  # tara form
 
     # Volitional Verb Forms
-    VolitionalPlainPositive = "食べよう"
-    VolitionalPlainNegative = "食べないだろう"
-    VolitionalPolitePositive = "食べましょう"
-    VolitionalPoliteNegative = "食べないでしょう"
+    volitional_plain_positive = "食べよう"
+    volitional_plain_negative = "食べないだろう"
+    volitional_polite_positive = "食べましょう"
+    volitional_polite_negative = "食べないでしょう"
 
     # Potential Verb Forms
-    PotentialPlainPositive = "食べられる"
-    PotentialPlainNegative = "食べられない"
-    PotentialPolitePositive = "食べられます"
-    PotentialPoliteNegative = "食べられません"
+    potential_plain_positive = "食べられる"
+    potential_plain_negative = "食べられない"
+    potential_polite_positive = "食べられます"
+    potential_polite_negative = "食べられません"
 
     # Imperative Verb Forms
-    ImperativePlainPositive = "食べろ"
-    ImperativePlainNegative = "食べるな"
-    ImperativePolitePositive = "食べてください"
-    ImperativePoliteNegative = "食べないでください"
+    imperative_plain_positive = "食べろ"
+    imperative_plain_negative = "食べるな"
+    imperative_polite_positive = "食べてください"
+    imperative_polite_negative = "食べないでください"
 
     # Causative Verb Forms
-    CausativePlainPositive = "食べさせる"
-    CausativePlainNegative = "食べさせない"
-    CausativePolitePositive = "食べさせます"
-    CausativePoliteNegative = "食べさせません"
+    causative_plain_positive = "食べさせる"
+    causative_plain_negative = "食べさせない"
+    causative_polite_positive = "食べさせます"
+    causative_polite_negative = "食べさせません"
 
     # Passive Verb Forms
-    PassivePlainPositive = "食べられる"
-    PassivePlainNegative = "食べられない"
-    PassivePolitePositive = "食べられます"
-    PassivePoliteNegative = "食べられません"
+    passive_plain_positive = "食べられる"
+    passive_plain_negative = "食べられない"
+    passive_polite_positive = "食べられます"
+    passive_polite_negative = "食べられません"
 
     # Provisional Verb Forms
-    ProvisionalPlainPositive = "食べれば"
-    ProvisionalPlainNegative = "食べなければ"
+    provisional_plain_positive = "食べれば"
+    provisional_plain_negative = "食べなければ"
 
 
 class IrregularVerbSuru:
     # http://www.japaneseverbconjugator.com/Suru.asp
-    Verb = "勉強する"  # plain positive nonpast
-    Verb_Class = VerbClass.IRREGULAR
+    verb = "勉強する"  # plain positive nonpast
+    verb_class = VerbClass.IRREGULAR
 
     # Formal Verb Forms
-    PolitePositiveNonpast = "勉強します"
-    PolitePositivePast = "勉強しました"
-    PoliteNegativeNonpast = "勉強しません"
-    PoliteNegativePast = "勉強しませんでした"
+    polite_positive_nonpast = "勉強します"
+    polite_positive_past = "勉強しました"
+    polite_negative_nonpast = "勉強しません"
+    polite_negative_past = "勉強しませんでした"
 
     # Plain Verb Forms
-    PlainPositivePast = "勉強した"  # ta form
-    PlainNegativeNonpast = "勉強しない"  # nai form
-    PlainNegativePast = "勉強しなかった"  # katta form
+    plain_positive_past = "勉強した"  # ta form
+    plain_negative_nonpast = "勉強しない"  # nai form
+    plain_negative_past = "勉強しなかった"  # katta form
 
-    TeForm = "勉強して"
+    te_form = "勉強して"
 
     # Conditional Verb Forms
-    ConditionalPlainPositive = "勉強したら"  # tara form
-    ConditionalPolitePositive = "勉強しましたら"  # tara form
-    ConditionalPlainNegative = "勉強しなかったら"  # tara form
-    ConditionalPoliteNegative = "勉強しませんでしたら"  # tara form
+    conditional_plain_positive = "勉強したら"  # tara form
+    conditional_polite_positive = "勉強しましたら"  # tara form
+    conditional_plain_negative = "勉強しなかったら"  # tara form
+    conditional_polite_negative = "勉強しませんでしたら"  # tara form
 
     # Volitional Verb Forms
-    VolitionalPlainPositive = "勉強しよう"
-    VolitionalPolitePositive = "勉強しましょう "
-    VolitionalPlainNegative = "勉強しないだろう"
-    VolitionalPoliteNegative = "勉強しないでしょう"
+    volitional_plain_positive = "勉強しよう"
+    volitional_polite_positive = "勉強しましょう "
+    volitional_plain_negative = "勉強しないだろう"
+    volitional_polite_negative = "勉強しないでしょう"
 
-    # VolitionalPlainPositivePast = "勉強したろう"
-    # VolitionalPolitePositivePast = "勉強しましたろう"
-    # VolitionalPlainNegativePast = "勉強しなかっただろう"
-    # VolitionalPoliteNegativePast = "勉強しなかたでしょう"
+    # volitional_plain_positive_past = "勉強したろう"
+    # volitional_polite_positive_past = "勉強しましたろう"
+    # volitional_plain_negative_past = "勉強しなかっただろう"
+    # volitional_polite_negative_past = "勉強しなかたでしょう"
 
     # Potential Verb Forms
-    PotentialPlainPositive = "勉強できる"
-    PotentialPlainNegative = "勉強できない"
-    PotentialPolitePositive = "勉強できます"
-    PotentialPoliteNegative = "勉強できません"
+    potential_plain_positive = "勉強できる"
+    potential_plain_negative = "勉強できない"
+    potential_polite_positive = "勉強できます"
+    potential_polite_negative = "勉強できません"
 
     # Imperative Verb Forms
-    ImperativePlainPositive = "勉強しろ"
-    ImperativePlainNegative = "勉強するな"
-    ImperativePolitePositive = "勉強してください"
-    ImperativePoliteNegative = "勉強しないでください"
+    imperative_plain_positive = "勉強しろ"
+    imperative_plain_negative = "勉強するな"
+    imperative_polite_positive = "勉強してください"
+    imperative_polite_negative = "勉強しないでください"
 
     # Causative Verb Forms
-    CausativePlainPositive = "勉強させる"
+    causative_plain_positive = "勉強させる"
 
     # Passive Verb Forms
-    PassivePlainPositive = "勉強される"
+    passive_plain_positive = "勉強される"
 
     # Provisional Verb Forms
-    ProvisionalPlainPositive = "勉強すれば"
-    ProvisionalPlainNegative = "勉強しなければ"
-    ProvisionalPolitePositive = "勉強しませば"
-    ProvisionalPoliteNegative = "勉強しませんなら"
+    provisional_plain_positive = "勉強すれば"
+    provisional_plain_negative = "勉強しなければ"
+    provisional_polite_positive = "勉強しませば"
+    provisional_polite_negative = "勉強しませんなら"
 
 
 class IrregularVerbKuru:
     # http://www.japaneseverbconjugator.com/Kuru.asp
-    Verb = "くる"  # plain positive nonpast
-    Verb_Class = VerbClass.IRREGULAR
+    verb = "くる"  # plain positive nonpast
+    verb_class = VerbClass.IRREGULAR
 
     # Formal Verb Forms
-    PolitePositiveNonpast = "きます"
-    PolitePositivePast = "きました"
-    PoliteNegativeNonpast = "きません"
-    PoliteNegativePast = "きませんでした"
+    polite_positive_nonpast = "きます"
+    polite_positive_past = "きました"
+    polite_negative_nonpast = "きません"
+    polite_negative_past = "きませんでした"
 
     # Plain Verb Forms
-    PlainPositivePast = "きた"  # ta form
-    PlainNegativeNonpast = "こない"  # nai form
-    PlainNegativePast = "こなかった"  # katta form
+    plain_positive_past = "きた"  # ta form
+    plain_negative_nonpast = "こない"  # nai form
+    plain_negative_past = "こなかった"  # katta form
 
-    TeForm = "きて"
+    te_form = "きて"
 
     # Conditional Verb Forms
-    ConditionalPlainPositive = "きたら"  # tara form
-    ConditionalPolitePositive = "きましたら"  # tara form
-    ConditionalPlainNegative = "こなかったら"  # tara form
-    ConditionalPoliteNegative = "きませんでしたら"  # tara form
+    conditional_plain_positive = "きたら"  # tara form
+    conditional_polite_positive = "きましたら"  # tara form
+    conditional_plain_negative = "こなかったら"  # tara form
+    conditional_polite_negative = "きませんでしたら"  # tara form
 
     # Volitional Verb Forms
-    VolitionalPolitePositive = "きましょう"
-    VolitionalPoliteNegative = "こないでしょう"
-    VolitionalPlainPositive = "こよう"
-    VolitionalPlainNegative = "こないだろう"
+    volitional_polite_positive = "きましょう"
+    volitional_polite_negative = "こないでしょう"
+    volitional_plain_positive = "こよう"
+    volitional_plain_negative = "こないだろう"
 
-    # VolitionalPlainPositivePast = "きたろう"
-    # VolitionalPolitePositivePast = "きたでしょう"
-    # VolitionalPlainNegativePast = "こなかっただろう"
-    # VolitionalPoliteNegativePast = "こなかったでしょう"
+    # volitional_plain_positive_past = "きたろう"
+    # volitional_polite_positive_past = "きたでしょう"
+    # volitional_plain_negative_past = "こなかっただろう"
+    # volitional_polite_negative_past = "こなかったでしょう"
 
     # Potential Verb Forms
-    PotentialPlainPositive = "こられる"
-    PotentialPlainNegative = "こられない"
-    PotentialPolitePositive = "こられます"
-    PotentialPoliteNegative = "こられません"
+    potential_plain_positive = "こられる"
+    potential_plain_negative = "こられない"
+    potential_polite_positive = "こられます"
+    potential_polite_negative = "こられません"
 
     # Imperative Verb Forms
-    ImperativePlainPositive = "こい"
-    ImperativePlainNegative = "くるな"
-    ImperativePolitePositive = "きてください"
-    ImperativePoliteNegative = "こないでください"
+    imperative_plain_positive = "こい"
+    imperative_plain_negative = "くるな"
+    imperative_polite_positive = "きてください"
+    imperative_polite_negative = "こないでください"
 
     # Causative Verb Forms
-    CausativePlainPositive = "こさせる"
-    CausativePlainNegative = "こさせない"
-    CausativePolitePositive = "こさせます"
-    CausativePoliteNegative = "こさせません"
+    causative_plain_positive = "こさせる"
+    causative_plain_negative = "こさせない"
+    causative_polite_positive = "こさせます"
+    causative_polite_negative = "こさせません"
 
     # Passive Verb Forms
-    PassivePlainPositive = "こられる"
+    passive_plain_positive = "こられる"
 
     # Provisional Verb Forms
-    ProvisionalPlainPositive = "くれば"
-    ProvisionalPlainNegative = "こなければ"
-    ProvisionalPolitePositive = "きませば"
-    ProvisionalPoliteNegative = "きませんなら"
+    provisional_plain_positive = "くれば"
+    provisional_plain_negative = "こなければ"
+    provisional_polite_positive = "きませば"
+    provisional_polite_negative = "きませんなら"
 
 
 class IrregularVerbKuruKanji:
     # http://www.japaneseverbconjugator.com/Kuru.asp
-    Verb = "来る"  # plain positive nonpast
-    Verb_Class = VerbClass.IRREGULAR
+    verb = "来る"  # plain positive nonpast
+    verb_class = VerbClass.IRREGULAR
 
     # Formal Verb Forms
-    PolitePositiveNonpast = "来ます"
-    PolitePositivePast = "来ました"
-    PoliteNegativeNonpast = "来ません"
-    PoliteNegativePast = "来ませんでした"
+    polite_positive_nonpast = "来ます"
+    polite_positive_past = "来ました"
+    polite_negative_nonpast = "来ません"
+    polite_negative_past = "来ませんでした"
 
     # Plain Verb Forms
-    PlainPositivePast = "来た"  # ta form
-    PlainNegativeNonpast = "来ない"  # nai form
-    PlainNegativePast = "来なかった"  # katta form
+    plain_positive_past = "来た"  # ta form
+    plain_negative_nonpast = "来ない"  # nai form
+    plain_negative_past = "来なかった"  # katta form
 
-    TeForm = "来て"
+    te_form = "来て"
 
     # Conditional Verb Forms
-    ConditionalPlainPositive = "来たら"  # tara form
-    ConditionalPolitePositive = "来ましたら"  # tara form
-    ConditionalPlainNegative = "来なかったら"  # tara form
-    ConditionalPoliteNegative = "来ませんでしたら"  # tara form
+    conditional_plain_positive = "来たら"  # tara form
+    conditional_polite_positive = "来ましたら"  # tara form
+    conditional_plain_negative = "来なかったら"  # tara form
+    conditional_polite_negative = "来ませんでしたら"  # tara form
 
     # Volitional Verb Forms
-    VolitionalPolitePositive = "来ましょう"
-    VolitionalPoliteNegative = "来ないでしょう"
-    VolitionalPlainPositive = "来よう"
-    VolitionalPlainNegative = "来ないだろう"
+    volitional_polite_positive = "来ましょう"
+    volitional_polite_negative = "来ないでしょう"
+    volitional_plain_positive = "来よう"
+    volitional_plain_negative = "来ないだろう"
 
-    # VolitionalPlainPositivePast = "来たろう"
-    # VolitionalPolitePositivePast = "来たでしょう"
-    # VolitionalPlainNegativePast = "来なかっただろう"
-    # VolitionalPoliteNegativePast = "来なかったでしょう"
+    # volitional_plain_positive_past = "来たろう"
+    # volitional_polite_positive_past = "来たでしょう"
+    # volitional_plain_negative_past = "来なかっただろう"
+    # volitional_polite_negative_past = "来なかったでしょう"
 
     # Potential Verb Forms
-    PotentialPlainPositive = "来られる"
-    PotentialPlainNegative = "来られない"
-    PotentialPolitePositive = "来られます"
-    PotentialPoliteNegative = "来られません"
+    potential_plain_positive = "来られる"
+    potential_plain_negative = "来られない"
+    potential_polite_positive = "来られます"
+    potential_polite_negative = "来られません"
 
     # Imperative Verb Forms
-    ImperativePlainPositive = "来い"
-    ImperativePlainNegative = "来るな"
-    ImperativePolitePositive = "来てください"
-    ImperativePoliteNegative = "来ないでください"
+    imperative_plain_positive = "来い"
+    imperative_plain_negative = "来るな"
+    imperative_polite_positive = "来てください"
+    imperative_polite_negative = "来ないでください"
 
     # Causative Verb Forms
-    CausativePlainPositive = "来させる"
-    CausativePlainNegative = "来させない"
-    CausativePolitePositive = "来させます"
-    CausativePoliteNegative = "来させません"
+    causative_plain_positive = "来させる"
+    causative_plain_negative = "来させない"
+    causative_polite_positive = "来させます"
+    causative_polite_negative = "来させません"
 
     # Passive Verb Forms
-    PassivePlainPositive = "来られる"
+    passive_plain_positive = "来られる"
 
     # Provisional Verb Forms
-    ProvisionalPlainPositive = "来れば"
-    ProvisionalPlainNegative = "来なければ"
-    ProvisionalPolitePositive = "来ませば"
-    ProvisionalPoliteNegative = "来ませんなら"
+    provisional_plain_positive = "来れば"
+    provisional_plain_negative = "来なければ"
+    provisional_polite_positive = "来ませば"
+    provisional_polite_negative = "来ませんなら"
+
+
+class CopulaDa:
+    plain_positive = "だ"
+    polite_positive = "です"
+    conditional = "なら"
+    presumptive_plain = "だろう"
+    presumptive_polite = "でしょう"
+    te_form_plain = "で"
+    te_form_polite = "でして"
+    plain_past = "だった"
+    polite_past = "でした"
+    tara_plain = "だったら"
+    tara_polite = "でしたら"
+    plain_negative = "ではない"
+    polite_negative = "ではありません"
+    presumptive_plain_negative = "ではないだろう"
+    presumptive_polite_negative = "ではないでしょう"
+    plain_past_negative = "なかった"
+    polite_past_negative = "ではありませんでした"
 
 
 PARAMETER_LIST = [

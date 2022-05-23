@@ -1,3 +1,9 @@
+## 2022-05-23 (v0.1.0)
+- added copula conjugator
+- add error instead of returning None for irreg verbs
+- use custom exceptions instead of `Exception`
+- more refactoring
+
 ## 2022-05-20 (v0.0.1)
 
 - configure setuptools
