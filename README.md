@@ -27,7 +27,7 @@ Japanese Verb Conjugator conjugates verbs based on `verb class`, `tense`, `forma
 
 `generate_volitional_form` requires `verb class`, `tense`, and `polarity` parameters.
 
-Similarily the cojugations of the copula だ/です can be generated
+Similarily the conjugations of the copula だ/です can be generated.
 
 ## Installation
 
