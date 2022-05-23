@@ -39,145 +39,145 @@ class TestPositiveVerbForms(unittest.TestCase):
     @parameterized.expand(PARAMETER_LIST)
     def test_polite_positive_nonpast(self, _, verb):
         result = jvfg.generate_polite_form(
-            verb.Verb, verb.Verb_Class, Tense.NONPAST, self.polarity
+            verb.verb, verb.verb_class, Tense.NONPAST, self.polarity
         )
-        self.assertEqual(result, verb.PolitePositiveNonpast)
+        self.assertEqual(result, verb.polite_positive_nonpast)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_polite_positive_past(self, _, verb):
         result = jvfg.generate_polite_form(
-            verb.Verb, verb.Verb_Class, Tense.PAST, self.polarity
+            verb.verb, verb.verb_class, Tense.PAST, self.polarity
         )
-        self.assertEqual(result, verb.PolitePositivePast)
+        self.assertEqual(result, verb.polite_positive_past)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_plain_positive_nonpast(self, _, verb):
         result = jvfg.generate_plain_form(
-            verb.Verb, verb.Verb_Class, Tense.NONPAST, self.polarity
+            verb.verb, verb.verb_class, Tense.NONPAST, self.polarity
         )
-        self.assertEqual(result, verb.Verb)
+        self.assertEqual(result, verb.verb)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_plain_positive_past(self, _, verb):
         result = jvfg.generate_plain_form(
-            verb.Verb, verb.Verb_Class, Tense.PAST, self.polarity
+            verb.verb, verb.verb_class, Tense.PAST, self.polarity
         )
-        self.assertEqual(result, verb.PlainPositivePast)
+        self.assertEqual(result, verb.plain_positive_past)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_te_form(self, _, verb):
-        result = jvfg.generate_te_form(verb.Verb, verb.Verb_Class)
-        self.assertEqual(result, verb.TeForm)
+        result = jvfg.generate_te_form(verb.verb, verb.verb_class)
+        self.assertEqual(result, verb.te_form)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_conditional_plain(self, _, verb):
-        if verb.Verb_Class == VerbClass.IRREGULAR:
+        if verb.verb_class == VerbClass.IRREGULAR:
             self.skipTest("Not Required for Irregular Verbs")
         result = jvfg.generate_conditional_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.ConditionalPlain)
+        self.assertEqual(result, verb.conditional_plain)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_conditional_polite(self, _, verb):
-        if verb.Verb_Class == VerbClass.IRREGULAR:
+        if verb.verb_class == VerbClass.IRREGULAR:
             self.skipTest("Not Required for Irregular Verbs")
         result = jvfg.generate_conditional_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.ConditionalPolite)
+        self.assertEqual(result, verb.conditional_polite)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_volitional_plain_positive(self, _, verb):
         result = jvfg.generate_volitional_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.VolitionalPlainPositive)
+        self.assertEqual(result, verb.volitional_plain_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_volitional_polite_positive(self, _, verb):
-        if verb.Verb_Class == VerbClass.IRREGULAR:
+        if verb.verb_class == VerbClass.IRREGULAR:
             self.skipTest("Not Required for Irregular Verbs")
         result = jvfg.generate_volitional_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.VolitionalPolitePositive)
+        self.assertEqual(result, verb.volitional_polite_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_potential_plain_positive(self, _, verb):
         result = jvfg.generate_potential_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.PotentialPlainPositive)
+        self.assertEqual(result, verb.potential_plain_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_potential_polite_positive(self, _, verb):
         result = jvfg.generate_potential_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.PotentialPolitePositive)
+        self.assertEqual(result, verb.potential_polite_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_imperative_plain_positive(self, _, verb):
         result = jvfg.generate_imperative_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.ImperativePlainPositive)
+        self.assertEqual(result, verb.imperative_plain_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_imperative_polite_positive(self, _, verb):
         result = jvfg.generate_imperative_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.ImperativePolitePositive)
+        self.assertEqual(result, verb.imperative_polite_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_provisional_plain_positive(self, _, verb):
         result = jvfg.generate_provisional_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.ProvisionalPlainPositive)
+        self.assertEqual(result, verb.provisional_plain_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_provisional_polite_positive(self, _, verb):
-        if verb.Verb_Class is not VerbClass.IRREGULAR:
+        if verb.verb_class is not VerbClass.IRREGULAR:
             self.skipTest("Not Required for Non-Irregular Verbs")
         result = jvfg.generate_provisional_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.ProvisionalPolitePositive)
+        self.assertEqual(result, verb.provisional_polite_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_causative_plain_positive(self, _, verb):
         result = jvfg.generate_causative_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.CausativePlainPositive)
+        self.assertEqual(result, verb.causative_plain_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_causative_polite_positive(self, _, verb):
-        if verb.Verb_Class == VerbClass.IRREGULAR:
+        if verb.verb_class == VerbClass.IRREGULAR:
             self.skipTest("Not Required for Irregular Verbs")
         result = jvfg.generate_causative_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.CausativePolitePositive)
+        self.assertEqual(result, verb.causative_polite_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_passive_plain_positive(self, _, verb):
         result = jvfg.generate_passive_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.PassivePlainPositive)
+        self.assertEqual(result, verb.passive_plain_positive)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_passive_polite_positive(self, _, verb):
-        if verb.Verb_Class == VerbClass.IRREGULAR:
+        if verb.verb_class == VerbClass.IRREGULAR:
             self.skipTest("Not Required for Irregular Verbs")
         result = jvfg.generate_passive_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.PassivePolitePositive)
+        self.assertEqual(result, verb.passive_polite_positive)
 
 
 # ---------------------------------------------------------- #
@@ -206,142 +206,142 @@ class TestNegativeVerbForms(unittest.TestCase):
     @parameterized.expand(PARAMETER_LIST)
     def test_polite_negative_nonpast(self, _, verb):
         result = jvfg.generate_polite_form(
-            verb.Verb, verb.Verb_Class, Tense.NONPAST, self.polarity
+            verb.verb, verb.verb_class, Tense.NONPAST, self.polarity
         )
-        self.assertEqual(result, verb.PoliteNegativeNonpast)
+        self.assertEqual(result, verb.polite_negative_nonpast)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_polite_negative_past(self, _, verb):
         result = jvfg.generate_polite_form(
-            verb.Verb, verb.Verb_Class, Tense.PAST, self.polarity
+            verb.verb, verb.verb_class, Tense.PAST, self.polarity
         )
-        self.assertEqual(result, verb.PoliteNegativePast)
+        self.assertEqual(result, verb.polite_negative_past)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_plain_negative_nonpast(self, _, verb):
         result = jvfg.generate_plain_form(
-            verb.Verb, verb.Verb_Class, Tense.NONPAST, self.polarity
+            verb.verb, verb.verb_class, Tense.NONPAST, self.polarity
         )
-        self.assertEqual(result, verb.PlainNegativeNonpast)
+        self.assertEqual(result, verb.plain_negative_nonpast)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_plain_negative_past(self, _, verb):
         result = jvfg.generate_plain_form(
-            verb.Verb, verb.Verb_Class, Tense.PAST, self.polarity
+            verb.verb, verb.verb_class, Tense.PAST, self.polarity
         )
-        self.assertEqual(result, verb.PlainNegativePast)
+        self.assertEqual(result, verb.plain_negative_past)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_conditional_plain(self, _, verb):
-        if verb.Verb_Class is not VerbClass.IRREGULAR:
+        if verb.verb_class is not VerbClass.IRREGULAR:
             self.skipTest("Not Required for Non-Irregular Verbs")
         result = jvfg.generate_conditional_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.ConditionalPlainNegative)
+        self.assertEqual(result, verb.conditional_plain_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_conditional_polite(self, _, verb):
-        if verb.Verb_Class is not VerbClass.IRREGULAR:
+        if verb.verb_class is not VerbClass.IRREGULAR:
             self.skipTest("Not Required for Non-Irregular Verbs")
         result = jvfg.generate_conditional_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.ConditionalPoliteNegative)
+        self.assertEqual(result, verb.conditional_polite_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_volitional_plain_negative(self, _, verb):
         result = jvfg.generate_volitional_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.VolitionalPlainNegative)
+        self.assertEqual(result, verb.volitional_plain_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_volitional_polite_negative(self, _, verb):
         result = jvfg.generate_volitional_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.VolitionalPoliteNegative)
+        self.assertEqual(result, verb.volitional_polite_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_potential_plain_negative(self, _, verb):
         result = jvfg.generate_potential_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.PotentialPlainNegative)
+        self.assertEqual(result, verb.potential_plain_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_potential_polite_negative(self, _, verb):
         result = jvfg.generate_potential_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.PotentialPoliteNegative)
+        self.assertEqual(result, verb.potential_polite_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_imperative_plain_negative(self, _, verb):
         result = jvfg.generate_imperative_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.ImperativePlainNegative)
+        self.assertEqual(result, verb.imperative_plain_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_imperative_polite_negative(self, _, verb):
         result = jvfg.generate_imperative_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.ImperativePoliteNegative)
+        self.assertEqual(result, verb.imperative_polite_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_provisional_plain_negative(self, _, verb):
         result = jvfg.generate_provisional_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.ProvisionalPlainNegative)
+        self.assertEqual(result, verb.provisional_plain_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_provisional_polite_negative(self, _, verb):
-        if verb.Verb_Class is not VerbClass.IRREGULAR:
+        if verb.verb_class is not VerbClass.IRREGULAR:
             self.skipTest("Not required for non-irregular verbs")
         result = jvfg.generate_provisional_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.ProvisionalPoliteNegative)
+        self.assertEqual(result, verb.provisional_polite_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_causative_plain_negative(self, _, verb):
-        if verb.Verb[-2:] == "する":
+        if verb.verb[-2:] == "する":
             self.skipTest("Not required for する verbs")
         result = jvfg.generate_causative_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.CausativePlainNegative)
+        self.assertEqual(result, verb.causative_plain_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_causative_polite_negative(self, _, verb):
-        if verb.Verb[-2:] == "する":
+        if verb.verb[-2:] == "する":
             self.skipTest("Not required for する verbs")
         result = jvfg.generate_causative_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.CausativePoliteNegative)
+        self.assertEqual(result, verb.causative_polite_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_passive_plain_negative(self, _, verb):
-        if verb.Verb_Class == VerbClass.IRREGULAR:
+        if verb.verb_class == VerbClass.IRREGULAR:
             self.skipTest("Not required for irregular verbs")
         result = jvfg.generate_passive_form(
-            verb.Verb, verb.Verb_Class, Formality.PLAIN, self.polarity
+            verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
-        self.assertEqual(result, verb.PassivePlainNegative)
+        self.assertEqual(result, verb.passive_plain_negative)
 
     @parameterized.expand(PARAMETER_LIST)
     def test_passive_polite_negative(self, _, verb):
-        if verb.Verb_Class == VerbClass.IRREGULAR:
+        if verb.verb_class == VerbClass.IRREGULAR:
             self.skipTest("Not required for irregular verbs")
         result = jvfg.generate_passive_form(
-            verb.Verb, verb.Verb_Class, Formality.POLITE, self.polarity
+            verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
-        self.assertEqual(result, verb.PassivePoliteNegative)
+        self.assertEqual(result, verb.passive_polite_negative)
 
 
 if __name__ == "__main__":
