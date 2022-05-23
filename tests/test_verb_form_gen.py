@@ -10,7 +10,7 @@ from src.japverbconj.constants.enumerated_types import (
 from src.japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
 from src.japverbconj.verb_form_gen import *
 
-from .constants import PARAMETER_LIST
+from .constants import PARAMETER_LIST, CopulaDa
 
 
 # ---------------------------------------------------------- #
@@ -342,6 +342,83 @@ class TestNegativeVerbForms(unittest.TestCase):
             verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
         self.assertEqual(result, verb.passive_polite_negative)
+
+
+class TestCopula(unittest.TestCase):
+    @parameterized.expand(
+        [
+            ("pos", Tense.NONPAST, Polarity.POSITIVE, CopulaDa.plain_positive),
+            ("pos past", Tense.PAST, Polarity.POSITIVE, CopulaDa.plain_past),
+            ("neg", Tense.NONPAST, Polarity.NEGATIVE, CopulaDa.plain_negative),
+            ("neg past", Tense.PAST, Polarity.NEGATIVE, CopulaDa.plain_past_negative),
+        ]
+    )
+    def test_copula_plain(self, _, tense, polarity, expected_copula):
+        self.assertEqual(
+            jvfg.copula.generate_plain_form(tense, polarity), expected_copula
+        )
+
+    @parameterized.expand(
+        [
+            ("pos", Tense.NONPAST, Polarity.POSITIVE, CopulaDa.polite_positive),
+            ("pos past", Tense.PAST, Polarity.POSITIVE, CopulaDa.polite_past),
+            ("neg", Tense.NONPAST, Polarity.NEGATIVE, CopulaDa.polite_negative),
+            ("neg past", Tense.PAST, Polarity.NEGATIVE, CopulaDa.polite_past_negative),
+        ]
+    )
+    def test_copula_polite(self, _, tense, polarity, expected_copula):
+        self.assertEqual(
+            jvfg.copula.generate_polite_form(tense, polarity), expected_copula
+        )
+
+    def test_copula_conditional(self):
+        self.assertEqual(jvfg.copula.generate_conditional_form(), CopulaDa.conditional)
+
+    @parameterized.expand(
+        [
+            ("pla pos", Formality.PLAIN, Polarity.POSITIVE, CopulaDa.presumptive_plain),
+            (
+                "pol pos",
+                Formality.POLITE,
+                Polarity.POSITIVE,
+                CopulaDa.presumptive_polite,
+            ),
+            (
+                "pla neg",
+                Formality.PLAIN,
+                Polarity.NEGATIVE,
+                CopulaDa.presumptive_plain_negative,
+            ),
+            (
+                "pol neg",
+                Formality.POLITE,
+                Polarity.NEGATIVE,
+                CopulaDa.presumptive_polite_negative,
+            ),
+        ]
+    )
+    def test_copula_presumptive(self, _, formality, polarity, expected_copula):
+        self.assertEqual(
+            jvfg.copula.generate_presumptive_form(formality, polarity), expected_copula
+        )
+
+    @parameterized.expand(
+        [
+            ("pla", Formality.PLAIN, CopulaDa.te_form_plain),
+            ("pol", Formality.POLITE, CopulaDa.te_form_polite),
+        ]
+    )
+    def test_copula_te_form(self, _, formality, expected_copula):
+        self.assertEqual(jvfg.copula.generate_te_form(formality), expected_copula)
+
+    @parameterized.expand(
+        [
+            ("pla", Formality.PLAIN, CopulaDa.tara_plain),
+            ("pol", Formality.POLITE, CopulaDa.tara_polite),
+        ]
+    )
+    def test_copula_tara_form(self, _, formality, expected_copula):
+        self.assertEqual(jvfg.copula.generate_tara_form(formality), expected_copula)
 
 
 if __name__ == "__main__":

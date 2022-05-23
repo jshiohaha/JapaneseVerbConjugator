@@ -306,11 +306,11 @@ class IrregularVerbKuruKanji:
 
 
 class CopulaDa:
-    plain_positive_nonpast = "だ"
-    polite_positive_nonpast = "です"
+    plain_positive = "だ"
+    polite_positive = "です"
     conditional = "なら"
     presumptive_plain = "だろう"
-    presumotive_polite = "でしょう"
+    presumptive_polite = "でしょう"
     te_form_plain = "で"
     te_form_polite = "でして"
     plain_past = "だった"
@@ -322,7 +322,7 @@ class CopulaDa:
     presumptive_plain_negative = "ではないだろう"
     presumptive_polite_negative = "ではないでしょう"
     plain_past_negative = "なかった"
-    polite_negative_past = "ではありませんでした"
+    polite_past_negative = "ではありませんでした"
 
 
 PARAMETER_LIST = [
