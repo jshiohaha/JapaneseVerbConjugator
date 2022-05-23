@@ -27,6 +27,8 @@ Japanese Verb Conjugator conjugates verbs based on `verb class`, `tense`, `forma
 
 `generate_volitional_form` requires `verb class`, `tense`, and `polarity` parameters.
 
+Similarily the cojugations of the copula だ/です can be generated
+
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install `japanese-verb-conjugator-v2`. If you want to install `japanese-verb-conjugator-v2` and its dependencies in a virtual environment, first create and activiate a virtual environment. If you want to change the virtual environment name to someting other than `venv`, replace the second `venv` with your desired name. Use that same name to replace `venv` in the second command.
@@ -87,10 +89,20 @@ from japverbconj.constants.enumerated_types import Formality, Polarity, Tense, V
 from japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
 
 jvfg.generate_plain_form("飲む", VerbClass.GODAN, Tense.NONPAST, Polarity.POSITIVE) # returns '飲む'
-jvfg.generate_plain_form("飲む", VerbClass.GODAN, Tense.NONPAST, Polarity.NEGATIVE) # returns '飲まない'
+jvfg.generate_plain_form("飲む", VerbClass.GODAN, Formality.POLITE, Polarity.NEGATIVE) # returns '飲まない'
 ```
 
 The library will try to help validate the correctness of the verb by checking for invalid verb lengths, non-Japanese characters, and invalid verb endings. **Limitation**: this library cannot identify Chinese words with valid Japanese particle endings or nonexistent Japanese verbs.
+
+AHere is an example of how to use the copula generator-
+
+```python 
+from japverbconj.constants.enumerated_types import Formality, Polarity, Tense, VerbClass
+from japverbconj.verb_form_gen import JapaneseVerbFormGenerator as jvfg
+
+jvfg.copula.generate_plain_form(Tense.NONPAST, Polarity.POSITIVE) # returns 'だ'
+jvfg.copula.generate_presumptive_form(Tense.NONPAST, Polarity.POSITIVE) # returns 'ではないでしょう'
+```
 
 ## Tests
 The coverage package is used to run the unittests. The configuration is defined in `.coveragerc`
