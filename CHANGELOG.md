@@ -1,4 +1,7 @@
-## 2022-05-23 (v0.1.0)
+## 2022-05-23 (v0.1.1)
+- fix breaking import bug
+
+## 2022-05-23 (v0.1.0) - broken
 - added copula conjugator
 - add error instead of returning None for irreg verbs
 - use custom exceptions instead of `Exception`

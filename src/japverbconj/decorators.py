@@ -1,4 +1,4 @@
-from src.japverbconj.exceptions import (
+from .exceptions import (
     InvalidJapaneseVerbEndingError,
     InvalidJapaneseVerbLengthError,
     NonJapaneseCharacterError,
