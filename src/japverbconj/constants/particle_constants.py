@@ -70,7 +70,7 @@ YO_PARTICLE = "よ"
 
 RA_PARTICLE = "ら"
 RE_PARTICLE = "れ"
-RI_PARTICLE = ""
+RI_PARTICLE = "り"
 RO_PARTICLE = "ろ"
 RU_PARTICLE = "る"
 
