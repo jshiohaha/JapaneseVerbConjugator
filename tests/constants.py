@@ -145,7 +145,7 @@ class IrregularVerbSuru:
 
     # Volitional Verb Forms
     volitional_plain_positive = "勉強しよう"
-    volitional_polite_positive = "勉強しましょう "
+    volitional_polite_positive = "勉強しましょう"
     volitional_plain_negative = "勉強しないだろう"
     volitional_polite_negative = "勉強しないでしょう"
 
