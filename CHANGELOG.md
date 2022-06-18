@@ -1,3 +1,6 @@
+## 2022-06-18 (v0.1.3)
+- fix irregular volitional polite forms
+
 ## 2022-05-23 (v0.1.2)
 - fix missing ri particle
 - fix breaking import bug
@@ -9,7 +12,6 @@
 - more refactoring
 
 ## 2022-05-20 (v0.0.1)
-
 - configure setuptools
 - use parametrized package for unittests
 - rename packages in a more pythonic way
