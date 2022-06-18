@@ -62,6 +62,63 @@ class GodanVerbNomu:
     provisional_plain_negative = "飲まなければ"
 
 
+class GodanVerbAru:
+    # https://www.japandict.com/%E6%9C%89%E3%82%8B?lang=eng#entry-1296400
+    verb = "ある"  # plain positive nonpast
+    verb_class = VerbClass.GODAN
+
+    # Formal Verb Forms
+    polite_positive_nonpast = "あります"
+    polite_positive_past = "ありました"
+    polite_negative_nonpast = "ありません"
+    polite_negative_past = "ありませんでした"
+
+    # Plain Verb Forms
+    plain_positive_past = "あった"
+    plain_negative_nonpast = "ない"
+    plain_negative_past = "なかった"
+
+    te_form = "あって"
+
+    # Conditional Verb Forms
+    conditional_polite = "ありましたら"
+    conditional_plain = "あったら"
+
+    # Volitional Verb Forms
+    volitional_polite_positive = "ありましょう"
+    volitional_polite_negative = "ないでしょう"
+    volitional_plain_positive = "あろう"
+    volitional_plain_negative = "ないだろう"
+
+    # Potential Verb Forms
+    potential_plain_positive = "あれる"
+    potential_plain_negative = "あれない"
+    potential_polite_positive = "あれます"
+    potential_polite_negative = "あれません"
+
+    # Imperative Verb Forms
+    imperative_plain_positive = "あれ"
+    imperative_plain_negative = "あるな"
+    imperative_polite_positive = "あってください"
+    imperative_polite_negative = "ないでください"
+
+    # Causative Verb Forms
+    causative_plain_positive = "あらせる"
+    causative_plain_negative = "あらせない"
+    causative_polite_positive = "あらせます"
+    causative_polite_negative = "あらせません"
+
+    # Passive Verb Forms
+    passive_plain_positive = "あられる"
+    passive_plain_negative = "あられない"
+    passive_polite_positive = "あられます"
+    passive_polite_negative = "あられません"
+
+    # Provisional Verb Forms
+    provisional_plain_positive = "あれば"
+    provisional_plain_negative = "なければ"
+
+
 class IchidanVerbTaberu:
     # http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%E9%A3%9F%E3%81%B9%E3%82%8B
     verb = "食べる"  # plain positive nonpast
@@ -327,6 +384,7 @@ class CopulaDa:
 
 PARAMETER_LIST = [
     ("godan_nomu", GodanVerbNomu),
+    ("godan_aru", GodanVerbAru),
     ("ichidan_taberu", IchidanVerbTaberu),
     ("irreg_suru", IrregularVerbSuru),
     ("irreg_kuru", IrregularVerbKuru),

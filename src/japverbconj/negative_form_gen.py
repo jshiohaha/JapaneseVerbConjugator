@@ -229,6 +229,8 @@ class NegativeVerbForms:
                     kuru_kanji_ending=MASU_NEGATIVE_NONPAST,
                 )
                 return f"{intermediate_verb}{NA_PARTICLE}{RA_PARTICLE}"
+        elif verb == ARU:
+            verb_stem = ""
         elif verb_class == VerbClass.GODAN:
             verb_stem = map_dictionary_to_a_ending(verb)
         else:

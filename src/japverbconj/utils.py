@@ -118,6 +118,8 @@ def generate_nai_form(verb, verb_class, is_regular_nai):
     """
     if not is_regular_nai:
         return f"{verb}{NAI_ENDING}"
+    if verb == ARU:
+        return NAI_ENDING
     verb_stem, particle_ending = splice_verb(verb, verb_class)
     stem_particle = ""
     if verb_class == VerbClass.IRREGULAR:
