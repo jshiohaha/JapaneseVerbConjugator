@@ -228,6 +228,9 @@ class IrregularVerbSuru:
 
     # Passive Verb Forms
     passive_plain_positive = "勉強される"
+    passive_plain_negative = "勉強されない"
+    passive_polite_positive = "勉強されます"
+    passive_polite_negative = "勉強されません"
 
     # Provisional Verb Forms
     provisional_plain_positive = "勉強すれば"
@@ -291,6 +294,9 @@ class IrregularVerbKuru:
 
     # Passive Verb Forms
     passive_plain_positive = "こられる"
+    passive_plain_negative = "こられない"
+    passive_polite_positive = "こられます"
+    passive_polite_negative = "こられません"
 
     # Provisional Verb Forms
     provisional_plain_positive = "くれば"
@@ -354,6 +360,9 @@ class IrregularVerbKuruKanji:
 
     # Passive Verb Forms
     passive_plain_positive = "来られる"
+    passive_plain_negative = "来られない"
+    passive_polite_positive = "来られます"
+    passive_polite_negative = "来られません"
 
     # Provisional Verb Forms
     provisional_plain_positive = "来れば"

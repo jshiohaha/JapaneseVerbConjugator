@@ -1,3 +1,6 @@
+## 2022-07-01 (v0.1.4)
+- fix irregular passive polite and negative forms
+
 ## 2022-06-18 (v0.1.3)
 - fix irregular volitional polite forms
 - add exception for negative aru forms

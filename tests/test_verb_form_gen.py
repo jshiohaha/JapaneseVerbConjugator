@@ -170,8 +170,6 @@ class TestPositiveVerbForms(unittest.TestCase):
 
     @parameterized.expand(PARAMETER_LIST)
     def test_passive_polite_positive(self, _, verb):
-        if verb.verb_class == VerbClass.IRREGULAR:
-            self.skipTest("Not Required for Irregular Verbs")
         result = jvfg.generate_passive_form(
             verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
@@ -325,8 +323,6 @@ class TestNegativeVerbForms(unittest.TestCase):
 
     @parameterized.expand(PARAMETER_LIST)
     def test_passive_plain_negative(self, _, verb):
-        if verb.verb_class == VerbClass.IRREGULAR:
-            self.skipTest("Not required for irregular verbs")
         result = jvfg.generate_passive_form(
             verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
@@ -334,8 +330,6 @@ class TestNegativeVerbForms(unittest.TestCase):
 
     @parameterized.expand(PARAMETER_LIST)
     def test_passive_polite_negative(self, _, verb):
-        if verb.verb_class == VerbClass.IRREGULAR:
-            self.skipTest("Not required for irregular verbs")
         result = jvfg.generate_passive_form(
             verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )

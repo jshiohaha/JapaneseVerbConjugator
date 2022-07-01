@@ -283,7 +283,24 @@ class NegativeVerbForms:
             str: negative passive form of the verb based on the formality
         parameter
         """
-        if verb_class == VerbClass.GODAN:
+        if verb_class == VerbClass.IRREGULAR:
+            if formality == Formality.PLAIN:
+                return handle_irregular_verb(
+                    verb,
+                    False,
+                    suru_ending=PASSIVE_SURU_PLAIN_NEGATIVE_ENDING,
+                    kuru_ending=PASSIVE_KURU_PLAIN_NEGATIVE_ENDING,
+                    kuru_kanji_ending=PASSIVE_KURU_KANJI_PLAIN_NEGATIVE_ENDING,
+                )
+            else:
+                return handle_irregular_verb(
+                    verb,
+                    False,
+                    suru_ending=PASSIVE_SURU_POLITE_NEGATIVE_ENDING,
+                    kuru_ending=PASSIVE_KURU_POLITE_NEGATIVE_ENDING,
+                    kuru_kanji_ending=PASSIVE_KURU_KANJI_POLITE_NEGATIVE_ENDING,
+                )
+        elif verb_class == VerbClass.GODAN:
             verb_stem = f"{map_dictionary_to_a_ending(verb)}{RE_PARTICLE}"
         else:
             verb_stem = f"{get_verb_stem(verb, verb_class)}{RA_PARTICLE}{RE_PARTICLE}"

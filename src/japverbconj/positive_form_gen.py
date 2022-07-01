@@ -318,12 +318,20 @@ class PositiveVerbForms:
         parameter
         """
         if verb_class == VerbClass.IRREGULAR:
-            return handle_irregular_verb(
-                verb,
-                suru_ending=PASSIVE_SURU_PLAIN_POSITIVE_ENDING,
-                kuru_ending=PASSIVE_KURU_PLAIN_POSITIVE_ENDING,
-                kuru_kanji_ending=PASSIVE_KURU_KANJI_PLAIN_POSITIVE_ENDING,
-            )
+            if formality == Formality.PLAIN:
+                return handle_irregular_verb(
+                    verb,
+                    suru_ending=PASSIVE_SURU_PLAIN_POSITIVE_ENDING,
+                    kuru_ending=PASSIVE_KURU_PLAIN_POSITIVE_ENDING,
+                    kuru_kanji_ending=PASSIVE_KURU_KANJI_PLAIN_POSITIVE_ENDING,
+                )
+            else:
+                return handle_irregular_verb(
+                    verb,
+                    suru_ending=PASSIVE_SURU_POLITE_POSITIVE_ENDING,
+                    kuru_ending=PASSIVE_KURU_POLITE_POSITIVE_ENDING,
+                    kuru_kanji_ending=PASSIVE_KURU_KANJI_POLITE_POSITIVE_ENDING,
+                )
         if verb_class == VerbClass.GODAN:
             verb_stem = map_dictionary_to_a_ending(verb)
             if formality == Formality.PLAIN:
