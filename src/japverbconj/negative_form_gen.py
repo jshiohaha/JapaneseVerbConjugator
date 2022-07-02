@@ -254,10 +254,22 @@ class NegativeVerbForms:
         parameter
         """
         if verb_class == VerbClass.IRREGULAR:
-            if get_ending_particle(verb, verb_class) == KURU_ENDING:
-                verb_stem = CAUSATIVE_KURU_NEGATIVE_BASE
+            if formality == Formality.PLAIN:
+                return handle_irregular_verb(
+                    verb,
+                    False,
+                    suru_ending=CAUSATIVE_PLAIN_NEGATIVE_SURU_ENDING,
+                    kuru_ending=CAUSATIVE_PLAIN_NEGATIVE_KURU_ENDING,
+                    kuru_kanji_ending=CAUSATIVE_PLAIN_NEGATIVE_KURU_KANJI_ENDING,
+                )
             else:
-                verb_stem = CAUSATIVE_KURU_KANJI_NEGATIVE_BASE
+                return handle_irregular_verb(
+                    verb,
+                    False,
+                    suru_ending=CAUSATIVE_POLITE_NEGATIVE_SURU_ENDING,
+                    kuru_ending=CAUSATIVE_POLITE_NEGATIVE_KURU_ENDING,
+                    kuru_kanji_ending=CAUSATIVE_POLITE_NEGATIVE_KURU_KANJI_ENDING,
+                )
         elif verb_class == VerbClass.GODAN:
             verb_stem = f"{map_dictionary_to_a_ending(verb)}{SE_PARTICLE}"
         else:

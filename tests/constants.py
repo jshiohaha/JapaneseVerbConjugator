@@ -225,6 +225,9 @@ class IrregularVerbSuru:
 
     # Causative Verb Forms
     causative_plain_positive = "勉強させる"
+    causative_plain_negative = "勉強ささない"
+    causative_polite_positive = "勉強させます"
+    causative_polite_negative = "勉強させません"
 
     # Passive Verb Forms
     passive_plain_positive = "勉強される"

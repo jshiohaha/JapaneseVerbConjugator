@@ -154,8 +154,6 @@ class TestPositiveVerbForms(unittest.TestCase):
 
     @parameterized.expand(PARAMETER_LIST)
     def test_causative_polite_positive(self, _, verb):
-        if verb.verb_class == VerbClass.IRREGULAR:
-            self.skipTest("Not Required for Irregular Verbs")
         result = jvfg.generate_causative_form(
             verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
@@ -305,8 +303,6 @@ class TestNegativeVerbForms(unittest.TestCase):
 
     @parameterized.expand(PARAMETER_LIST)
     def test_causative_plain_negative(self, _, verb):
-        if verb.verb[-2:] == "する":
-            self.skipTest("Not required for する verbs")
         result = jvfg.generate_causative_form(
             verb.verb, verb.verb_class, Formality.PLAIN, self.polarity
         )
@@ -314,8 +310,6 @@ class TestNegativeVerbForms(unittest.TestCase):
 
     @parameterized.expand(PARAMETER_LIST)
     def test_causative_polite_negative(self, _, verb):
-        if verb.verb[-2:] == "する":
-            self.skipTest("Not required for する verbs")
         result = jvfg.generate_causative_form(
             verb.verb, verb.verb_class, Formality.POLITE, self.polarity
         )
