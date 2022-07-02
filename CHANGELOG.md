@@ -1,3 +1,5 @@
+## 2022-07-02 (v0.1.5)
+- fix irregular causative polite and negative forms
 ## 2022-07-01 (v0.1.4)
 - fix irregular passive polite and negative forms
 
